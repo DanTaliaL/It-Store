@@ -1,0 +1,25 @@
+﻿@model ItStore.Models.SystemsFolder.CreateUserModel
+<div class="intro intro__title">
+    <div class="container row">
+        <form asp-action="UserCreate" metod="Post">
+            <div asp-validation-summary="All"></div>
+            <p>
+                <label asp-for="Login">Логин</label>
+                <input class="form-control" asp-for="Login" />
+            </p>
+            <p>
+                <label asp-for="Password">Пароль</label>
+                <input class="form-control" asp-for="Password" />
+            </p>
+            <p>
+                <label asp-for="Email">Электронная почта</label>
+                <input class="form-control" asp-for="Email" />
+            </p>
+
+            <button class="btn" asp-action="UserCreate">Регситрация</button>
+        </form>
+        <div class="showcase showcase__scale">
+            <img src="~/Images/MainPages/Login/Login.png" />
+        </div>
+    </div>
+</div>

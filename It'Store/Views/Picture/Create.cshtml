@@ -1,0 +1,25 @@
+﻿@model ItStore.Models.DataFolder.Picture
+@{
+    Layout = null;
+}
+
+<form asp-controller="Picture" asp-action="Create" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Добавить изображение</legend>
+
+            <div class="editor-label">Название</div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+
+            <div class="editor-label">Файл изображения</div>
+            <div class="editor-field">
+                <input type="file" name="uploadImage" />
+            </div>
+
+            <p>
+                <input type="submit" value="Добавить" />
+            </p>
+        </fieldset>
+    </form>

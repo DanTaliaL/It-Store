@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<body>
+
+    <div class="intro  intro__title">
+
+        <div class="container">
+            <div class="container__logo">
+                <div class="elipse__left"></div>
+                <div class="text__banner">
+                    <p>MSI Alpha 15</p>
+                </div>
+                <div class="text__info">
+                    <p>Оформите заказ на MSI Alpha 15 и получите скидочный купон на весь ассортимент</p>
+                </div>
+            </div>
+            <div class="text__systeminfo">
+                <p>
+                    Процессор до AMD Ryzen™ 7 4800H <br />
+                    Графика до AMD Radeon™ RX 5600M 6GB GDDR6 <br />
+                    15.6" Full HD (1920x1080) <br />
+                </p>
+                
+            </div>
+            <form method="post">
+                 <button class="button__style button__place" asp-area="" asp-controller="Account" asp-action="Login">Подробнее</button>
+            </form>
+                  
+            <div class="elipse__right"></div>
+            <div class="showcase">
+                <img src="~/Images/MainPages/Firstblock/Desk1.png" />
+            </div>
+        </div>
+    </div>
+</body>

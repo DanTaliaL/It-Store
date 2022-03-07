@@ -1,0 +1,24 @@
+﻿@model ItStore.Models.SystemsFolder.LoginModel
+<div class="intro intro__title">
+    <div class="container">
+        <form asp-action="login" method="post">
+            <div asp-validation-summary="All"></div>
+            <p>
+                <label asp-for="Login">Логин</label>
+                <input class="form-control" asp-for="Login" />
+            </p>
+            <p>
+                <label asp-for="Password">Пароль</label>
+                <input class="form-control" asp-for="Password" />
+            </p>
+            <button class="btn">Войти</button>
+            <button class="btn" type="submit" asp-controller="Account" asp-action="UserCreate">Регестрация</button>
+
+        </form>
+        <div class="showcase showcase__scale">
+            <img src="~/Images/MainPages/Login/Login.png" />
+        </div>
+    </div>
+
+</div>
+
