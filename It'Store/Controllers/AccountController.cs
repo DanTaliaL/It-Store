@@ -11,8 +11,7 @@ namespace ItStore.Controllers
     {
         private UserManager<AppUser> userManager;
         private SignInManager<AppUser> signInManager;
-        private RoleManager<IdentityRole> roleManager;
-
+        private RoleManager<IdentityRole> roleManager;      
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
@@ -22,7 +21,7 @@ namespace ItStore.Controllers
 
         [AllowAnonymous]
         public IActionResult Login(string? ReturnUrl)
-        {            
+        {
             ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
@@ -40,7 +39,8 @@ namespace ItStore.Controllers
                     await signInManager.SignOutAsync();
                     Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                     if (result.Succeeded)
-                    {
+                    {   
+                        
                         return RedirectToAction(ReturnUrl ?? "Index","Home");
                     }
                 }
@@ -94,27 +94,35 @@ namespace ItStore.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
+
         public async Task<IActionResult> Profile()
         {
-           
+            // исправить
+            bool AdminStatus = false;
+            AppUser appUser = await userManager.FindByNameAsync("DanTalial");
             IdentityRole rlManager = await roleManager.FindByNameAsync("Admin");
             if (rlManager == null)
             {
                 return View();
             }
             else
-            {
-                if ("Admin" == rlManager.Name)
+            {                
+               
+                foreach (AppUser user in userManager.Users)
                 {
-                    return RedirectToAction("PageRole", "AdminRole");
+                    AdminStatus = await userManager.IsInRoleAsync(appUser,"Admin");
+                }
+                if (AdminStatus)
+                {
+                    return RedirectToAction("AdminProfile");
                 }
                 else
                 {
                     return View();
                 }
-            }               
+            }
         }
 
         public IActionResult AdminProfile() => View();

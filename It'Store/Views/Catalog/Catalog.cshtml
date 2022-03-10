@@ -1,0 +1,5 @@
+﻿@model IEnumerable<ItStore.Models.DataFolder.Product>
+@foreach (var q in Model)
+{
+    @Html.Partial("ProductSummary" ,q)
+}

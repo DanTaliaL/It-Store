@@ -1,0 +1,17 @@
+﻿@model ItStore.Models.DataFolder.WareHouse
+<div class="intro intro__title">
+    <form asp-controller="WareHouse" asp-action="WareHouse" method="post">
+        <div asp-validation-summary="All">
+            <p>
+                <label asp-for="Name">Наименование склада</label>
+                <input class="form-control" asp-for="Name" />
+            </p>
+            <p>
+                <label asp-for="Adress">Адресс</label>
+                <input class="form-control" asp-for="Adress" />
+            </p>
+            <button class="btn" type="submit">Заполнить</button>
+        </div>
+    </form>
+
+</div>

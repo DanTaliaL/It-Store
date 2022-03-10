@@ -1,7 +1,7 @@
 ﻿using ItStore.Models.DataFolder;
 using System.Collections.Generic;
 
-namespace ItStore.Models
+namespace ItStore.Models.DataFolder
 {
     public class Manufacturer
     {

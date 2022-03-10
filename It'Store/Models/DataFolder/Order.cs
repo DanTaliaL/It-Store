@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ItStore.Models
+namespace ItStore.Models.DataFolder
 {
     public class Order
     {

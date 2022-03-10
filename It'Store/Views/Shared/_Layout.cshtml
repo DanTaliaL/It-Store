@@ -19,17 +19,19 @@
                     <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Logo.png"></a>
                 </div>
                 <nav class="nav">
-                    <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Каталог </a>
+                    <a class="nav__link" asp-area="" asp-controller="Catalog" asp-action="Catalog"> Каталог </a>
                     <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Гарантия и возврат </a>
                     <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Успей купить </a>
                     <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Контакты </a>
                 </nav>
                 <div>
-                    <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Search.png"/></a>
-                    <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Basket.png"/></a>
+                    <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Search.png" /></a>
+                    <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Basket.png" /></a>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png"/></a>
+
+                        <a class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a>
+
                     }
                     else
                     {

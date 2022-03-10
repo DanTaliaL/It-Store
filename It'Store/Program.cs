@@ -1,4 +1,5 @@
 using ItStore.Models;
+using ItStore.Models.DataFolder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,11 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opts =>
 }).AddEntityFrameworkStores<DataContext>()
               .AddDefaultTokenProviders();
 builder.Host.UseDefaultServiceProvider(options => options.ValidateScopes = false);
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+//builder.Services.AddTransient<IOrderRepository, EFOrderRepository>();
+//builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 
@@ -38,6 +44,7 @@ app.UseStatusCodePages();
 app.UseRouting();
 app.UseAuthorization();
 app.UseAuthentication();
+app.UseSession();
 app.UseMvcWithDefaultRoute();
 DataContext.CreateAdminAccount(app.Services, app.Configuration).Wait();
 

@@ -1,0 +1,17 @@
+﻿<div class="intro intro__title">
+    <div class="container">
+        <h1>Аккаунт администратора: @User.Identity.Name</h1>
+        <form asp-action="Logout method="post">
+            <p>
+                <button class="btn" asp-controller="Picture" asp-action="Picture">Библиотека изображений</button>
+                <button class="btn" asp-controller="Picture" asp-action="Create">Добавление изображений</button>
+                <button class="btn" asp-controller="AdminRole" asp-action="PageRole"> Управление доступа пользоваталей</button>
+
+                <button class="btn" asp-controller="WareHouse" asp-action="WareHouseForm">Заполнение данных о складе</button>
+                <button class="btn" asp-controller="Product" asp-action="ProductForm">Форма заполнения товара</button>
+            </p>
+            <button class="btn" asp-area="" asp-controller="Account" asp-action="Logout">Выйти</button>
+        </form>
+
+    </div>
+</div>
