@@ -1,4 +1,5 @@
-﻿using ItStore.Models;
+﻿using It_Store.Models.DataFolder;
+using ItStore.Models;
 using ItStore.Models.DataFolder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -96,25 +97,49 @@ namespace ItStore.Controllers
 
     public class OrderController : Controller
     {
-        private DataContext Data { get; set; }
-        public OrderController(DataContext DC) => Data = DC;
+        private IOrderRepository repository { get; set; }
+        private Cart cart { get; set; }
+        public OrderController(IOrderRepository repository, Cart cart)
+        {
+            this.repository=repository;
+            this.cart = cart;
+        } 
 
         [HttpPost]
-        public IActionResult Order(Order order)
+        public IActionResult OrderForm(Order order)
         {
-            Data.Orders.Add(order);
-            Data.SaveChanges();
-            return RedirectToAction();
+            if (cart.Lines.Count()==0)
+            {
+                ModelState.AddModelError("", "Ваша корзина пуста");
+            }
+            if (ModelState.IsValid)
+            {
+                order.Lines = cart.Lines.ToArray();
+                repository.SaveOrder(order);
+                return RedirectToAction(nameof(Completed));
+            }
+            else
+            {
+                return View(order);
+            }
+            //Data.Orders.Add(order);
+            //Data.SaveChanges();
+            //return RedirectToAction();
+        }
+        public IActionResult Completed()
+        {
+            cart.Clear();
+            return View();
         }
 
         public IActionResult Order()
         {
-            IQueryable<Order> orders = Data.Orders
+            IQueryable<Order> orders = repository.Orders
                 .Include(q => q.Products);
-            return View(Data.Orders.OrderBy(q => q.Id));
+            return View(repository.Orders.OrderBy(q => q.Id));
         }
 
-        public IActionResult OrderForm() => View();
+        public IActionResult OrderForm() => View(new Order());
     }
 
     public class ProductController : Controller

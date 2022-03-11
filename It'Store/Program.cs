@@ -1,3 +1,4 @@
+using It_Store.Models.DataFolder;
 using ItStore.Models;
 using ItStore.Models.DataFolder;
 using Microsoft.AspNetCore.Identity;
@@ -22,8 +23,8 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opts =>
 builder.Host.UseDefaultServiceProvider(options => options.ValidateScopes = false);
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
-//builder.Services.AddTransient<IOrderRepository, EFOrderRepository>();
-//builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+builder.Services.AddTransient<IOrderRepository, EFOrderRepository>();
+builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();

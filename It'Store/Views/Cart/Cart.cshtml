@@ -3,22 +3,31 @@
     <h2>Корзина</h2>
     <table class="table text-white">
         <tr>
-            <td >Количество</td>
+            <td>Количество</td>
             <td>Продукт</td>
             <td class="text-right">Цена</td>
             <td class="text-right">Всего</td>
         </tr>
         @foreach (var q in Model.Cart.Lines)
         {
-            <tr>
-                <th class="text-left">@q.Quantity</th>
-                <th class="text-left">@q.Product.Name</th>
-                <th class="text-right"> @q.Product.Price.ToString("c")</th>
-                <th class="text-right">
-                    @((q.Quantity*q.Product.Price).ToString("c"))
-                </th>
-            </tr>
+    <tr>
+        <th class="text-left">@q.Quantity</th>
+        <th class="text-left">@q.Product.Name</th>
+        <th class="text-right"> @q.Product.Price.ToString("c")</th>
+        <th class="text-right">
+            @((q.Quantity*q.Product.Price).ToString("c"))
+        </th>
+        <th>
+            <form asp-action="RemoveFromCart" method="post">
+                <input type="hidden" name="Id" value="@q.Product.Id" />
+                <input type="hidden" name="returnUrl" value="@Model.ReturnUrl"/>
+                <button type="submit" class="btn">Удалить</button>
+            </form>
+        </th>
+    </tr>
+
         }
+
         <tfoot>
             <tr>
                 <td colspan="3" class="text-right">Итого</td>
@@ -30,5 +39,6 @@
     </table>
     <div class="text-center">
         <a class="btn" href="@Model.ReturnUrl">Назад</a>
+        <a class="btn" asp-action="OrderForm" asp-controller="Order">Заказать</a>
     </div>
 </div>

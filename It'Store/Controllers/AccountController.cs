@@ -11,7 +11,8 @@ namespace ItStore.Controllers
     {
         private UserManager<AppUser> userManager;
         private SignInManager<AppUser> signInManager;
-        private RoleManager<IdentityRole> roleManager;      
+        private RoleManager<IdentityRole> roleManager;
+
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
@@ -97,19 +98,19 @@ namespace ItStore.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
         public async Task<IActionResult> Profile()
         {
             // исправить
             bool AdminStatus = false;
-            AppUser appUser = await userManager.FindByNameAsync("DanTalial");
+            AppUser appUser = await userManager.FindByNameAsync("DanTaliaL");
             IdentityRole rlManager = await roleManager.FindByNameAsync("Admin");
             if (rlManager == null)
             {
                 return View();
             }
             else
-            {                
-               
+            {                             
                 foreach (AppUser user in userManager.Users)
                 {
                     AdminStatus = await userManager.IsInRoleAsync(appUser,"Admin");
@@ -124,7 +125,6 @@ namespace ItStore.Controllers
                 }
             }
         }
-
         public IActionResult AdminProfile() => View();
     }
 }

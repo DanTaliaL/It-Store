@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ItStore.Migrations
+namespace It_Store.Migrations
 {
     public partial class _1 : Migration
     {
@@ -113,13 +113,10 @@ namespace ItStore.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TimeOrders = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ProductPrice = table.Column<int>(type: "int", nullable: false),
-                    OrderPrice = table.Column<int>(type: "int", nullable: false),
-                    DeliveryMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PurshaceStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    DeliveryMethod = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -421,6 +418,32 @@ namespace ItStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CartLine",
+                columns: table => new
+                {
+                    CartLineId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartLine", x => x.CartLineId);
+                    table.ForeignKey(
+                        name: "FK_CartLine_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CartLine_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CatrgoryProduct",
                 columns: table => new
                 {
@@ -604,6 +627,16 @@ namespace ItStore.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CartLine_OrderId",
+                table: "CartLine",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartLine_ProductId",
+                table: "CartLine",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CatrgoryProduct_ProductsId",
                 table: "CatrgoryProduct",
                 column: "ProductsId");
@@ -680,6 +713,9 @@ namespace ItStore.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "CartLine");
 
             migrationBuilder.DropTable(
                 name: "CatrgoryProduct");

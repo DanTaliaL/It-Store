@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<ItStore.Models.DataFolder.Product>
-@foreach (var q in Model)
-{
-    @Html.Partial("ProductSummary" ,q)
-}
+<div class="intro intro__title">
+    @foreach (var q in Model)
+    {
+        @Html.Partial("ProductSummary", q)
+    }
+</div>
+

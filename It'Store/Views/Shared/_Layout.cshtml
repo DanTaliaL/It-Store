@@ -29,8 +29,7 @@
                     <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Basket.png" /></a>
                     @if (User.Identity.IsAuthenticated)
                     {
-
-                        <a class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a>
+                        <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a>
 
                     }
                     else

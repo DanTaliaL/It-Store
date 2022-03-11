@@ -10,8 +10,7 @@ namespace ItStore.Controllers
         public CatalogController(DataContext DC) => Data = DC;
         public int PageSize = 4;
         public IActionResult Catalog(int productPage=1)
-        {
-            //276
+        {           
             return View(Data.Products.OrderBy(p => p.Id).Skip((productPage - 1) * PageSize).Take(PageSize));
         }
     }

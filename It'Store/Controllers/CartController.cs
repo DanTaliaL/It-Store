@@ -8,35 +8,38 @@ namespace ItStore.Controllers
     public class CartController : Controller
     {
         private DataContext Data { get; set; }
-        public CartController(DataContext DC) => Data = DC;
-        public RedirectToActionResult AddToCart(int Id, string returnUrl)
+        private Cart cart { get; set; }
+        public CartController(DataContext DC, Cart cartService)
         {
-            Product product = Data.Products.FirstOrDefault(q => q.Id == Id);
-            if (product != null)
-            {
-                Cart cart = GetCart();
-                cart.AddItem(product, 1);
-                SaveCart(cart);
-            }
-            return RedirectToAction("Cart", new {returnUrl});
-        }
-        private Cart GetCart()
-        {
-            Cart cart = HttpContext.Session.GetJson<Cart>("Cart") ?? new Cart();
-            return cart;
-        }
-        private void SaveCart(Cart cart)
-        {
-            HttpContext.Session.SetJson("Cart", cart);
+            Data = DC;
+            cart = cartService;
         }
 
         public IActionResult Cart(string returnUrl)
         {
             return View(new CartIndexViewModel
             {
-                Cart = GetCart(),
-                ReturnUrl = returnUrl
+                Cart = cart,
+                ReturnUrl = returnUrl,
             });
+        }
+        public RedirectToActionResult AddToCart(int Id, string returnUrl)
+        {
+            Product product = Data.Products.FirstOrDefault(q => q.Id == Id);
+            if (product != null)
+            {
+                cart.AddItem(product, 1);
+            }
+            return RedirectToAction("Cart", new { returnUrl });
+        }
+        public RedirectToActionResult RemoveFromCart(int Id, string returnUrl)
+        {
+            Product product = Data.Products.FirstOrDefault(q => q.Id == Id);
+            if (product != null)
+            {
+                cart.RemoveLine(product);
+            }
+            return RedirectToAction("Cart", new { returnUrl });
         }
     }
 }
