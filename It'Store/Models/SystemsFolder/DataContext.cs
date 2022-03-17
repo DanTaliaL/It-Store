@@ -22,8 +22,8 @@ namespace ItStore.Models
         public DbSet<Category> Category { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<History> Histories { get; set; }
-        public DbSet<Picture> Pictures { get; set; }
-
+        public DbSet<CartLine> CartLine { get; set; }
+        public DbSet<Picture> Pictures { get; set; } 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -1,4 +1,4 @@
-﻿using It_Store.Models.DataFolder;
+﻿using ItStore.Models.DataFolder;
 using ItStore.Models;
 using ItStore.Models.DataFolder;
 using Microsoft.AspNetCore.Mvc;
@@ -85,12 +85,13 @@ namespace ItStore.Controllers
             Data.SaveChanges();
             return RedirectToAction();
         }
-
+        
         public IActionResult Options()
         {
             IQueryable<Options> options = Data.Options
                 .Include(q => q.Product);
             return View(Data.Options.OrderBy(q => q.Id));
+            
         }
         public IActionResult OptionsForm() => View();
     }
@@ -119,9 +120,10 @@ namespace ItStore.Controllers
                 return RedirectToAction(nameof(Completed));
             }
             else
-            {
+            {              
                 return View(order);
             }
+            
             //Data.Orders.Add(order);
             //Data.SaveChanges();
             //return RedirectToAction();
@@ -129,7 +131,7 @@ namespace ItStore.Controllers
         public IActionResult Completed()
         {
             cart.Clear();
-            return View();
+            return View(cart);
         }
 
         public IActionResult Order()

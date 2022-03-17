@@ -1,6 +1,5 @@
-using It_Store.Models.DataFolder;
-using ItStore.Models;
 using ItStore.Models.DataFolder;
+using ItStore.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +24,7 @@ builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddTransient<IOrderRepository, EFOrderRepository>();
 builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+builder.Services.AddScoped<ChartViewModel>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();

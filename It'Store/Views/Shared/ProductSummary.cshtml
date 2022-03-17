@@ -11,10 +11,8 @@
         <div class="card-text p-1">@Model.Model</div>
         <form id="@Model.Id" asp-action="AddToCart" asp-controller="Cart" method="post">
             <input type="hidden" asp-for="Id" />
-            <input type="hidden" name="returnUrl"
-                   value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
             <button type="submit" class="btn" style="float:right">Добвавить в корзину</button>
-            <h1>Где то тут кнопка должна быть!!!!</h1>
         </form>
     </div>
 

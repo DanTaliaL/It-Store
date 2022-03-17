@@ -3,7 +3,7 @@ using ItStore.Models.DataFolder;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace It_Store.Models.DataFolder
+namespace ItStore.Models.DataFolder
 {
     public class SessionCart : Cart
     {

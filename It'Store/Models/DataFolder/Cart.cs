@@ -25,8 +25,10 @@ namespace ItStore.Models.DataFolder
             else
             {
                 Line.Quantity += quantity;
-            }
+            } 
+            
         }
+
         public virtual void RemoveLine(Product product)=>LineCollection.RemoveAll(q=>q.Product.Id==product.Id);
         public virtual decimal ComputeTotalValue() => LineCollection.Sum(q => q.Product.Price * q.Quantity);
         public virtual void Clear()=> LineCollection.Clear();

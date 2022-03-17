@@ -2,7 +2,7 @@
 using ItStore.Models.DataFolder;
 using Microsoft.EntityFrameworkCore;
 
-namespace It_Store.Models.DataFolder
+namespace ItStore.Models.DataFolder
 {
          public interface IOrderRepository
         {

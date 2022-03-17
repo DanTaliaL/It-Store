@@ -7,6 +7,7 @@
             <td>Продукт</td>
             <td class="text-right">Цена</td>
             <td class="text-right">Всего</td>
+            <td class="text-right">Навигация</td>
         </tr>
         @foreach (var q in Model.Cart.Lines)
         {
@@ -14,26 +15,21 @@
         <th class="text-left">@q.Quantity</th>
         <th class="text-left">@q.Product.Name</th>
         <th class="text-right"> @q.Product.Price.ToString("c")</th>
-        <th class="text-right">
-            @((q.Quantity*q.Product.Price).ToString("c"))
-        </th>
+        <th class="text-right"> @((q.Quantity*q.Product.Price).ToString("c")) </th>
         <th>
             <form asp-action="RemoveFromCart" method="post">
                 <input type="hidden" name="Id" value="@q.Product.Id" />
                 <input type="hidden" name="returnUrl" value="@Model.ReturnUrl"/>
-                <button type="submit" class="btn">Удалить</button>
+                <button type="submit" class="btn">Удалить</button>              
             </form>
         </th>
     </tr>
-
         }
-
         <tfoot>
             <tr>
                 <td colspan="3" class="text-right">Итого</td>
-                <td class="text-right">
-                    @Model.Cart.ComputeTotalValue().ToString("c")
-                </td>
+                <td class="text-right">@Model.Cart.ComputeTotalValue().ToString("c")</td>
+                <td></td>
             </tr>
         </tfoot>
     </table>

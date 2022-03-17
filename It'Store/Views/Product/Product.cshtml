@@ -2,27 +2,29 @@
 <div class="intro intro__title">
     <table>
         <tr>
-            <td>Наименование</td>
-            <td>Цена</td>
-            <td>Доступность</td>
-            <td>Количество</td>
-            <td>Модель</td>
-            <td>Seo</td>
+            <th>Наименование</th>
+            <th>Цена</th>
+            <th>Доступность</th>
+            <th>Количество</th>
+            <th>Модель</th>
+            <th>Seo</th>
         </tr>
-        <tr>
-            @{
-                foreach (var q in Model)
-                {
-                    <th>@q.Name.</th>
-                    <th>@q.Price</th>
-                    <th>@q.Aviability</th>
-                    <th>@q.Quantity</th>
-                    <th>@q.Model</th>
-                    <th>@q.SEO</th>
-                }
-            }
 
-        </tr>
+        @{
+            foreach (var q in Model)
+            {
+                <tr>
+                    <td>@q.Name.</td>
+                    <td>@q.Price</td>
+                    <td>@q.Aviability</td>
+                    <td>@q.Quantity</td>
+                    <td>@q.Model</td>
+                    <td>@q.SEO</td>
+                </tr>
+            }
+        }
+
+
     </table>
-    <button class="btn" asp-controller="Product" asp-action="ProductForm">Заполнение продуктов</button>
+    <a class="btn" asp-controller="Product" asp-action="ProductForm" > Заполнение продуктов</a>
 </div>

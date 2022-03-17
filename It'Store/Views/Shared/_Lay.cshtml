@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="us-ascii" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - IT'Store</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -21,12 +21,10 @@
                 <nav class="nav">
                     <a class="nav__link" asp-area="" asp-controller="Catalog" asp-action="Catalog"> Каталог </a>
                     <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Гарантия и возврат </a>
-                    <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Успей купить </a>
-                    <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Контакты </a>
                 </nav>
                 <div>
                     <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Search.png" /></a>
-                    <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart"><img src="~/Images/Icons/Basket.png" /></a>
+                    <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Basket.png" /></a>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a>

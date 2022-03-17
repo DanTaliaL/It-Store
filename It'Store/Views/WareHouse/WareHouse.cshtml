@@ -1,0 +1,16 @@
+﻿@model IQueryable<WareHouse>
+<div class="intro intro__title">
+    <table>
+        <tr>
+            <th>Нименование</th>
+            <th>Адресс</th>
+        </tr>
+        @foreach (var q in Model)
+        {
+            <tr>
+                <td>@q.Name</td>
+                <td>@q.Adress</td>
+            </tr>
+        }
+    </table>
+</div>
