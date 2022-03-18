@@ -1,6 +1,5 @@
 ﻿using ItStore.Models.DataFolder;
 using ItStore.Models;
-using ItStore.Models.DataFolder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,18 +1,71 @@
 ﻿@model ItStore.Models.DataFolder.ChartViewModel
 <div class="intro intro__title">
     <script src="~/js/chart.min.js"></script>
-    <script src="~/js/convert.js"></script>
 
-<canvas id="myChart" class="container" width="200" height="100"></canvas>
-<script>
+    <div class="container">
+        <h3>Дорогая группа</h3>
+        <table>
+            <tr>
+                <th>Наименование</th>
+                <th>Группа</th>
+            </tr>
+            @foreach (var q in Model.Products.Where(q => (q.Price - Model.SmallPriceFlag) / (Model.FourthPoint - Model.SmallPriceFlag) > 0.75))
+            {
+                <tr>
+                    <td>
+                        @q.Name
+                    </td>
+                    <td>
+                        @q.Price
+                    </td>
+                </tr>
+            }
+        </table>
+        <h3>Приемлимая группа</h3>
+        <table>
+            <tr>
+                <th>Наименование</th>
+                <th>Группа</th>
+            </tr>
+            @foreach (var q in Model.Products.Where(q => (q.Price - Model.SmallPriceFlag) / (Model.SecondPoint - Model.SmallPriceFlag) > 0.75
+               && (Model.ThirdPoint - q.Price) / (Model.MostBigPrice - Model.ThirdPoint) + 1 > 0.75))
+            {
+                <tr>
+                    <td>
+                        @q.Name
+                    </td>
+                    <td>
+                        @q.Price
+                    </td>
+                </tr>
+            }
+        </table>
+        <h3>Дешевая группа</h3>
+        <table>
+            <tr>
+                <th>Наименование</th>
+                <th>Группа</th>
+            </tr>
+            @foreach (var q in Model.Products.Where(q => (Model.FirstPoint - q.Price) / (Model.MostBigPrice - Model.SmallPriceFlag) + 1 > 0.75))
+            {
+                <tr>
+                    <td>
+                        @q.Name
+                    </td>
+                    <td>
+                        @q.Price
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <canvas id="myChart" class="container" width="200" height="100"></canvas>
+    <script>
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [@foreach (var q in Model.QuantityPoint) 
-            {
-                @q
-            }],
+            labels: [@foreach (var q in Model.QuantityPoint){@q}],
                 datasets:[{
                     label: 'Максимальное значение',
                     data: [@foreach (var q in Model.TopPrice){@q}],
@@ -53,6 +106,6 @@
                 }
             }
         });
-</script>
+    </script>
 </div>
 

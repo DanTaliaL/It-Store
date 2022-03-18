@@ -29,7 +29,14 @@
                     <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart"><img src="~/Images/Icons/Basket.png" /></a>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a>
+                        if (User.IsInRole("Admin"))
+                        {
+                            <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="AdminProfile"><img src="~/Images/Icons/User.png" /></a>
+                        }
+                        else
+                        {
+                            <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a>
+                        }
 
                     }
                     else

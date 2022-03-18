@@ -35,11 +35,6 @@ namespace ItStore.Controllers
             if (uploadImage != null)
             {
                 byte[] ImageData = ConvertToBytes(uploadImage);
-                //using (var binaryReader = new BinaryReader(uploadImage.OpenReadStream()))
-                //{
-                //    ImageData = binaryReader.ReadBytes(Convert.ToByte(uploadImage.Length)).ToArray();
-                //}
-                // установка массива байтов
                 picture.Image = ImageData;
 
                 Data.Pictures.Add(picture);

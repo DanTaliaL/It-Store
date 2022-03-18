@@ -3,6 +3,7 @@ using ItStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
+using System.Globalization;
 
 namespace ItStore.Controllers
 {
@@ -17,57 +18,72 @@ namespace ItStore.Controllers
         }
         public IActionResult Chart()
         {
-            int MostBigPrice = 1;
+            var Chart = new ChartViewModel();
+            Chart.Products = Data.Products.Select(x => new Product
+            {
+                Name = x.Name,
+                Price = x.Price
+
+            });
+            Chart.MostBigPrice = 1;
             foreach (var q in Data.Products.OrderBy(a => a.Price))
             {
-                MostBigPrice = q.Price;
+                Chart.MostBigPrice = q.Price;
             }
 
-            int MostSmallPrice = 1;
+            Chart.MostSmallPrice = 1;
             foreach (var q in Data.Products.OrderByDescending(q => q.Price))
             {
-                MostSmallPrice = q.Price;
+                Chart.MostSmallPrice = q.Price;
             }
-            int SmallPriceFlag = MostSmallPrice;
+            Chart.SmallPriceFlag = Chart.MostSmallPrice;
 
-            int ProductQuantity = MostBigPrice / MostSmallPrice;
+            Chart.ProductQuantity = Chart.MostBigPrice / Chart.MostSmallPrice;
 
-            for (int i = 0; i <= ProductQuantity; i++)
+            Chart.FirstPoint = Chart.MostBigPrice * 0.30;
+            Chart.SecondPoint = Chart.MostBigPrice * 0.35;
+            Chart.ThirdPoint = Chart.MostBigPrice * 0.65;
+            Chart.FourthPoint = Chart.MostBigPrice * 0.70;
+
+            for (int i = 0; i < Chart.ProductQuantity; i++)
             {
-                ChartView.QuantityPoint.Add(Convert.ToString(MostSmallPrice) + ",");
-                ChartView.MidlePrice.Add(Convert.ToString(1) + ",");
-                ChartView.TopPrice.Add(Convert.ToString(0.75) + ",");
-                if (MostSmallPrice < 8700)
+                Chart.QuantityPoint.Add(Convert.ToString(Chart.MostSmallPrice) + ",");
+                Chart.TopPrice.Add(Convert.ToString(1) + ",");
+                Chart.MidlePrice.Add(Convert.ToString(0.75) + ","); //CultureInfo.InvariantCulture трансфер символов
+
+                if (Chart.MostSmallPrice < Chart.FourthPoint + 1)
                 {
-                    ChartView.First.Add($"{(MostSmallPrice - SmallPriceFlag) / (8600.0 - SmallPriceFlag)}" + ",");
+                    Chart.First.Add($"{(Chart.MostSmallPrice - Chart.SmallPriceFlag) / (Chart.FourthPoint - Chart.SmallPriceFlag)}" + ",");
                 }
                 else
                 {
-                    ChartView.First.Add(1 + ",");
+                    Chart.First.Add(1 + ",");
                 }
-                if (MostSmallPrice > 3600)
+
+                if (Chart.MostSmallPrice > Chart.FirstPoint + 1)
                 {
-                    ChartView.Second.Add((3600.0 - MostSmallPrice) / (MostBigPrice - 3600.0) + 1 + ",");
+                    Chart.Second.Add((Chart.FirstPoint - Chart.MostSmallPrice) / (Chart.MostBigPrice - Chart.FirstPoint) + 1 + ",");
                 }
                 else
                 {
-                    ChartView.Second.Add(1 + ",");
+                    Chart.Second.Add(1 + ",");
                 }
-                if (MostSmallPrice < 4300)
+
+                if (Chart.MostSmallPrice < Chart.SecondPoint)
                 {
-                    ChartView.Third.Add((MostSmallPrice - SmallPriceFlag) / (4200.0 - SmallPriceFlag) + ",");
+                    Chart.Third.Add((Chart.MostSmallPrice - Chart.SmallPriceFlag) / (Chart.SecondPoint - Chart.SmallPriceFlag) + ",");
                 }
-                else if (MostSmallPrice > 7900)
+                else if (Chart.MostSmallPrice > Chart.ThirdPoint + 1)
                 {
-                    ChartView.Third.Add((7800.0 - MostSmallPrice) / (MostBigPrice - 7800.0) + 1 + ",");
+                    Chart.Third.Add((Chart.ThirdPoint - Chart.MostSmallPrice) / (Chart.MostBigPrice - Chart.ThirdPoint) + 1 + ",");
                 }
                 else
                 {
-                    ChartView.Third.Add(1 + ",");
+                    Chart.Third.Add(1 + ",");
                 }
-                MostSmallPrice += SmallPriceFlag;                
+                Chart.MostSmallPrice += Chart.SmallPriceFlag;
             }
-            return View(ChartView);
+            return View(Chart);
         }
     }
 }

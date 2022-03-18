@@ -40,8 +40,7 @@ namespace ItStore.Controllers
                     await signInManager.SignOutAsync();
                     Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                     if (result.Succeeded)
-                    {   
-                        
+                    {                          
                         return RedirectToAction(ReturnUrl ?? "Index","Home");
                     }
                 }
@@ -97,34 +96,7 @@ namespace ItStore.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-
-
-        public async Task<IActionResult> Profile()
-        {
-            // исправить
-            bool AdminStatus = false;
-            AppUser appUser = await userManager.FindByNameAsync("DanTaliaL");
-            IdentityRole rlManager = await roleManager.FindByNameAsync("Admin");
-            if (rlManager == null)
-            {
-                return View();
-            }
-            else
-            {                             
-                foreach (AppUser user in userManager.Users)
-                {
-                    AdminStatus = await userManager.IsInRoleAsync(appUser,"Admin");
-                }
-                if (AdminStatus)
-                {
-                    return RedirectToAction("AdminProfile");
-                }
-                else
-                {
-                    return View();
-                }
-            }
-        }
+        public async Task<IActionResult> Profile() => View();
         public IActionResult AdminProfile() => View();
     }
 }
