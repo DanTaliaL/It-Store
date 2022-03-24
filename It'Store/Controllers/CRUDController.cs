@@ -84,13 +84,13 @@ namespace ItStore.Controllers
             Data.SaveChanges();
             return RedirectToAction();
         }
-        
+
         public IActionResult Options()
         {
             IQueryable<Options> options = Data.Options
                 .Include(q => q.Product);
             return View(Data.Options.OrderBy(q => q.Id));
-            
+
         }
         public IActionResult OptionsForm() => View();
     }
@@ -101,14 +101,14 @@ namespace ItStore.Controllers
         private Cart cart { get; set; }
         public OrderController(IOrderRepository repository, Cart cart)
         {
-            this.repository=repository;
+            this.repository = repository;
             this.cart = cart;
-        } 
+        }
 
         [HttpPost]
         public IActionResult OrderForm(Order order)
         {
-            if (cart.Lines.Count()==0)
+            if (cart.Lines.Count() == 0)
             {
                 ModelState.AddModelError("", "Ваша корзина пуста");
             }
@@ -119,10 +119,10 @@ namespace ItStore.Controllers
                 return RedirectToAction(nameof(Completed));
             }
             else
-            {              
+            {
                 return View(order);
             }
-            
+
             //Data.Orders.Add(order);
             //Data.SaveChanges();
             //return RedirectToAction();
@@ -146,7 +146,13 @@ namespace ItStore.Controllers
     public class ProductController : Controller
     {
         private DataContext Data { get; set; }
-        public ProductController(DataContext DC) => Data = DC;    
+        public ProductController(DataContext DC) => Data = DC;
+        public int PageSize = 4;
+
+        public ViewResult List(int productPage = 1)
+            => View(Data.Products.OrderBy(q => q.Id)
+                .Skip((productPage - 1) * PageSize)
+                .Take(PageSize));
 
         [HttpPost]
         public IActionResult Product(Product product)

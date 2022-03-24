@@ -24,37 +24,38 @@
                     <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Успей купить </a>
                     <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Контакты </a>
                 </nav>
-                <nav class="nav">
-                    <form method="post" asp-action="Catalog" asp-controller="Catalog">
-                        <input type="text" class="form-control-sm" name="searchstring">          
-                        <button type="submit" asp-action="Catalog" asp-controller="Catalog" class="nav__link btn__a"><img src="~/Images/Icons/Search.png" /></button>
-                    </form>
-                    <div>
-                        <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart"><img src="~/Images/Icons/Basket.png" /></a>
-                        @if (User.Identity.IsAuthenticated)
+                <div>
+                    <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Search.png" /></a>
+                    <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart"><img src="~/Images/Icons/Basket.png" /></a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Admin"))
                         {
-                            if (User.IsInRole("Admin"))
-                            {
-                                <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="AdminProfile"><img src="~/Images/Icons/User.png" /></a>
-                            }
-                            else
-                            {
-                                <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a>
-                            }
-
-                        }
+        <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="AdminProfile"><img src="~/Images/Icons/User.png" /></a> }
                         else
                         {
-                            <a class="nav__link" asp-area="" asp-controller="Account" asp-action="Login"><img src="~/Images/Icons/User.png" /></a>
-                        }
+        <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a> }
 
-                    </div>
-                </nav>
+                    }
+                    else
+                    {
+        <a class="nav__link" asp-area="" asp-controller="Account" asp-action="Login"><img src="~/Images/Icons/User.png" /></a>}
+
+                </div>
             </div>
         </div>
     </header>
-    <div>
-        @RenderBody()
+    <div class="navbar navbar-inverse bg-inverse"
+         role="navigation">
+    </div>
+    <div class="row m-1 р-1">
+        <div id="categories"
+             clasв="col-3">
+            Put something useful here later
+        </div>
+        <div>
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>

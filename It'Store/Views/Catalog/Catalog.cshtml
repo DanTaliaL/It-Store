@@ -1,8 +1,16 @@
-﻿@model IEnumerable<ItStore.Models.DataFolder.Product>
-<div class="intro intro__title">
-    @foreach (var q in Model)
+﻿@model ProductsListViewModel
+@{
+    Layout = "_LayoutCatalog";
+}
+<div class="intro intro__title container">
+
+
+    @foreach (var q in Model.Products)
     {
         @Html.Partial("ProductSummary", q)
     }
 </div>
-
+<div page-model="@Model.PaginInfo" page-action="Catalog" page-classed-enabled="true"
+     page-class="btn" page-class-normal="btn-secondary"
+     page-class-selected="btn" class="btn-group pull-right m-1">
+</div>

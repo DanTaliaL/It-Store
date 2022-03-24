@@ -198,6 +198,11 @@ a:hover {
     opacity: 0.70;
     transition: all .1s linear;
 }
+.btn__a {
+    background-color: #121212;
+    border: 1px;
+    color: none;
+}
 
     .btn:hover {
         opacity: 1;

@@ -1,37 +1,41 @@
 ﻿@model ItStore.Models.DataFolder.Product
-<div class="intro intro__title">
-<form  asp-action="Product" method="post">
-    <div asp-validation-summary="All">
-        <p>
-            <label asp-for="Name">Наименование продукта</label>
-            <input class="form-control" asp-for="Name" />
-        </p>
-        <p>
-            <label asp-for="Price">Цена продукта</label>
-            <input class="form-control" asp-for="Price"/>
-        </p>
-        <p>
-            <label asp-for="Quantity">Количество товара</label>
-            <input class="form-control" asp-for="Quantity"/>
-        </p>
-        <p>
-            <label asp-for="Aviability">Доступность</label>
-            <input type="checkbox" class="form-check" asp-for="Aviability"/>
-        </p>
-        <p>
-            <label asp-for="Model">Модель товара</label>
-            <input class="form-control" asp-for="Model"/>
-        </p>
-        <p>
-            <label asp-for="SEO">Сео ядро</label>
-            <input  class="form-control" asp-for="SEO"/>
-        </p>
-        <p>
-            <label asp-for="WareHouseId">Ид склада (загулшка)</label>
-            <input class="form-control" asp-for="WareHouseId"/>
-        </p>
-    </div>
-    <button class="btn" type="submit" asp-action="Product" >Заполнить</button>
-</form>
-    <button class="btn" type="submit" asp-action="Product"> Таблица товара</button>
+<div class="intro intro__title container">
+    <form asp-action="Product" method="post">
+        <div asp-validation-summary="All">
+            <p>
+                <label asp-for="Name">Наименование продукта</label>
+                <input class="form-control" asp-for="Name" />
+            </p>
+            <p>
+                <label asp-for="Price">Цена продукта</label>
+                <input class="form-control" asp-for="Price" />
+            </p>
+            <p>
+                <label asp-for="Quantity">Количество товара</label>
+                <input class="form-control" asp-for="Quantity" />
+            </p>
+            <p>
+                <label asp-for="Aviability">Доступность</label>
+                <input type="checkbox" class="form-check" asp-for="Aviability" />
+            </p>
+            <p>
+                <label asp-for="Model">Модель товара</label>
+                <input class="form-control" asp-for="Model" />
+            </p>
+            <p>
+                <label asp-for="SEO">Сео ядро</label>
+                <input class="form-control" asp-for="SEO" />
+            </p>
+            <p>
+                <label asp-for="WareHouseId">Ид склада (загулшка)</label>
+                <input class="form-control" asp-for="WareHouseId" />
+            </p>
+        </div>
+        <div class="row">
+            <button class="btn col" type="submit" asp-action="Product">Заполнить</button>
+            <a class="btn col" asp-action="Product"> Таблица товара</a>
+        </div>
+
+    </form>
+   
 </div>
