@@ -12,12 +12,14 @@ namespace ItStore.Controllers
         private UserManager<AppUser> userManager;
         private SignInManager<AppUser> signInManager;
         private RoleManager<IdentityRole> roleManager;
+        private DataContext Data;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, DataContext Data)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
+            this.Data = Data;
         }
 
         [AllowAnonymous]
@@ -96,7 +98,7 @@ namespace ItStore.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-        public async Task<IActionResult> Profile() => View();
-        public IActionResult AdminProfile() => View();
+        public async Task<IActionResult> Profile() => View(Data.Pictures);
+        public IActionResult AdminProfile() => View(Data.Pictures);
     }
 }

@@ -198,7 +198,7 @@ a:hover {
     opacity: 0.70;
     transition: all .1s linear;
 }
-.btn__a {
+.btn__link {
     background-color: #121212;
     border: 1px;
     color: none;

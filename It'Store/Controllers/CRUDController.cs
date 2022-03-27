@@ -27,29 +27,6 @@ namespace ItStore.Controllers
         public IActionResult CustomerForm() => View();
     }
 
-    public class CutegoryController : Controller
-    {
-        private DataContext Data { get; set; }
-        public CutegoryController(DataContext DC) => Data = DC;
-
-        [HttpPost]
-        public IActionResult Cutegory(Category category)
-        {
-            Data.Category.Add(category);
-            Data.SaveChanges();
-            return View(category);
-        }
-
-        public IActionResult Category()
-        {
-            IQueryable<Category> categories = Data.Category
-                .Include(q => q.Products);
-
-            return View(categories.OrderBy(q => q.Id));
-        }
-        public IActionResult CategoryForm() => View();
-    }
-
     public class ManufacturerController : Controller
     {
         private DataContext Data { get; set; }

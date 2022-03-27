@@ -49,21 +49,6 @@ namespace ItStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Category",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Available = table.Column<bool>(type: "bit", nullable: false),
-                    SEO = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Category", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
@@ -355,6 +340,7 @@ namespace ItStore.Migrations
                     Aviability = table.Column<bool>(type: "bit", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Categories = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SEO = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WareHouseId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -438,30 +424,6 @@ namespace ItStore.Migrations
                     table.ForeignKey(
                         name: "FK_CartLine_Products_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatrgoryProduct",
-                columns: table => new
-                {
-                    CategoriesId = table.Column<int>(type: "int", nullable: false),
-                    ProductsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatrgoryProduct", x => new { x.CategoriesId, x.ProductsId });
-                    table.ForeignKey(
-                        name: "FK_CatrgoryProduct_Category_CategoriesId",
-                        column: x => x.CategoriesId,
-                        principalTable: "Category",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CatrgoryProduct_Products_ProductsId",
-                        column: x => x.ProductsId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -637,11 +599,6 @@ namespace ItStore.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CatrgoryProduct_ProductsId",
-                table: "CatrgoryProduct",
-                column: "ProductsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ManufacturerSuppliers_SuppliersId",
                 table: "ManufacturerSuppliers",
                 column: "SuppliersId");
@@ -718,9 +675,6 @@ namespace ItStore.Migrations
                 name: "CartLine");
 
             migrationBuilder.DropTable(
-                name: "CatrgoryProduct");
-
-            migrationBuilder.DropTable(
                 name: "ManufacturerSuppliers");
 
             migrationBuilder.DropTable(
@@ -752,9 +706,6 @@ namespace ItStore.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Category");
 
             migrationBuilder.DropTable(
                 name: "Manufacturer");

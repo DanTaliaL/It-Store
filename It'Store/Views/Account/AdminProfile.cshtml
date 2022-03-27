@@ -1,6 +1,12 @@
-﻿<div class="intro intro__title">
+﻿@model IEnumerable<Picture>
+<div class="intro intro__title">
     <div class="container">
         <h1>Аккаунт администратора: @User.Identity.Name</h1>
+        @foreach (var q in Model.Where(q => q.Name == User.Identity.Name))
+        {
+            @Html.Raw("<img style='width:240px; height:320px;' src=\"data:image/jpeg;base64,"
+                                        + Convert.ToBase64String(q.Image) + "\" />")
+        }
         <form asp-action="Logout method="post">
             <p>
                 <button class="btn" asp-controller="Picture" asp-action="Picture">Библиотека изображений</button>

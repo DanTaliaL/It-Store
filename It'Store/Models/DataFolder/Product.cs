@@ -13,12 +13,11 @@ namespace ItStore.Models.DataFolder
         public bool Aviability { get; set; }
         public int Quantity { get; set; }
         public string Model { get; set; }
+        public string Categories { get; set; }
         public string SEO { get; set; }
 
         public List<Order> Orders { get; set; }
         
-        public List<Category> Categories { get; set; }
-
         public int WareHouseId { get; set; }
         public WareHouse WareHouse { get; set; }
 

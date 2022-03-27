@@ -1,0 +1,16 @@
+﻿@model IEnumerable<string>
+<a class="btn" asp-action="Catalog" 
+   asp-controller="Catalog"
+   asp-route-category="">
+    Главная
+</a>
+@foreach (var q in Model)
+{
+    <a class="btn"
+       asp-action="Catalog"
+       asp-controller="Catalog"
+       asp-route-category="@q"
+       asp-route-productPage="1">
+        @q
+    </a>
+}

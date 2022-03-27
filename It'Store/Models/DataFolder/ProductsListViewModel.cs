@@ -4,5 +4,6 @@
     {
         public IEnumerable<Product> Products { get; set;}
         public PaginInfo PaginInfo { get; set;}
+        public string CurrentCategory { get; set;}
     }
 }

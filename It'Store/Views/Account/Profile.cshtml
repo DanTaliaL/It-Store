@@ -1,4 +1,5 @@
-﻿<div class="intro intro__title">
+﻿@model IEnumerable<ItStore.Models.DataFolder.Picture>
+<div class="intro intro__title">
     <div class="container">
         <form asp-action="Logout method="post">
             <p>
@@ -6,6 +7,11 @@
             </p>
         </form>
         <h1>Hi @User.Identity.Name</h1>
+        @foreach (var q in Model.Where(q=>q.Name==User.Identity.Name))
+        {
+            @Html.Raw("<img style='width:240px; height:320px;' src=\"data:image/jpeg;base64,"
+                                        + Convert.ToBase64String(q.Image) + "\" />")
+        }
     </div>
 </div>
 

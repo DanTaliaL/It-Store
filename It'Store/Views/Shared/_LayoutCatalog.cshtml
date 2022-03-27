@@ -45,15 +45,12 @@
             </div>
         </div>
     </header>
-    <div class="navbar navbar-inverse bg-inverse"
-         role="navigation">
-    </div>
-    <div class="row m-1 р-1">
-        <div id="categories"
-             clasв="col-3">
-            Put something useful here later
+
+    <div class="row text-white  container">
+        <div id="categories" class="col-2 intro">
+            @await Component.InvokeAsync("NavigationMenu")
         </div>
-        <div>
+        <div class="col-9">
             @RenderBody()
         </div>
     </div>

@@ -46,7 +46,43 @@ app.UseRouting();
 app.UseAuthorization();
 app.UseAuthentication();
 app.UseSession();
-app.UseMvcWithDefaultRoute();
+app.UseMvc(routes =>
+{
+    routes.MapRoute(
+        name: null,
+        template: "{category}/Page{productPage:int}",
+        defaults: new { controller = "Catalog", action = "Catalog" }
+
+    );
+    routes.MapRoute(
+        name: null,
+        template: "Page{productPage:int}",
+        defaults: new
+        {
+            controller = "Catalog",
+            action = "Catalog",
+            productPage = 1
+        });
+    routes.MapRoute(
+        name: null,
+        template: "{category}",
+        defaults: new
+        {
+            controller = "Catalog",
+            action = "Catalog",
+            productPage = 1
+        });
+    routes.MapRoute(
+        name: null,
+        template: "",
+        defaults: new
+        {
+            controller = "Home",
+            action = "Index",
+            productPage = 1
+        });
+    routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
+});
 DataContext.CreateAdminAccount(app.Services, app.Configuration).Wait();
 
 //app.MapControllerRoute(

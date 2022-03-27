@@ -23,6 +23,14 @@
                 <input class="form-control" asp-for="Model" />
             </p>
             <p>
+                <label asp-for="Categories">Категория</label>
+                <select asp-for="@Model.Categories" class="form-control-plaintext text-white">
+                    <option class="text-black" value="Смартфоны и гаджеты">Смартфоны и гаджеты</option>
+                    <option class="text-black" value="ТВ и мультимедиа">ТВ и мультимедиа</option>
+                    <option class="text-black" value="Компьютеры">Компьютеры</option>
+                </select>
+            </p>
+            <p>
                 <label asp-for="SEO">Сео ядро</label>
                 <input class="form-control" asp-for="SEO" />
             </p>

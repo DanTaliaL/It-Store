@@ -22,21 +22,6 @@ namespace ItStore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("CategoryProduct", b =>
-                {
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoriesId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("CatrgoryProduct", (string)null);
-                });
-
             modelBuilder.Entity("HistoryOrder", b =>
                 {
                     b.Property<int>("HistoryId")
@@ -156,30 +141,6 @@ namespace ItStore.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("CartLine");
-                });
-
-            modelBuilder.Entity("ItStore.Models.DataFolder.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Available")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SEO")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("ItStore.Models.DataFolder.Customer", b =>
@@ -345,6 +306,10 @@ namespace ItStore.Migrations
 
                     b.Property<bool>("Aviability")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Categories")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
                         .IsRequired()
@@ -700,21 +665,6 @@ namespace ItStore.Migrations
                     b.HasIndex("SuppliersId");
 
                     b.ToTable("RequestSuplier", (string)null);
-                });
-
-            modelBuilder.Entity("CategoryProduct", b =>
-                {
-                    b.HasOne("ItStore.Models.DataFolder.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ItStore.Models.DataFolder.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("HistoryOrder", b =>

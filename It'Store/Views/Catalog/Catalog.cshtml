@@ -2,8 +2,21 @@
 @{
     Layout = "_LayoutCatalog";
 }
-<div class="intro intro__title container">
-
+<div class="container intro intro__title text-white">
+    @{
+        if (ViewBag.SelectedCategory != null)
+        {
+            <h4 class="text-center">@ViewBag.SelectedCategory</h4>
+        }
+        else if (ViewBag.SearchingString != null)
+        {
+            <h4 class="text-center">@ViewBag.SearchingString</h4>
+        }
+        else
+        {
+            <h4 class="text-center">Главная</h4>
+        }
+    }
 
     @foreach (var q in Model.Products)
     {
@@ -12,5 +25,7 @@
 </div>
 <div page-model="@Model.PaginInfo" page-action="Catalog" page-classed-enabled="true"
      page-class="btn" page-class-normal="btn-secondary"
+     page-url-category="@Model.CurrentCategory"
      page-class-selected="btn" class="btn-group pull-right m-1">
 </div>
+

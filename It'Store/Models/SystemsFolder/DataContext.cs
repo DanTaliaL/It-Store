@@ -19,7 +19,6 @@ namespace ItStore.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<Options> Options { get; set; }
         public DbSet<Manufacturer> Manufacturer { get; set; }
-        public DbSet<Category> Category { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<History> Histories { get; set; }
         public DbSet<CartLine> CartLine { get; set; }
@@ -36,12 +35,6 @@ namespace ItStore.Models
                 .HasMany(q => q.Orders)
                 .WithMany(q => q.Products)
                 .UsingEntity(q => q.ToTable("OrdersProduct"));
-
-
-            builder.Entity<Category>()   //product category many to many
-                .HasMany(q => q.Products)
-                .WithMany(q => q.Categories)
-                .UsingEntity(q => q.ToTable("CatrgoryProduct"));
 
 
             builder.Entity<Product>()

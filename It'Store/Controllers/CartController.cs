@@ -23,14 +23,14 @@ namespace ItStore.Controllers
                 ReturnUrl = returnUrl,
             });
         }
-        public RedirectToActionResult AddToCart(int Id, string returnUrl)
+        public IActionResult AddToCart(int Id, string returnUrl)
         {
             Product product = Data.Products.FirstOrDefault(q => q.Id == Id);
             if (product != null)
             {
                 cart.AddItem(product, 1);
             }
-            return RedirectToAction("Cart", new { returnUrl });
+            return RedirectToAction("Cart", new { returnUrl }); //исправить
         }
         public RedirectToActionResult RemoveFromCart(int Id, string returnUrl)
         {
