@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - IT'Store</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/flexstyle.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,10 +25,14 @@
                     <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Контакты </a>
                 </nav>
                 <nav class="nav">
-                    <form method="post" asp-action="Catalog" asp-controller="Catalog">
-                        <input type="text" class="form-control-sm" name="searchstring">          
-                        <button type="submit" asp-action="Catalog" asp-controller="Catalog" class="nav__link btn__link"><img src="~/Images/Icons/Search.png" /></button>
-                    </form>
+                    <div class="d6 text-white">
+                        <form method="get" asp-action="Catalog" asp-controller="Catalog">
+                            <input type="text" class="form-control-sm text-white" name="searchstring" placeholder="Искать здесь...">
+                            <button type="submit" asp-action="Catalog" asp-controller="Catalog" class="nav__link"><img src="~/Images/Icons/Search.png" /></button>
+                        </form>
+                    </div>
+
+
                     <div>
                         <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart"><img src="~/Images/Icons/Basket.png" /></a>
                         @if (User.Identity.IsAuthenticated)

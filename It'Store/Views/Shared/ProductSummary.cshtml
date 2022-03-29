@@ -1,5 +1,5 @@
 ﻿@model Product
-    <div class="card-body m-1 p-1  border-white">
+@*<div class="card-body m-1 p-1  border-white">
         <div class="bd-faded p-1">
             <h4>
                 @Model.Name
@@ -14,5 +14,25 @@
             <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
             <button type="submit" class="btn" style="float:right">Добвавить в корзину</button>
         </form>
+    </div>*@
+
+    <div class="col-md-3">
+        <div class="product">
+            <div class="image__catalog">
+               <p>image</p>
+            </div>
+            <div class="info">
+                <h3>@Model.Name</h3>
+                <div class="catalog__price">
+                    <span class="price">@Model.Price</span>
+                    <form id="@Model.Id" asp-action="AddToCart" asp-controller="Cart" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                        <button type="submit" class="btn__catalog"><img src="~/Images/Icons/Basket.png"></button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
     </div>
 

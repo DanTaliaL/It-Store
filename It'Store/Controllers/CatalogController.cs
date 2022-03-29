@@ -11,14 +11,17 @@ namespace ItStore.Controllers
         {
             Data = DC;
         }
-        public int PageSize = 4;
-        public IActionResult Catalog(string category, int productPage = 1)
+        public int PageSize = 8;
+
+        public IActionResult Catalog(string category, string searchstring, int productPage = 1)
         {
+            ViewBag.SearchingString = searchstring;
             ViewBag.SelectedCategory = category;
-            return View(new ProductsListViewModel
+            return View( new ProductsListViewModel
             {
                 Products = Data.Products
                 .Where(q => category == null || q.Categories == category)
+                .Where(q=> searchstring==null || q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.SEO.Contains(searchstring) || q.Price.ToString() == searchstring)
                 .OrderBy(p => p.Id)
                 .Skip((productPage - 1) * PageSize)
                 .Take(PageSize),
@@ -28,29 +31,34 @@ namespace ItStore.Controllers
                     ItemsPerPage = PageSize,
                     TotalItems = category == null?
                     Data.Products.Count():
-                    Data.Products.Where(q=>q.Categories==category).Count()
+                    Data.Products
+                    .Where(q=>q.Categories==category && q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.SEO.Contains(searchstring) || q.Price.ToString() == searchstring) //не вернвый расчет поиска и категорий
+                    .Count()
                 },
                 CurrentCategory = category
             });
         }
-        [HttpPost]
-        public IActionResult Catalog(string searchstring, int productPage = 1, int Debager =1)//debager кастыльная заглушка
-        {
-            ViewBag.SearchingString = searchstring;
-            return View(new ProductsListViewModel
-            {
-                Products = Data.Products
-                .Where(q => q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.SEO.Contains(searchstring) || q.Price.ToString() == searchstring)
-                .OrderBy(p => p.Price)
-                .Skip((productPage - 1) * PageSize)
-                .Take(PageSize),
-                PaginInfo = new PaginInfo
-                {
-                    CurrentPage = productPage,
-                    ItemsPerPage = PageSize,
-                    TotalItems = Data.Products.Count()
-                }
-            });
-        }
+
+        //    [HttpPost]
+        //    public IActionResult Catalog(string searchstring, string category , int productPage = 1)
+        //    {
+        //        ViewBag.SearchingString = searchstring;
+        //        return View(new ProductsListViewModel
+        //        {
+        //            Products = Data.Products
+        //            .Where(q => q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.SEO.Contains(searchstring) || q.Price.ToString() == searchstring)
+        //            .OrderBy(p => p.Price)
+        //            .Skip((productPage - 1) * PageSize),               
+        //            PaginInfo = new PaginInfo
+        //            {
+        //                CurrentPage = productPage,
+        //                ItemsPerPage = PageSize,
+        //                TotalItems = searchstring == null ?
+        //                Data.Products.Count() :
+        //                Data.Products.Where(q=> q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.SEO.Contains(searchstring) || q.Price.ToString() == searchstring).Count()
+        //            },
+        //            CurrentCategory = category                
+        //        });
+        //    }
     }
 }

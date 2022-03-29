@@ -72,6 +72,7 @@ app.UseMvc(routes =>
             action = "Catalog",
             productPage = 1
         });
+
     routes.MapRoute(
         name: null,
         template: "",
@@ -81,6 +82,7 @@ app.UseMvc(routes =>
             action = "Index",
             productPage = 1
         });
+
     routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
 });
 DataContext.CreateAdminAccount(app.Services, app.Configuration).Wait();

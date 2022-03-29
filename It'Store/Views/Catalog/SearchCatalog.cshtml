@@ -17,21 +17,17 @@
             <h4 class="text-center">Главная</h4>
         }
     }
-    <div class="row">
-        @foreach (var q in Model.Products)
-        {
-            @Html.Partial("ProductSummary", q)
-        }
-    </div>
 
-    <div page-model="@Model.PaginInfo" page-action="Catalog" page-classed-enabled="true"
-         page-class="btn__pagin" page-class-normal="btn-secondary"
-         page-url-category="@Model.CurrentCategory"
-         page-class-selected="btn__pagin__selected" class="btn-group pull-right m-1">
-    </div>
-
+    @foreach (var q in Model.Products)
+    {
+        @Html.Partial("ProductSummary", q)
+    }
 </div>
-
-
-
+<form method="post">
+    <div page-model="@Model.PaginInfo" page-action="Catalogs" page-classed-enabled="true"
+         page-class="btn" page-class-normal="btn-secondary"
+         page-url-category="@Model.CurrentCategory"
+         page-class-selected="btn" class="btn-group pull-right m-1">
+    </div>
+</form>
 
