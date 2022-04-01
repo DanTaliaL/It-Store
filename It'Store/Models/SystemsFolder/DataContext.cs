@@ -76,6 +76,11 @@ namespace ItStore.Models
                 .HasMany(q => q.Orders)
                 .WithMany(q => q.Promotion)
                 .UsingEntity(q => q.ToTable("OrdersPromotions"));
+
+            builder.Entity<Picture>()
+                .HasOne(q => q.Product)
+                .WithMany(q => q.Pictures)
+                .HasForeignKey(q => q.ProductId);
                       
         }
         public static async Task CreateAdminAccount(IServiceProvider sericeProvider,

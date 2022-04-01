@@ -109,20 +109,6 @@ namespace ItStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pictures",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pictures", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Promotions",
                 columns: table => new
                 {
@@ -342,6 +328,7 @@ namespace ItStore.Migrations
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Categories = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SEO = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     WareHouseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -472,6 +459,27 @@ namespace ItStore.Migrations
                     table.ForeignKey(
                         name: "FK_OrdersProduct_Products_ProductsId",
                         column: x => x.ProductsId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pictures",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pictures", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pictures_Products_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -627,6 +635,11 @@ namespace ItStore.Migrations
                 name: "IX_OrdersPromotions_PromotionId",
                 table: "OrdersPromotions",
                 column: "PromotionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pictures_ProductId",
+                table: "Pictures",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_WareHouseId",

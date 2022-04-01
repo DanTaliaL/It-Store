@@ -1,8 +1,7 @@
 ﻿using ItStore.Models;
 using ItStore.Models.DataFolder;
 using Microsoft.AspNetCore.Mvc;
-
-
+using Microsoft.EntityFrameworkCore;
 
 namespace ItStore.Controllers
 {
@@ -36,10 +35,8 @@ namespace ItStore.Controllers
             {
                 byte[] ImageData = ConvertToBytes(uploadImage);
                 picture.Image = ImageData;
-
                 Data.Pictures.Add(picture);
                 Data.SaveChanges();
-
                 return RedirectToAction("Picture");
             }
             return View(picture);

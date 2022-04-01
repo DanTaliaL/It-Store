@@ -126,17 +126,15 @@ namespace ItStore.Controllers
         public ProductController(DataContext DC) => Data = DC;
         public int PageSize = 4;
 
-        public ViewResult List(int productPage = 1)
-            => View(Data.Products.OrderBy(q => q.Id)
-                .Skip((productPage - 1) * PageSize)
-                .Take(PageSize));
-
-        [HttpPost]
-        public IActionResult Product(Product product)
+        //for Image
+        private byte[] ConvertToBytes(IFormFile file)
         {
-            Data.Products.Add(product);
-            Data.SaveChanges();
-            return RedirectToAction();
+            Stream stream = file.OpenReadStream();
+            using (var memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                return memoryStream.ToArray();
+            }
         }
 
         public IActionResult Product()
@@ -146,10 +144,24 @@ namespace ItStore.Controllers
                 .Include(q => q.WareHouse)
                 .Include(q => q.Options)
                 .Include(q => q.Suppliers)
-                .Include(q => q.Orders);
-            return View(Data.Products.OrderBy(q => q.Id));
+                .Include(q => q.Orders)
+                .Include(q => q.Pictures);
+            return View(Data.Products.OrderBy(q=>q.Id));
         }
 
+        [HttpPost]
+        public IActionResult ProductForm(Product product, IFormFile file)
+        {
+            if (file != null)
+            {
+                byte[] ImageData = ConvertToBytes(file);
+                product.Image = ImageData;
+                Data.Products.Add(product);
+                Data.SaveChanges();
+                return RedirectToAction("Product");
+            }
+            return View();
+        }
         public IActionResult ProductForm() => View();
     }
 

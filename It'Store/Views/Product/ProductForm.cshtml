@@ -1,6 +1,6 @@
 ﻿@model ItStore.Models.DataFolder.Product
 <div class="intro intro__title container">
-    <form asp-action="Product" method="post">
+    <form asp-action="ProductForm" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="All">
             <p>
                 <label asp-for="Name">Наименование продукта</label>
@@ -34,13 +34,19 @@
                 <label asp-for="SEO">Сео ядро</label>
                 <input class="form-control" asp-for="SEO" />
             </p>
+            <fieldset>
+                <div class="editor-label">Файл изображения</div>
+                <div class="editor-field">
+                    <input type="file" name="file" />
+                </div>
+            </fieldset>
             <p>
                 <label asp-for="WareHouseId">Ид склада (загулшка)</label>
                 <input class="form-control" asp-for="WareHouseId" />
             </p>
         </div>
         <div class="row">
-            <button class="btn col" type="submit" asp-action="Product">Заполнить</button>
+            <button class="btn col" type="submit" asp-action="ProductForm">Заполнить</button>
             <a class="btn col" asp-action="Product"> Таблица товара</a>
         </div>
 

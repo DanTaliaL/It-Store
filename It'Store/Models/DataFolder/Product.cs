@@ -15,6 +15,7 @@ namespace ItStore.Models.DataFolder
         public string Model { get; set; }
         public string Categories { get; set; }
         public string SEO { get; set; }
+        public byte[] Image { get; set; }
 
         public List<Order> Orders { get; set; }
         
@@ -24,5 +25,7 @@ namespace ItStore.Models.DataFolder
         public List<Options> Options { get; set; } 
 
         public List<Supplier> Suppliers { get; set; }
+        public List<Picture> Pictures { get; set; }
+        
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ItStore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220326180809__1")]
+    [Migration("20220330202319__1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -293,7 +293,12 @@ namespace ItStore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Pictures");
                 });
@@ -312,6 +317,10 @@ namespace ItStore.Migrations
                     b.Property<string>("Categories")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Model")
                         .IsRequired()
@@ -725,6 +734,17 @@ namespace ItStore.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("ItStore.Models.DataFolder.Picture", b =>
+                {
+                    b.HasOne("ItStore.Models.DataFolder.Product", "Product")
+                        .WithMany("Pictures")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("ItStore.Models.DataFolder.Product", b =>
                 {
                     b.HasOne("ItStore.Models.DataFolder.WareHouse", "WareHouse")
@@ -897,6 +917,8 @@ namespace ItStore.Migrations
             modelBuilder.Entity("ItStore.Models.DataFolder.Product", b =>
                 {
                     b.Navigation("Options");
+
+                    b.Navigation("Pictures");
 
                     b.Navigation("Suppliers");
                 });

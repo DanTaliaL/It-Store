@@ -8,18 +8,18 @@
                                         + Convert.ToBase64String(q.Image) + "\" />")
         }
         <form asp-action="Logout method="post">
-            <p>
-                <button class="btn" asp-controller="Picture" asp-action="Picture">Библиотека изображений</button>
-                <button class="btn" asp-controller="Picture" asp-action="Create">Добавление изображений</button>
-                <button class="btn" asp-controller="AdminRole" asp-action="PageRole"> Управление доступа пользоваталей</button>
-
-                <button class="btn" asp-controller="WareHouse" asp-action="WareHouseForm">Заполнение данных о складе</button>
-                <button class="btn" asp-controller="Product" asp-action="ProductForm">Форма заполнения товара</button>
-
-                <button class="btn" asp-controller="Chart" asp-action="Chart">Аналитика продаж</button>
-            </p>
             <button class="btn" asp-area="" asp-controller="Account" asp-action="Logout">Выйти</button>
         </form>
+        <p>
+            <a class="btn" asp-controller="Picture" asp-action="Picture">Библиотека изображений</a>
+            <a class="btn" asp-controller="Picture" asp-action="Create">Добавление изображений</a>
+            <a class="btn" asp-controller="AdminRole" asp-action="PageRole"> Управление доступа пользоваталей</a>
+
+            <a class="btn" asp-controller="WareHouse" asp-action="WareHouseForm">Заполнение данных о складе</a>
+            <a class="btn" asp-controller="Product" asp-action="ProductForm">Форма заполнения товара</a>
+
+            <a class="btn" asp-controller="Chart" asp-action="Chart">Аналитика продаж</a>
+        </p>
 
     </div>
 </div>

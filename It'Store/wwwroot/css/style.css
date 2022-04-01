@@ -251,8 +251,31 @@ a:hover {
 /*catalog style
     ================
 */
-.product {
+
+.product {    
     margin-bottom: 30px;
+    background-color: #121212;
+    box-shadow: 8px 3px 13px rgba(0, 0, 0, 0.26);
+    border-radius: 15px;
+
+}
+
+.elipse__right__catalog {
+    position: absolute;
+    margin-left: 1001px;
+    margin-top: 458px;
+    background: #6100ff;
+    box-shadow: 0px 0px 250px 250px #380080;
+    opacity: 20%;
+}
+
+.elipse__left__catalog {
+    position: absolute;
+    margin-left: 111px;
+    margin-top: 135px;
+    background: #6100FF;
+    box-shadow: 0px 0px 250px 100px #5b00a3;
+    opacity: 20%;
 }
 
 .image__catalog {
@@ -261,11 +284,13 @@ a:hover {
     object-fit: cover;
     border-radius: 7px;
     margin-bottom: 10px;
+
 }
 
 .info h3 {
     font-size: 21px;
     margin-bottom: 0;
+
 }
 
 .catalog__price {
@@ -273,11 +298,13 @@ a:hover {
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+
 }
 
 .price {
     font-weight: 300;
     font-size: 18px;
+ 
 }
 
 .btn__catalog {
@@ -290,6 +317,7 @@ a:hover {
     background-color: #0a325c;
     color: white;
     border-radius: 10px;
+    z-index: 2;
 }
 
 .btn__pagin {
@@ -301,6 +329,7 @@ a:hover {
     background-color: #121212;
     color: none;
     border-radius: 10px;
+    z-index: 2;
 }
 
 .btn__pagin__selected {
@@ -312,55 +341,29 @@ a:hover {
     background-color: #121212;
     color: white;
     border-radius: 10px;
+    z-index: 2;
 }
 
 btn__pagin, .btn__pagin:hover {
     border: 1px solid #c4c4c4;
     background-color: #121212;
     opacity: 80%;
+    z-index: 2;
 }
-/*madal style
+/*search style
     ================
 */
 
 
-
-/*.d6 input {
-    height: 100%;
-    width: 0;
-    border: none;
-    border-bottom: 2px solid transparent;
-    outline: none;
-    background: transparent;
-    transition: .4s cubic-bezier(0, 0.8, 0, 1);
-    z-index: 2;
-}
-
-    .d6 input:focus {
-        width: 300px;
-        z-index: 1;
-        border-bottom: 2px solid #F9F0DA;
-    }
-
-.d6 button {
-    background: #121212;
-    border: none;
-    cursor: pointer;
-}
-
-    .d6 button:before {
-        content:"";
-        font-family: FontAwesome;
-        font-size: 16px;
-        color: #121212;
-    }*/
-/*asdasdasda*/
-
 .d6 form {
     position: relative;
-    width: 300px; /*300px*/
+    width: 300px; 
     margin: 0 auto;
-    height: 42px; /*42px*/
+    height: 42px; 
+}
+
+.d6 h3{
+    opacity:70%;
 }
 
 .d6 input {
