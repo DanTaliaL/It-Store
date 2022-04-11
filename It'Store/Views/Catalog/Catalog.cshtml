@@ -4,37 +4,37 @@
 }
 
 
-    <div class="container intro intro__title text-white">
-        @{
-            if (ViewBag.SelectedCategory != null)
-            {
-                <h4 class="text-center">@ViewBag.SelectedCategory</h4>
-            }
-            else if (ViewBag.SearchingString != null)
-            {
-                <h4 class="text-center">@ViewBag.SearchingString</h4>
-            }
-            else
-            {
-                <h4 class="text-center">Главная</h4>
-            }
+<div class="container intro text-white">
+    @{
+        if (ViewBag.SelectedCategory != null)
+        {
+            <h4 class="text-center">@ViewBag.SelectedCategory</h4>
         }
-        <div class="elipse__right__catalog"></div>
-        <div class="elipse__left__catalog"></div>
-        <div class="row">
+        else if (ViewBag.SearchingString != null)
+        {
+            <h4 class="text-center">@ViewBag.SearchingString</h4>
+        }
+        else
+        {
+            <h4 class="text-center">Главная</h4>
+        }
+    }
+    <div class="elipse__right__catalog"></div>
+    <div class="elipse__left__catalog"></div>
+    <div class="row">
 
-            @foreach (var q in Model.Products)
-            {
-                @Html.Partial("ProductSummary", q)
-            }
-        </div>
-        <div page-model="@Model.PaginInfo" page-action="Catalog" page-classed-enabled="true"
-             page-class="btn__pagin" page-class-normal="btn-secondary"
-             page-url-category="@Model.CurrentCategory"
-             page-class-selected="btn__pagin__selected" class="btn-group pull-right m-1">
-        </div>
-
+        @foreach (var q in Model.Products)
+        {
+            @Html.Partial("ProductSummary", q)
+        }
     </div>
+    <div page-model="@Model.PaginInfo" page-action="Catalog" page-classed-enabled="true"
+         page-class="btn__pagin" page-class-normal="btn-secondary"
+         page-url-category="@Model.CurrentCategory"
+         page-class-selected="btn__pagin__selected" class="btn-group pull-right m-1">
+    </div>
+    @*page-url-productmodel="@Model.ProductModel"*@
+</div>
 
 
 

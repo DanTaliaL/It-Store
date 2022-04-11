@@ -46,6 +46,7 @@ app.UseRouting();
 app.UseAuthorization();
 app.UseAuthentication();
 app.UseSession();
+//app.UseMvcWithDefaultRoute();
 app.UseMvc(routes =>
 {
     routes.MapRoute(

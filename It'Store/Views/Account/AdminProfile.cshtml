@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Picture>
-<div class="intro intro__title">
+<div class="intro">
     <div class="container">
         <h1>Аккаунт администратора: @User.Identity.Name</h1>
         @foreach (var q in Model.Where(q => q.Name == User.Identity.Name))

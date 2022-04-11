@@ -13,17 +13,17 @@ namespace ItStore.Controllers
             Data = DC;
         }
         public int PageSize = 8;
-
-        public IActionResult Catalog(string category, string searchstring, int productPage = 1)
+         
+        public IActionResult Catalog(string category, string searchstring, string productmodel, int productPage = 1)
         {
             ViewBag.SearchingString = searchstring;
-            ViewBag.SelectedCategory = category;           
-            return View( new ProductsListViewModel
+            ViewBag.SelectedCategory = category;
+            var result = new ProductsListViewModel
             {
-                
                 Products = Data.Products
-                .Where(q => category == null || q.Categories == category)
-                .Where(q=> searchstring==null || q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.SEO.Contains(searchstring) || q.Price.ToString() == searchstring)
+                .Where(q=>productmodel == null || q.Model == productmodel)
+                .Where(q =>category == null || q.Categories == category)
+                .Where(q=>searchstring == null|| q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.SEO.Contains(searchstring) || q.Price.ToString() == searchstring)
                 .OrderBy(p => p.Id)
                 .Skip((productPage - 1) * PageSize)
                 .Take(PageSize),
@@ -31,14 +31,19 @@ namespace ItStore.Controllers
                 {
                     CurrentPage = productPage,
                     ItemsPerPage = PageSize,
-                    TotalItems = category == null?
-                    Data.Products.Count():
+                    TotalItems = category == null ?
+                    Data.Products.Count() :
                     Data.Products
-                    .Where(q=>q.Categories==category && q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.SEO.Contains(searchstring) || q.Price.ToString() == searchstring) //не вернвый расчет поиска и категорий
+                    .Where(q => q.Categories == category)
+                    .Where(q=>q.Model == productmodel)
+                    .Where(q=>q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.SEO.Contains(searchstring) || q.Price.ToString() == searchstring) //не вернвый расчет поиска и категорий
                     .Count()
                 },
-                CurrentCategory = category
-            });
+                CurrentCategory = category,
+                ProductModel =productmodel
+            };
+
+            return View(result);
         }
     }
 }

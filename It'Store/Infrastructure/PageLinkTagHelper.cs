@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using ItStore.Models.DataFolder;
 using Microsoft.AspNetCore.Mvc;
+using ItStore.Controllers;
 
 namespace ItStore.Infrastructure
 {
@@ -18,9 +19,9 @@ namespace ItStore.Infrastructure
         [ViewContext]
         [HtmlAttributeNotBound]
         public ViewContext viewContext { get; set; }
-        public PaginInfo PageModel  { get; set; }
+        public PaginInfo PageModel { get; set; }
         public string PageAction { get; set; }
-        [HtmlAttributeName(DictionaryAttributePrefix ="page-url-")]
+        [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
         public Dictionary<string, object> PageUrlValues { get; set; }
         = new Dictionary<string, object>();
         public bool PageClassedEnabled { get; set; } = false;
@@ -31,7 +32,7 @@ namespace ItStore.Infrastructure
         {
             IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(viewContext);
             TagBuilder result = new TagBuilder("div");
-            for (int i = 1; i <=PageModel.TotalPages; i++)
+            for (int i = 1; i <= PageModel.TotalPages; i++)
             {
                 TagBuilder tag = new TagBuilder("a");
                 PageUrlValues["productPage"] = i;
@@ -41,7 +42,7 @@ namespace ItStore.Infrastructure
                 if (PageClassedEnabled)
                 {
                     tag.AddCssClass(PageClass);
-                    tag.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected:PageClassNormal);
+                    tag.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
                 }
                 tag.InnerHtml.Append(i.ToString());
                 result.InnerHtml.AppendHtml(tag);

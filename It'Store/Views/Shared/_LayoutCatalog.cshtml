@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - IT'Store</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Open+Sans:wght@300&family=Raleway:wght@200&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="container">
     <header class="header">
-        <div class="container">
+        <div @*class="container"*@>
             <div class="header__inner">
                 <div class="header__logo">
                     <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Logo.png"></a>
@@ -45,9 +44,10 @@
             </div>
         </div>
     </header>
-    <div class="row text-white container">
+    <div class="row m-1 p-1 text-white">
         <div id="categories" class="col-2 intro">
             @await Component.InvokeAsync("NavigationMenu")
+            @await Component.InvokeAsync("NavigationModelMenu")
         </div>
         <div class="col-9">
             @RenderBody()

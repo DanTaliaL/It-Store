@@ -1,0 +1,13 @@
+﻿@model IQueryable<string>
+<p> </p>
+
+@foreach (var q in Model)
+{
+    <a class="btn"
+       asp-action="Catalog"
+       asp-controller="Catalog"
+       asp-route-productmodel="@q"
+       asp-route-productPage="1">
+        @q
+    </a>
+}

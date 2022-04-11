@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<string>
-<a class="btn" asp-action="Catalog" 
+<a class="btn" asp-action="Catalog"
    asp-controller="Catalog"
-   asp-route-category="">
+   asp-route-category=""
+    asp-route-productmodel="">
     Главная
 </a>
 @foreach (var q in Model)

@@ -24,37 +24,49 @@ a:hover {
 /*text
     ================
 */
-.text__banner {
-    position: absolute;
-    width: 441px;
-    height: 111px;
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 72px;
-    line-height: 153.9%;
-    /* identical to box height, or 111px */
 
-    font-feature-settings: 'pnum' on, 'lnum' on;
-    color: #FFFFFF;
+.banner{
+   width:100%;
+   min-height:10rem;
+   z-index:10;
 }
+    .banner h1 {
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 72px;
+        line-height: 153.9%;
+        /* identical to box height, or 111px */
 
-.text__info {
-    position: absolute;
-    width: 442px;
-    height: 58px;
-    margin-left: 0px;
-    margin-top: 114px;
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 19px;
-    line-height: 153.9%;
-    /* or 29px */
+        font-feature-settings: 'pnum' on, 'lnum' on;
+        color: #FFFFFF;
+        padding-top: 30%;
+    }
+    .banner p {   
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 19px;
+        line-height: 153.9%;
+        color: #FFFFFF;
+    }
+    .banner button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 13px 46px;
+        color:white;
+        background:none;
+        border: 1px solid #6100FF;
+        box-sizing: border-box;
+        border-radius: 10px;
+    }
+    .banner img{
+        max-width:100%;
+        max-height:100%;
+    }
 
-
-    color: #FFFFFF;
-}
 
 .text__systeminfo {
     font-family: Open Sans;
@@ -64,33 +76,15 @@ a:hover {
     line-height: 170%;
     /* identical to box height, or 28px */
 
-    text-align: left;
+    text-align: left;            /*boolshit*/
     position: absolute;
     width: 425px;
     height: 124px;
-    margin-left: 577px;
-    margin-top: 570px;
+    padding-left: 577px;
+    padding-top: 570px;
 }
 
 
-/*container
-    ================
-*/
-.container {
-    width: 100%;
-    max-width: 1440px;
-    max-height: 800px;
-    margin: 0 auto;
-}
-
-.container__logo {
-    position: absolute;
-    width: 442px;
-    height: 172px;
-    margin-left: 136px;
-    margin-top: 261px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-}
 
 /*header
     ================
@@ -146,15 +140,10 @@ a:hover {
     padding-top: 20px;
     display: flex;
     flex-direction: column;
-}
-
-.intro__title {
     color: white;
     font-family: 'Open Sans', sans-serif;
 }
 
-.intro__inner {
-}
 
 /*elipse
     ================
@@ -178,12 +167,12 @@ a:hover {
 }
 
 .showcase {
-    position: absolute;
-    margin-left: 514px;
-    margin-top: 134px;
+    position: page; /*boolshit*/
+    padding-left: 514px;
+    padding-top: 134px;
 }
 
-.showcase__scale {
+.showcase__scale { /*boolshit*/
     transform: scale();
     width: 813px;
     height: 498px;
@@ -235,14 +224,6 @@ a:hover {
     border-radius: 10px;
     opacity: 0.70;
     transition: opacity .1s linear;
-}
-
-.button__place {
-    position: absolute;
-    width: 205px;
-    height: 54px;
-    margin-left: 136px;
-    margin-top: 486px;
 }
 
 .button__style:hover {
