@@ -12,47 +12,50 @@
 </head>
 <body class="container">
     <header class="header">
-        <div @*class="container"*@>
-            <div class="header__inner">
-                <div class="header__logo">
-                    <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Logo.png"></a>
-                </div>
-                <nav class="nav">
-                    <a class="nav__link" asp-area="" asp-controller="Catalog" asp-action="Catalog"> Каталог </a>
-                    <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Гарантия и возврат </a>
-                    <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Успей купить </a>
-                    <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Контакты </a>
-                </nav>
-                <div>
-                    <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Search.png" /></a>
-                    <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart"><img src="~/Images/Icons/Basket.png" /></a>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        if (User.IsInRole("Admin"))
+        <div class="header__inner">
+                    <div class="header__logo">
+                        <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Logo.png"></a>
+                    </div>
+                    <nav class="nav">
+                        <a class="nav__link" asp-area="" asp-controller="Catalog" asp-action="Catalog"> Каталог </a>
+                        <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Гарантия и возврат </a>
+                        <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Успей купить </a>
+                        <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Контакты </a>
+                    </nav>
+                    <div>
+                        <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Search.png" /></a>
+                        <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart"><img src="~/Images/Icons/Basket.png" /></a>
+                        @if (User.Identity.IsAuthenticated)
                         {
-        <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="AdminProfile"><img src="~/Images/Icons/User.png" /></a> }
+                            if (User.IsInRole("Admin"))
+                            {
+            <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="AdminProfile"><img src="~/Images/Icons/User.png" /></a> }
+                            else
+                            {
+            <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a> }
+
+                        }
                         else
                         {
-        <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a> }
+            <a class="nav__link" asp-area="" asp-controller="Account" asp-action="Login"><img src="~/Images/Icons/User.png" /></a>}
 
-                    }
-                    else
-                    {
-        <a class="nav__link" asp-area="" asp-controller="Account" asp-action="Login"><img src="~/Images/Icons/User.png" /></a>}
-
-                </div>
-            </div>
-        </div>
+                    </div>
+        </div>            
     </header>
     <div class="row m-1 p-1 text-white">
-        <div id="categories" class="col-2 intro">
-            @await Component.InvokeAsync("NavigationMenu")
-            @await Component.InvokeAsync("NavigationModelMenu")
+        <div class="col-2">
+            <div id="categories" class="intro">
+                @await Component.InvokeAsync("NavigationMenu")
+            </div>
+            <div id="productmodel" class="intro">
+                @await Component.InvokeAsync("NavigationModelMenu")
+            </div>
         </div>
         <div class="col-9">
             @RenderBody()
         </div>
     </div>
-     
+
+
 </body>
 </html>

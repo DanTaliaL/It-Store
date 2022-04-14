@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - IT'Store</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/flexstyle.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Open+Sans:wght@300&family=Raleway:wght@200&display=swap" rel="stylesheet">
+</head>
+<body class="container">
+    <header class="header">
+        <div class="header__inner">
+
+
+            @*old*@
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+                <div class="header__logo">
+                    <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Logo.png"></a>
+                </div>
+                <div class="navbar-brand">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span><img src="~/Images/Icons/Burger.png" /></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav__link" asp-area="" asp-controller="Catalog" asp-action="Catalog"> Каталог </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Гарантия и возврат </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Успей купить </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Контакты </a>
+                            </li>
+                            <li>
+                                <div class="d-lg-none">
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        if (User.IsInRole("Admin"))
+                                        {
+                                            <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="AdminProfile"> Профиль </a>
+                                        }
+                                        else
+                                        {
+                                            <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"> Профиль </a>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <a class="nav__link" asp-area="" asp-controller="Account" asp-action="Login"> Профиль </a>
+                                    }
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-lg-none">
+                                    <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart">Корзина</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="d-none d-lg-block">
+                    <nav class="nav">
+                        <div class="d6 text-white">
+                            <form method="get" asp-action="Catalog" asp-controller="Catalog">
+                                <input type="text" class="form-control-sm text-white" name="searchstring" placeholder="Искать здесь...">
+                                <button type="submit" asp-action="Catalog" asp-controller="Catalog" class="nav__link"><img src="~/Images/Icons/Search.png" /></button>
+                            </form>
+                        </div>
+
+                        @*body test*@
+
+                        <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart"><img src="~/Images/Icons/Basket.png" /></a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Admin"))
+                            {
+                                <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="AdminProfile"><img src="~/Images/Icons/User.png" /></a>
+                            }
+                            else
+                            {
+                                <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a>
+                            }
+
+                        }
+                        else
+                        {
+                            <a class="nav__link" asp-area="" asp-controller="Account" asp-action="Login"><img src="~/Images/Icons/User.png" /></a>
+                        }
+
+
+                    </nav>
+                </div>
+
+
+
+            </nav>
+
+
+            @*old*@
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

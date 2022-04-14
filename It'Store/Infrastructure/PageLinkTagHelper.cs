@@ -19,7 +19,7 @@ namespace ItStore.Infrastructure
         [ViewContext]
         [HtmlAttributeNotBound]
         public ViewContext viewContext { get; set; }
-        public PaginInfo PageModel { get; set; }
+        public ProductsListViewModel PageModel { get; set; }
         public string PageAction { get; set; }
         [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
         public Dictionary<string, object> PageUrlValues { get; set; }
@@ -32,17 +32,17 @@ namespace ItStore.Infrastructure
         {
             IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(viewContext);
             TagBuilder result = new TagBuilder("div");
-            for (int i = 1; i <= PageModel.TotalPages; i++)
+            for (int i = 1; i <= PageModel.PaginInfo.TotalPages; i++)
             {
                 TagBuilder tag = new TagBuilder("a");
                 PageUrlValues["productPage"] = i;
+                PageUrlValues["searchstring"] = PageModel.Searchstring;
+                PageUrlValues["category"] = PageModel.CurrentCategory;
                 tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
-                tag.Attributes["href"] = urlHelper.Action(PageAction,
-                    new { productPage = i });
                 if (PageClassedEnabled)
                 {
                     tag.AddCssClass(PageClass);
-                    tag.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
+                    tag.AddCssClass(i == PageModel.PaginInfo.CurrentPage ? PageClassSelected : PageClassNormal);
                 }
                 tag.InnerHtml.Append(i.ToString());
                 result.InnerHtml.AppendHtml(tag);

@@ -21,11 +21,12 @@ a:hover {
     color: white;
 }
 
-/*text
+/*baner
     ================
 */
 
 .banner{
+   padding-top:10%;
    width:100%;
    min-height:10rem;
    z-index:10;
@@ -56,35 +57,38 @@ a:hover {
         justify-content: center;
         align-items: center;
         padding: 13px 46px;
-        color:white;
-        background:none;
+        color: white;
+        background: none;
         border: 1px solid #6100FF;
         box-sizing: border-box;
         border-radius: 10px;
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 153.9%;
+        /* identical to box height, or 28px */
+
+        text-transform: uppercase;
+        font-feature-settings: 'pnum' on, 'lnum' on;
+        opacity: 0.70;
+        transition: opacity .1s linear;
     }
+
+.banner button:hover {
+    opacity: 1;
+}
+
+
     .banner img{
         max-width:100%;
         max-height:100%;
     }
 
 
-.text__systeminfo {
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
+.banner__link a {
     font-size: 18px;
-    line-height: 170%;
-    /* identical to box height, or 28px */
-
-    text-align: left;            /*boolshit*/
-    position: absolute;
-    width: 425px;
-    height: 124px;
-    padding-left: 577px;
-    padding-top: 570px;
 }
-
-
 
 /*header
     ================
@@ -94,8 +98,9 @@ a:hover {
     position: sticky;
     top: 0px;
     left: 0;
-    z-index: 1000;
-    background-color:#121212;
+    z-index: 100;
+    background-color: #121212;
+
 }
 
 .header__logo {
@@ -107,6 +112,7 @@ a:hover {
     justify-content: space-between;
     padding: 15px 0;
     align-items: center;
+
 }
 
 /*nav
@@ -116,6 +122,21 @@ a:hover {
     display: flex;
     font-size: 18px;
     font-weight: 700;
+}
+
+.navbar{
+    display:-webkit-box;
+}
+.navbar-brand{
+    margin-right:0rem;
+}
+.navbar-light {
+    color: rgba(0,0,0,.55);
+     border-color: none; 
+}
+.navbar-toggler {
+    color: rgba(0,0,0,.55);
+    border-color: none;
 }
 
 
@@ -129,6 +150,7 @@ a:hover {
     .nav__link:hover {
         opacity: 1;
     }
+
 
 /*intro
     ================
@@ -388,3 +410,6 @@ btn__pagin, .btn__pagin:hover {
         font-size: 16px;
         color: #F9F0DA;
     }
+
+    /*search*/
+

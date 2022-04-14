@@ -13,5 +13,6 @@ namespace ItStore.Controllers
     {
         public IActionResult Index() => View();
         public IActionResult Privacy() => View();
+
     }
 }

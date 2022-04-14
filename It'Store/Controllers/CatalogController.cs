@@ -27,21 +27,48 @@ namespace ItStore.Controllers
                 .OrderBy(p => p.Id)
                 .Skip((productPage - 1) * PageSize)
                 .Take(PageSize),
-                PaginInfo = new PaginInfo
+                PaginInfo =  new PaginInfo
+                {
+                    CurrentPage = productPage,
+                    ItemsPerPage = PageSize,
+                    TotalItems = Data.Products.Count()
+                },
+                CurrentCategory = category,
+                ProductModel =productmodel,
+                Searchstring = searchstring               
+            };
+
+            if (searchstring != null)
+            {
+                result.PaginInfo = new PaginInfo
+                {
+                    CurrentPage = productPage,
+                    ItemsPerPage = PageSize,
+                    TotalItems = Data.Products.Where(q => q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.SEO.Contains(searchstring)).Count()
+                };
+            }
+            else if (category != null)
+            {
+                result.PaginInfo = new PaginInfo
                 {
                     CurrentPage = productPage,
                     ItemsPerPage = PageSize,
                     TotalItems = category == null ?
                     Data.Products.Count() :
-                    Data.Products
-                    .Where(q => q.Categories == category)
-                    .Where(q=>q.Model == productmodel)
-                    .Where(q=>q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.SEO.Contains(searchstring) || q.Price.ToString() == searchstring) //не вернвый расчет поиска и категорий
-                    .Count()
-                },
-                CurrentCategory = category,
-                ProductModel =productmodel
-            };
+                    Data.Products.Where(q => q.Categories == category).Count()
+                };
+            }
+            else if (productmodel != null)
+            {
+                result.PaginInfo = new PaginInfo
+                {
+                    CurrentPage = productPage,
+                    ItemsPerPage = PageSize,
+                    TotalItems = productmodel == null ?
+                    Data.Products.Count() :
+                    Data.Products.Where(q => q.Model == productmodel).Count()
+                };
+            }
 
             return View(result);
         }

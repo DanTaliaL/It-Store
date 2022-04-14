@@ -28,12 +28,13 @@
             @Html.Partial("ProductSummary", q)
         }
     </div>
-    <div page-model="@Model.PaginInfo" page-action="Catalog" page-classed-enabled="true"
+    <div page-model="@Model" page-action="Catalog" page-classed-enabled="true"
          page-class="btn__pagin" page-class-normal="btn-secondary"
          page-url-category="@Model.CurrentCategory"
+         page-url-searchstring="@Model.Searchstring"
+         page-url-productmodel="@Model.ProductModel"
          page-class-selected="btn__pagin__selected" class="btn-group pull-right m-1">
     </div>
-    @*page-url-productmodel="@Model.ProductModel"*@
 </div>
 
 
