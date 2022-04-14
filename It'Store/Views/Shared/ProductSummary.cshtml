@@ -7,7 +7,12 @@
                                         + Convert.ToBase64String(Model.Image) + "\" />")
             </div>
             <div class="info">
-                <h3>@Model.Name</h3>
+                <form asp-controller="Catalog" asp-action="ProductCart" id="@Model.Id" method="get">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="Name"/>
+                    <button type="submit" asp-controller="Catalog" asp-action="ProductCart"><h3>@Model.Name</h3></button>
+                </form>
+               
                 <div class="catalog__price">
                     <span class="price">@Model.Price</span>
                     <form id="@Model.Id" asp-action="AddToCart" asp-controller="Cart" method="post">

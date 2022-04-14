@@ -72,5 +72,18 @@ namespace ItStore.Controllers
 
             return View(result);
         }
+
+        public IActionResult ProductCart(int Id, string? Name)
+        {
+            var Result = new ProductCartViewModel
+            {
+                Products = Data.Products.Where(q=>q.Id==Id),
+                Pictures = Data.Pictures.Where(q=>q.Name==Name),
+                Options = Data.Options,
+                ProductId = Id,
+                
+            };
+            return View(Result);
+        }
     }
 }

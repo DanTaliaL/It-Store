@@ -411,5 +411,12 @@ btn__pagin, .btn__pagin:hover {
         color: #F9F0DA;
     }
 
-    /*search*/
+/* product cart*/
 
+.product__cart {
+    padding-top: 10%;
+    width: 100%;
+    min-height: 10rem;
+    z-index: 10;
+    background-color:#808080;
+}
