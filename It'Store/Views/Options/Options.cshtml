@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Options>
+<table class="text-white">
+    <tr>
+        <th>Цвет</th>
+        <th>Размер</th>
+        <th>Частота процессора</th>
+        <th>Громкость</th>
+    </tr>
+    <tr>
+        @foreach (var q in Model)
+        {
+            <td>@q.Color.</td>
+            <td>@q.Size</td>
+            <td>@q.ClockFrequency</td>
+            <td>@q.Volume</td>
+        }
+    </tr>
+</table>

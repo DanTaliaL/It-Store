@@ -1,0 +1,34 @@
+﻿@model Options
+
+<form asp-controller="Options" asp-action="Options" method="post">
+    <div asp-validation-summary="All" class="text-white">
+
+        <p>
+            <label asp-for="ProductId">Id продукта</label>
+            <input class="form-control" asp-for="ProductId"/>
+        </p>
+
+        <p>
+            <label asp-for="ClockFrequency">Частота процессора</label>
+            <input class="form-control" asp-for="ClockFrequency" />
+        </p>
+        <p>
+            <label asp-for="Color">Цвет</label>
+            <input class="form-control" asp-for="Color"/>
+        </p>
+       <p>
+           <label asp-for="Volume">Громкость</label>
+           <input class="form-control" asp-for="Volume" />
+       </p>
+        <p>
+            <label asp-for="Size">Размеры</label>
+            <input class="form-control" asp-for="Size"/>
+        </p>
+        <p>
+            <label asp-for="Model">Производитель</label>
+            <input class="form-control" asp-for="Model"/>
+        </p>
+        <button type="submit" asp-action="Options">Заполнить </button>
+        <a class="btn" asp-controller="Options" asp-action="Options">Таблица</a>
+    </div>
+</form>

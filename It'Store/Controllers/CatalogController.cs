@@ -79,9 +79,8 @@ namespace ItStore.Controllers
             {
                 Products = Data.Products.Where(q=>q.Id==Id),
                 Pictures = Data.Pictures.Where(q=>q.Name==Name),
-                Options = Data.Options,
-                ProductId = Id,
-                
+                Options = Data.Options.Where(q=>q.ProductId==Id),
+                ProductId = Id,               
             };
             return View(Result);
         }

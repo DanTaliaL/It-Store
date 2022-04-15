@@ -1,55 +1,41 @@
 ﻿@model ItStore.Models.DataFolder.ProductCartViewModel
-
-<div class="product__cart">
-    <h1 class="text-white">
-        @foreach (var q in Model.Products.Where(q => q.Id == Model.ProductId))
-        {
-            @q.Name
-        }
-    </h1>
-    <div class="image__catalog">
-        <div>
-            <div class="image__catalog">
-                @*@foreach (var q in Model.Pictures)
-                    {
-                        @Html.Raw("<img style='width:209px; height:210px;' src=\"data:image/jpeg;base64,"
-                                             + Convert.ToBase64String(q.Image) + "\" />")
-                    }*@
+<div class="product__cart row">
+    <div id="carouselExampleFade" class="carousel slide col" data-bs-ride="carousel">
+        <div class="carousel-inner position">
+            <div class="carousel-item active">
+                @foreach (var q in Model.Products)
+                {
+                    @Html.Raw("<img class='d-block' style='width:209px; height:210px;' src=\"data:image/jpeg;base64,"
+                                              + Convert.ToBase64String(q.Image) + "\" />")
+                }
             </div>
-        </div>
-
-    </div>
-</div>
-
-
-
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            @foreach (var q in Model.Products)
+            @foreach (var q in Model.Pictures)
             {
-                @Html.Raw("<img class='d-block w-100' style='width:209px; height:210px;' src=\"data:image/jpeg;base64,"
-                                          + Convert.ToBase64String(q.Image) + "\" />")
+                @Html.Partial("ProductPicture", q)
             }
         </div>
-        @foreach (var q in Model.Pictures)
-        {
-            @Html.Partial("ProductPicture", q)
-        }
-
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Назад</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Вперед</span>
+        </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Предыдущий</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Следующий</span>
-    </button>
+    <div class="col">
+        @foreach (var q in Model.Products)
+        {
+            @Html.Partial("ProductInformation", q)
+        }
+    </div>
 </div>
-
+<div>
+    <h3 class="text-white text-center"><b> Подробные характеристики</b></h3>
+    <table class="text-white row">
+        @foreach (var q in Model.Options)
+        {
+            @Html.Partial("ProductOption",q)
+        }
+    </table>
+</div>
