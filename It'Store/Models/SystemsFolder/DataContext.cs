@@ -22,7 +22,8 @@ namespace ItStore.Models
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<History> Histories { get; set; }
         public DbSet<CartLine> CartLine { get; set; }
-        public DbSet<Picture> Pictures { get; set; } 
+        public DbSet<Picture> Pictures { get; set; }
+        public DbSet<Commentaries> Comments { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -77,11 +78,11 @@ namespace ItStore.Models
                 .WithMany(q => q.Promotion)
                 .UsingEntity(q => q.ToTable("OrdersPromotions"));
 
-            builder.Entity<Picture>()
+            builder.Entity<Commentaries>()
                 .HasOne(q => q.Product)
-                .WithMany(q => q.Pictures)
-                .HasForeignKey(q => q.ProductId);
-                      
+                .WithMany(q => q.Comments)
+                .HasForeignKey(q => q.ProductID);
+
         }
         public static async Task CreateAdminAccount(IServiceProvider sericeProvider,
                 IConfiguration configuration)

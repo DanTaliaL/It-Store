@@ -144,8 +144,7 @@ namespace ItStore.Controllers
                 .Include(q => q.WareHouse)
                 .Include(q => q.Options)
                 .Include(q => q.Suppliers)
-                .Include(q => q.Orders)
-                .Include(q => q.Pictures);
+                .Include(q => q.Orders);
             return View(Data.Products.OrderBy(q=>q.Id));
         }
 
@@ -233,5 +232,19 @@ namespace ItStore.Controllers
         }
 
         public IActionResult WareHouseForm() => View();
+    }
+
+    public class CommentariesController : Controller
+    {
+        private DataContext Data { get; set; }
+        public CommentariesController(DataContext DC) => Data = DC;
+
+        [HttpPost]
+        public IActionResult Commentaries(Commentaries commentaries)
+        {
+            Data.Comments.Add(commentaries);
+            Data.SaveChanges();
+            return RedirectToAction("Catalog","Catalog");
+        }
     }
 }

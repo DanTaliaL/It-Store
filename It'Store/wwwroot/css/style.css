@@ -464,3 +464,35 @@ btn__pagin, .btn__pagin:hover {
 .btn__cart:hover {
     opacity: 1;
 }
+
+.product__cart h4{
+    color:black;
+    font-style:italic;
+}
+.product__cart h3 {
+    font-style: italic;
+}
+
+.carousel__button__position {
+    top: -50%;
+}
+.context__inner{
+    text-align:right;
+}
+
+/*Comments*/
+.comments ul ul {
+    margin-left: 60px;
+}
+
+.comments .comment img {
+    margin-right: 20px;
+}
+
+.comments .comment {
+    padding: 6px;
+}
+
+    .comments .comment:hover {
+        background: #eee;
+    }

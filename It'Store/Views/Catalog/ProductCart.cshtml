@@ -14,28 +14,71 @@
                 @Html.Partial("ProductPicture", q)
             }
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Назад</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Вперед</span>
-        </button>
+        <div>
+            <button class="carousel-control-prev carousel__button__position" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Назад</span>
+            </button>
+            <button class="carousel-control-next carousel__button__position" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Вперед</span>
+            </button>
+        </div>
+
+        <div>
+            @foreach (var q in Model.Products)
+            {
+                @Html.Partial("ProductInformation", q)
+            }
+        </div>
     </div>
+
     <div class="col">
-        @foreach (var q in Model.Products)
-        {
-            @Html.Partial("ProductInformation", q)
-        }
-    </div>
-</div>
-<div>
-    <h3 class="text-white text-center"><b> Подробные характеристики</b></h3>
-    <table class="text-white row">
+        <h3 class="text-white text-center">
+            <b>
+                Подробные характеристики
+            </b>
+        </h3>
         @foreach (var q in Model.Options)
         {
-            @Html.Partial("ProductOption",q)
+            @Html.Partial("ProductOption", q)
         }
-    </table>
+    </div>
+
+
+    <div >
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading text-white">
+                            Комментарии
+                        </div>
+                        <form asp-controller="Commentaries" asp-action="Commentaries" method="post">
+                            <div class="panel-body comments">
+                                <input type="hidden" asp-for="ProductID" />
+                                <input type="hidden" asp-for="UserName" />
+                                <textarea class="form-control" placeholder="Оставьте Ваш комментарий" asp-action="ProductCart" asp-for="Comment" rows="5"></textarea>
+                                <br>
+                                <button type="submit" class="btn btn-info pull-right">Отправить</button>
+                                <div class="clearfix"></div>
+                                <hr>
+                                <ul class="media-list">
+                                </ul>
+                            </div>
+                        </form>
+                        @foreach (var q in Model.Commentaries)
+                        {
+                            @Html.Partial("ProductCommentaries", q)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
 </div>
+
+

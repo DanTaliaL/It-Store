@@ -23,7 +23,7 @@ namespace ItStore.Controllers
                 Products = Data.Products
                 .Where(q=>productmodel == null || q.Model == productmodel)
                 .Where(q =>category == null || q.Categories == category)
-                .Where(q=>searchstring == null|| q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.SEO.Contains(searchstring) || q.Price.ToString() == searchstring)
+                .Where(q=>searchstring == null|| q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.Price.ToString() == searchstring)
                 .OrderBy(p => p.Id)
                 .Skip((productPage - 1) * PageSize)
                 .Take(PageSize),
@@ -44,7 +44,7 @@ namespace ItStore.Controllers
                 {
                     CurrentPage = productPage,
                     ItemsPerPage = PageSize,
-                    TotalItems = Data.Products.Where(q => q.Name.Contains(searchstring) || q.Model.Contains(searchstring) || q.SEO.Contains(searchstring)).Count()
+                    TotalItems = Data.Products.Where(q => q.Name.Contains(searchstring) || q.Model.Contains(searchstring)).Count()
                 };
             }
             else if (category != null)
@@ -77,10 +77,12 @@ namespace ItStore.Controllers
         {
             var Result = new ProductCartViewModel
             {
-                Products = Data.Products.Where(q=>q.Id==Id),
-                Pictures = Data.Pictures.Where(q=>q.Name==Name),
-                Options = Data.Options.Where(q=>q.ProductId==Id),
-                ProductId = Id,               
+                Products = Data.Products.Where(q => q.Id == Id),
+                Pictures = Data.Pictures.Where(q => q.Name == Name),
+                Options = Data.Options.Where(q => q.ProductId == Id),
+                ProductID = Id,
+                Commentaries = Data.Comments.Where(q=>q.ProductID==Id),
+                UserName = User.Identity.Name,
             };
             return View(Result);
         }

@@ -2,33 +2,119 @@
 
 <form asp-controller="Options" asp-action="Options" method="post">
     <div asp-validation-summary="All" class="text-white">
-
         <p>
             <label asp-for="ProductId">Id продукта</label>
-            <input class="form-control" asp-for="ProductId"/>
+            <input class="form-control" asp-for="ProductId" />
+        </p>
+        <h4>Процессор</h4>
+        <p>
+            <label asp-for="ProcessorModelName">Наименование процессора</label>
+            <input class="form-control" asp-for="ProcessorModelName" />
+        </p>
+        <p>
+            <label asp-for="QuantityCore">Количество ядер</label>
+            <input class="form-control" asp-for="QuantityCore" />
+        </p>
+        <p>
+            <label asp-for="NumberOfThreads">Число потоков</label>
+            <input class="form-control" asp-for="NumberOfThreads" />
+        </p>
+        <p>
+            <label asp-for="CPUFrequency">Частота процессора</label>
+            <input class="form-control" asp-for="CPUFrequency" />
+        </p>
+        <p>
+            <label asp-for="MaxCPUFrequency">Автоматическое увеличение частоты</label>
+            <input class="form-control" asp-for="MaxCPUFrequency" />
+        </p>
+        <h4>Классификация</h4>
+        <p>
+            <label asp-for="Model">Модель</label>
+            <input class="form-control" asp-for="Model" />
+        </p>
+        <p>
+            <label asp-for="ManufacturerCode">Код производителя</label>
+            <input class="form-control" asp-for="ManufacturerCode" />
+        </p>
+        <p>
+            <label asp-for="ReleaseYear">Год выпуска</label>
+            <input class="form-control" asp-for="ReleaseYear" />
+        </p>
+        <p>
+            <label asp-for="OperatingSystem">Операционная система</label>
+            <input class="form-control" asp-for="OperatingSystem" />
+        </p>
+        <h4>Материал</h4>
+        <p>
+            <label asp-for="CoverMaterial">Маетриал крышки</label>
+            <input class="form-control" asp-for="CoverMaterial" />
         </p>
 
         <p>
-            <label asp-for="ClockFrequency">Частота процессора</label>
-            <input class="form-control" asp-for="ClockFrequency" />
+            <label asp-for="HousingMaterial">Материал корпуса</label>
+            <input class="form-control" asp-for="HousingMaterial" />
+        </p>
+        <h4>Экран</h4>
+        <p>
+            <label asp-for="ScreenType">Тип экрана</label>
+            <input class="form-control" asp-for="ScreenType" />
         </p>
         <p>
-            <label asp-for="Color">Цвет</label>
-            <input class="form-control" asp-for="Color"/>
-        </p>
-       <p>
-           <label asp-for="Volume">Громкость</label>
-           <input class="form-control" asp-for="Volume" />
-       </p>
-        <p>
-            <label asp-for="Size">Размеры</label>
-            <input class="form-control" asp-for="Size"/>
+            <label asp-for="ScreenDiagonal">Диагональ экрана</label>
+            <input class="form-control" asp-for="ScreenDiagonal" />
         </p>
         <p>
-            <label asp-for="Model">Производитель</label>
-            <input class="form-control" asp-for="Model"/>
+            <label asp-for="ScreenResolution">Разрешение экрана</label>
+            <input class="form-control" asp-for="ScreenResolution" />
         </p>
-        <button type="submit" asp-action="Options">Заполнить </button>
+        <p>
+            <label asp-for="MaximumScreenRefreshRate">Максимальная частота обновления экрана</label>
+            <input class="form-control" asp-for="MaximumScreenRefreshRate" />
+        </p>
+        <p>
+            <label asp-for="PixelDensity">Плотность пикселей</label>
+            <input class="form-control" asp-for="PixelDensity" />
+        </p>
+        <h4>Оперативная память</h4>
+        <p>
+            <label asp-for="RAMType">Тип оперативной памяти</label>
+            <input class="form-control" asp-for="RAMType" />
+        </p>
+        <p>
+            <label asp-for="RAMMemory">Обьем оперативной памяти</label>
+            <input class="form-control" asp-for="RAMMemory" />
+        </p>
+        <p>
+            <label asp-for="RAMFrequency">Частота оперативной памяти</label>
+            <input class="form-control" asp-for="RAMFrequency" />
+        </p>
+        <h4>Накопители данных</h4>
+        <p>
+            <label asp-for="VolumeSSD">Обьем SSD</label>
+            <input class="form-control" asp-for="VolumeSSD" />
+        </p>
+        <p>
+            <label asp-for="VolumeHDD">Обьем HDD</label>
+            <input class="form-control" asp-for="VolumeHDD" />
+        </p>
+        <p>
+            <label asp-for="VolumeEMMC">Обьем EMMC</label>
+            <input class="form-control" asp-for="VolumeEMMC" />
+        </p>
+        <h4>Графический ускоритель</h4>
+        <p>
+            <label asp-for="TypeOfGraphicsAccelerator">Вид графического ускорителя</label>
+            <input class="form-control" asp-for="TypeOfGraphicsAccelerator" />
+        </p>
+        <p>
+            <label asp-for="BuiltInGraphicsCardModel">Модель встроеной видеокарты</label>
+            <input class="form-control" asp-for="BuiltInGraphicsCardModel" />
+        </p>
+        <p>
+            <label asp-for="DiscreteGraphicsCardModel">Модель дискретной карты</label>
+            <input class="form-control" asp-for="DiscreteGraphicsCardModel" />
+        </p>
+        <button type="submit" class="btn" asp-action="Options">Заполнить </button>
         <a class="btn" asp-controller="Options" asp-action="Options">Таблица</a>
     </div>
 </form>

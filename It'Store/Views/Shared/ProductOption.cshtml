@@ -1,13 +1,17 @@
 ﻿@model Options
-<tr class="col-md-3">
-    <th>Размер</th>
-    <th>Частота процессора </th>
-    <th>Цвет</th>
-    <th>Производитель</th>
-</tr>
-<tr class="col-md-3">
-    <td>@Model.Size</td>
-    <td>@Model.ClockFrequency</td>
-    <td>@Model.Color</td>
-    <td>@Model.Model</td>
-</tr>
+<div class="row justify-content-between">
+    <div>
+            <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Процессор @Model.ProcessorModelName .....
+            </a>
+
+    </div>
+    <p>
+        
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body text-black">
+            <p> Частота @Model.MaxCPUFrequency</p>
+        </div>
+    </div>
+</div>

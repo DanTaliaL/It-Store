@@ -143,6 +143,35 @@ namespace ItStore.Migrations
                     b.ToTable("CartLine");
                 });
 
+            modelBuilder.Entity("ItStore.Models.DataFolder.Commentaries", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Grade")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("ItStore.Models.DataFolder.Customer", b =>
                 {
                     b.Property<int>("Id")
@@ -216,10 +245,33 @@ namespace ItStore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ClockFrequency")
+                    b.Property<string>("BuiltInGraphicsCardModel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CPUFrequency")
                         .HasColumnType("int");
 
-                    b.Property<string>("Color")
+                    b.Property<string>("CoverMaterial")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiscreteGraphicsCardModel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HousingMaterial")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ManufacturerCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MaxCPUFrequency")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MaximumScreenRefreshRate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -227,14 +279,70 @@ namespace ItStore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("NumberOfThreads")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OperatingSystem")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PixelDensity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProcessorModelName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Size")
+                    b.Property<int>("QuantityCore")
                         .HasColumnType("int");
 
-                    b.Property<int>("Volume")
-                        .HasColumnType("int");
+                    b.Property<string>("RAMFrequency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RAMMemory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RAMType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReleaseYear")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ScreenDiagonal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ScreenResolution")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ScreenType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeOfGraphicsAccelerator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VolumeEMMC")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VolumeHDD")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VolumeSSD")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -291,12 +399,7 @@ namespace ItStore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Pictures");
                 });
@@ -308,9 +411,6 @@ namespace ItStore.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Aviability")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Categories")
                         .IsRequired()
@@ -330,13 +430,6 @@ namespace ItStore.Migrations
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SEO")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("WareHouseId")
                         .HasColumnType("int");
@@ -721,21 +814,21 @@ namespace ItStore.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ItStore.Models.DataFolder.Options", b =>
+            modelBuilder.Entity("ItStore.Models.DataFolder.Commentaries", b =>
                 {
                     b.HasOne("ItStore.Models.DataFolder.Product", "Product")
-                        .WithMany("Options")
-                        .HasForeignKey("ProductId")
+                        .WithMany("Comments")
+                        .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ItStore.Models.DataFolder.Picture", b =>
+            modelBuilder.Entity("ItStore.Models.DataFolder.Options", b =>
                 {
                     b.HasOne("ItStore.Models.DataFolder.Product", "Product")
-                        .WithMany("Pictures")
+                        .WithMany("Options")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -914,9 +1007,9 @@ namespace ItStore.Migrations
 
             modelBuilder.Entity("ItStore.Models.DataFolder.Product", b =>
                 {
-                    b.Navigation("Options");
+                    b.Navigation("Comments");
 
-                    b.Navigation("Pictures");
+                    b.Navigation("Options");
 
                     b.Navigation("Suppliers");
                 });

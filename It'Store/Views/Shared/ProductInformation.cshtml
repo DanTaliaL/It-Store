@@ -7,6 +7,6 @@
     <form class="col" id="@Model.Id" asp-action="AddToCart" asp-controller="Cart" method="post">
         <input type="hidden" asp-for="Id" />
         <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-        <button type="submit" class="btn__cart">Купить</button>
+        <button type="submit" class="btn__cart">Добавить в корзину</button>
     </form>
 </div>
