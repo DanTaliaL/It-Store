@@ -10,7 +10,7 @@
                 <form asp-controller="Catalog" asp-action="ProductCart" id="@Model.Id" method="get">
                     <input type="hidden" asp-for="Id" />
                     <input type="hidden" asp-for="Name"/>
-                    <button type="submit" asp-controller="Catalog" asp-action="ProductCart"><h3>@Model.Name</h3></button>
+                    <button class="product__link text-white" type="submit" asp-controller="Catalog" asp-action="ProductCart"><h3>@Model.Name</h3></button>
                 </form>
                
                 <div class="catalog__price">

@@ -4,14 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - IT'Store</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Open+Sans:wght@300&family=Raleway:wght@200&display=swap" rel="stylesheet">
 </head>
-<body class="container">
-
+<body>
     <header class="header">
         <div class="px-3 py-2 text-white">
             <div class="container">
@@ -50,7 +50,7 @@
             <div class="container d-flex flex-wrap justify-content-center">
 
                 <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" method="get" asp-action="Catalog" asp-controller="Catalog">
-                    <input type="text" class="form-control text-white" name="searchstring" placeholder="Искать...">
+                    <input type="text" class="form-control form-control-dark text-white" name="searchstring" placeholder="Искать...">
 
                 </form>
 
@@ -61,79 +61,98 @@
                     {
                         if (User.IsInRole("Admin"))
                         {
-        <a type="" class="nav__link nav__link_icon" asp-area="" asp-controller="Account" asp-action="AdminProfile"><img src="~/Images/Icons/User.png" /></a> }
+                            <a type="" class="nav__link nav__link_icon" asp-area="" asp-controller="Account" asp-action="AdminProfile"><img src="~/Images/Icons/User.png" /></a>
+                        }
                         else
                         {
-        <a type="" class="nav__link nav__link_icon" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a> }
+                            <a type="" class="nav__link nav__link_icon" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a>
+                        }
 
                     }
                     else
                     {
-        <a class="nav__link nav__link_icon" asp-area="" asp-controller="Account" asp-action="Login"><img src="~/Images/Icons/User.png" /></a>}
+                        <a class="nav__link nav__link_icon" asp-area="" asp-controller="Account" asp-action="Login"><img src="~/Images/Icons/User.png" /></a>
+                    }
                 </div>
             </div>
         </div>
     </header>
-    <div class="row m-1 p-1 text-white">
-        <div class="col-2">
-            <div id="categories" class="intro">
-                @await Component.InvokeAsync("NavigationMenu")
-            </div>
-            <div id="productmodel" class="intro">
-                @await Component.InvokeAsync("NavigationModelMenu")
+
+    <div class="wrapper">
+
+        <div class="content">
+            <div class="container">
+                <div class="row m-1 p-1 text-white ">
+                    <div class="col-2">
+                        <div id="categories" class="intro">
+                            @await Component.InvokeAsync("NavigationMenu")
+                        </div>
+                        <div id="productmodel" class="intro">
+                            @await Component.InvokeAsync("NavigationModelMenu")
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        @RenderBody()
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-9">
-            @RenderBody()
+
+
+        @*foorer*@
+        <div class="footer">
+            <div class="footer__position">
+                <div class="container">
+                    <footer class="row row-cols-5 py-5">
+                        <div class="col">
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+                                <img src="~/Images/Icons/Logo.png">
+                            </a>
+                            <p class="text-muted">&copy; 2021</p>
+                        </div>
+
+                        <div class="col">
+
+                        </div>
+
+                        <div class="col">
+                            <h5>Section</h5>
+                            <ul class="nav flex-column">
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col">
+                            <h5>Section</h5>
+                            <ul class="nav flex-column">
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col">
+                            <h5>Section</h5>
+                            <ul class="nav flex-column">
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                            </ul>
+                        </div>
+                    </footer>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div>
-        <footer class="row row-cols-5 py-5 my-5 border-top">
-            <div class="col">
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-                    <img src="~/Images/Icons/Logo.png">
-                </a>
-                <p class="text-muted">&copy; 2021</p>
-            </div>
-
-            <div class="col">
-
-            </div>
-
-            <div class="col">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                </ul>
-            </div>
-
-            <div class="col">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                </ul>
-            </div>
-
-            <div class="col">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                </ul>
-            </div>
-        </footer>
-    </div>
 </body>
+
 </html>

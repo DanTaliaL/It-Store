@@ -2,75 +2,236 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="d-none d-lg-block">
-    <div class="intro">
-        <div class="elipse__right"></div>
-        <div class="banner">
-            <div class="row justify-content-lg-start">
-                <div class="col-4">
-                    <h1>MSI Alpha 15</h1>
-                    <p>Оформите заказ на MSI Alpha 15 и получите скидочный купон на весь ассортимент</p>
-                    <form method="post">
-                        <button asp-area="" asp-controller="Home" asp-action="Privacy">Подробнее</button>
-                    </form>
+<div class="elipse__right"></div>
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators banner__position">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">     
+        <div class="carousel-item active">
+
+
+            <div class="d-none d-lg-block">
+                <div class="intro">
+
+                    <div class="banner">
+                        <div class="row justify-content-lg-start">
+                            <div class="col-4">
+                                <h1>MSI Alpha 15</h1>
+                                <p>Оформите заказ на MSI Alpha 15 и получите скидочный купон на весь ассортимент</p>
+                                <form method="post">
+                                    <button asp-area="" asp-controller="Home" asp-action="Privacy">Подробнее</button>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <img src="~/Images/MainPages/Firstblock/Desk1.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-self-center">
+                        <div class="col">
+                            <h6>
+                                Процессор до AMD Ryzen™ 7 4800H  <br />
+                                Графика до AMD Radeon™ RX 5600M 6GB GDDR6 <br />
+                                Экран 15.6" Full HD (1920x1080)
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="align-self-end banner__link">
+                        <div col="col">
+                            <a asp-controller="Catalog" asp-action="Catalog">Все товары <img src="~/Images/Icons/VectorLink.png" /></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col">
-                    <img src="~/Images/MainPages/Firstblock/Desk1.png" />
+            </div>
+
+
+            @*мобильная версия*@
+            <div class="d-lg-none">
+                <div class="intro">
+                    <div class="elipse__right"></div>
+                    <div class="banner">
+                        <div class="row justify-content-lg-start">
+                            <div class="col-4">
+                                <h2><b>MSI Alpha 15555</b></h2>
+                                <form method="post">
+                                    <button style="display:flex;" asp-area="" asp-controller="Account" asp-action="Login">Подробнее</button>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <img src="~/Images/MainPages/Firstblock/Desk1.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-self-center">
+                        <div class="col">
+                            <h6>
+                                Процессор до AMD Ryzen™ 7 4800H  <br />
+                                Графика до AMD Radeon™ RX 5600M 6GB GDDR6 <br />
+                                Экран 15.6" Full HD (1920x1080)
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="align-self-end banner__link">
+                        <div col="col">
+                            <a asp-controller="Catalog" asp-action="Catalog">Все товары <img src="~/Images/Icons/VectorLink.png" /></a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
         </div>
-        <div class="align-self-center">
-            <div class="col">
-                <h6>
-                    Процессор до AMD Ryzen™ 7 4800H  <br />
-                    Графика до AMD Radeon™ RX 5600M 6GB GDDR6 <br />
-                    5.6" Full HD (1920x1080)
-                </h6>
+
+
+        <div class="carousel-item">
+
+            <div class="d-none d-lg-block">
+                <div class="intro">
+
+                    <div class="banner">
+
+                        <div class="row justify-content-lg-start">
+                            <div class="col-4">
+                                <h1>Legion Y920</h1>
+                                <p>Уникальная для покупателей IT'Store возможность предзаказа игрового устройства</p>
+                                <form method="post">
+                                    <button asp-area="" asp-controller="Home" asp-action="Privacy">Подробнее</button>
+                                </form>
+                            </div>
+                            <div class="col align-items-center">
+                                <img src="~/Images/MainPages/Firstblock/Desk2.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-self-center">
+                        <div class="col">
+                            <h6>
+                                Процессор Intel® Core™ i7-7820HK 7  <br />
+                                Видеокарта NVIDIA® GeForce® GTX-3080 16 ГБ GDDR5 с PCI Express <br />
+                                17,3-дюймовый дисплей стандарта FHD (1920 х 1080), матрица IPS
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="align-self-end banner__link">
+                        <div col="col">
+                            <a asp-controller="Catalog" asp-action="Catalog">Все товары <img src="~/Images/Icons/VectorLink.png" /></a>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            @*Мобильная версия*@
+            <div class="d-lg-none">
+                <div class="intro">
+                    <div class="elipse__right"></div>
+                    <div class="banner">
+                        <div class="row justify-content-lg-start">
+                            <div class="col-4">
+                                <h2><b>Legion Y920</b></h2>
+                                <form method="post">
+                                    <button asp-area="" asp-controller="Account" asp-action="Login">Подробнее</button>
+                                </form>
+                            </div>
+                            <div class="col align-items-center">
+                                <img src="~/Images/MainPages/Firstblock/Desk2.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-self-center">
+                        <div class="col">
+                            <h6>
+                                Процессор Intel® Core™ i7-7820HK 7  <br />
+                                Видеокарта NVIDIA® GeForce® GTX-3080 16 ГБ GDDR5 с PCI Express <br />
+                                17,3-дюймовый дисплей стандарта FHD (1920 х 1080), матрица IPS
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="align-self-end banner__link">
+                        <div col="col">
+                            <a asp-controller="Catalog" asp-action="Catalog">Все товары <img src="~/Images/Icons/VectorLink.png" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="align-self-end banner__link">
-            <div col="col">
-                <a asp-controller="Catalog" asp-action="Catalog">Все товары <img  src="~/Images/Icons/VectorLink.png" /></a>
+        <div class="carousel-item">
+            <div class="d-none d-lg-block">
+                <div class="intro">
+
+                    <div class="banner">
+                        <div class="row justify-content-lg-start">
+                            <div class="col-4">
+                                <h1>Dream Machines </h1>
+                                <p>
+                                    Позвольте себе игру высочайшего качества при полной детализации и гладкости геймплея.<br />
+                                    Мощные видеокарты, процессоры и уникальные решения для охлаждения.<br />
+                                    Все это найдете в ноутбуках Dream Machines!
+                                </p>
+                                <form method="post">
+                                    <button asp-area="" asp-controller="Home" asp-action="Privacy">Подробнее</button>
+                                </form>
+                            </div>
+                            <div class="col align-items-center">
+                                <img src="~/Images/MainPages/Firstblock/Desk3.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-self-center">
+                        <div class="col">
+                            <h6>
+                                Процессор Core i7 10750H  <br />
+                                Видеокарта GeForce RTX 3070 8 Гб <br />
+                                Экран 15,6" Full HD (1920x1080)
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="align-self-end banner__link">
+                        <div col="col">
+                            <a asp-controller="Catalog" asp-action="Catalog">Все товары <img src="~/Images/Icons/VectorLink.png" /></a>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            @*Мобильная версия*@
+            <div class="d-lg-none">
+                <div class="intro">
+                    <div class="elipse__right"></div>
+                    <div class="banner">
+                        <div class="row justify-content-lg-start">
+                            <div class="col-4">
+                                <h2><b>Dream Machines</b></h2>
+                                <form method="post">
+                                    <button asp-area="" asp-controller="Account" asp-action="Login">Подробнее</button>
+                                </form>
+                            </div>
+                            <div class="col align-items-center">
+                                <img src="~/Images/MainPages/Firstblock/Desk3.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-self-center">
+                        <div class="col">
+                            <h6>
+                                Процессор Core i7 10750H  <br />
+                                GeForce RTX 3070 8 Гб <br />
+                                15,6" Full HD (1920x1080)
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="align-self-end banner__link">
+                        <div col="col">
+                            <a asp-controller="Catalog" asp-action="Catalog">Все товары <img src="~/Images/Icons/VectorLink.png" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
-
-
-@*мобильная версия*@
-<div class="d-lg-none">
-    <div class="intro">
-        <div class="elipse__right"></div>
-        <div class="banner">
-            <div class="row justify-content-lg-start">
-                <div class="col-4">
-                    <h2><b>MSI Alpha 15555</b></h2>
-                    <p>Оформите заказ на MSI Alpha 15 и получите скидочный купон на весь ассортимент</p>
-                    <form method="post">
-                        <button asp-area="" asp-controller="Account" asp-action="Login">Подробнее</button>
-                    </form>
-                </div>
-                <div class="col">
-                    <img src="~/Images/MainPages/Firstblock/Desk1.png" />
-                </div>
-            </div>
-        </div>
-        <div class="align-self-center">
-            <div class="col">
-                <h6>
-                    Процессор до AMD Ryzen™ 7 4800H  <br />
-                    Графика до AMD Radeon™ RX 5600M 6GB GDDR6 <br />
-                    5.6" Full HD (1920x1080)
-                </h6>
-            </div>
-        </div>
-        <div class="align-self-end banner__link">
-            <div col="col">
-                <a asp-controller="Catalog" asp-action="Catalog">Все товары <img src="~/Images/Icons/VectorLink.png" /></a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 

@@ -34,6 +34,7 @@ namespace ItStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model, string? ReturnUrl)
         {
+            bool AdminStatus = false;
             if (ModelState.IsValid)
             {
                 AppUser user = await userManager.FindByNameAsync(model.Login);
@@ -42,8 +43,18 @@ namespace ItStore.Controllers
                     await signInManager.SignOutAsync();
                     Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                     if (result.Succeeded)
-                    {                          
-                        return RedirectToAction(ReturnUrl ?? "Index","Home");
+                    {
+                        AdminStatus = await userManager.IsInRoleAsync(user, "Admin");
+
+                        if (AdminStatus)
+                        {
+                            return RedirectToAction(ReturnUrl ?? "AdminProfile");
+                        }
+                        else
+                        {
+                            return RedirectToAction(ReturnUrl ?? "Profile");
+                        }
+
                     }
                 }
                 ModelState.AddModelError(nameof(CreateUserModel.Password), "Invalid Login or Password");

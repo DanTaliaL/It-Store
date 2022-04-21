@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Open+Sans:wght@300&family=Raleway:wght@200&display=swap" rel="stylesheet">
 </head>
-<body class="container">
+<body>
     <header class="header">
         <div class="px-3 py-2 text-white">
             <div class="container">
@@ -50,7 +50,7 @@
             <div class="container d-flex flex-wrap justify-content-center">
 
                 <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" method="get" asp-action="Catalog" asp-controller="Catalog">
-                    <input type="text" class="form-control text-white" name="searchstring" placeholder="Искать...">
+                    <input type="text" class="form-control form-control-dark text-white" name="searchstring" placeholder="Искать...">
 
                 </form>
 
@@ -78,61 +78,69 @@
         </div>
     </header>
 
+    <div class="wrapper">
 
-    <div>
-        @RenderBody()
+        <div class="content">
+            <div class="container">
+                @RenderBody()
+            </div>>
+        </div>
+
+
+
+        @*foorer*@
+        <div class="footer">
+            <div class="footer__position">
+                <div class="container">
+                    <footer class="row row-cols-5 py-5">
+                        <div class="col">
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+                                <img src="~/Images/Icons/Logo.png">
+                            </a>
+                            <p class="text-muted">&copy; 2021</p>
+                        </div>
+
+                        <div class="col">
+
+                        </div>
+
+                        <div class="col">
+                            <h5>Section</h5>
+                            <ul class="nav flex-column">
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col">
+                            <h5>Section</h5>
+                            <ul class="nav flex-column">
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col">
+                            <h5>Section</h5>
+                            <ul class="nav flex-column">
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                            </ul>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
     </div>
-
-    @*foorer*@
-    <div>
-        <footer class="row row-cols-5 py-5 my-5 border-top">
-            <div class="col">
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-                    <img src="~/Images/Icons/Logo.png">
-                </a>
-                <p class="text-muted">&copy; 2021</p>
-            </div>
-
-            <div class="col">
-
-            </div>
-
-            <div class="col">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                </ul>
-            </div>
-
-            <div class="col">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                </ul>
-            </div>
-
-            <div class="col">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                </ul>
-            </div>
-        </footer>
-    </div>
-
-
 
 </body>
 

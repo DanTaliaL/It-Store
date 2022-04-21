@@ -26,10 +26,11 @@ a:hover {
 */
 
 .banner {
-    padding-top: 10%;
+    padding-top: 5%;
+    padding-bottom:2%;
     width: 100%;
+    height:75%;
     min-height: 10rem;
-    z-index: 10;
 }
 
     .banner h1 {
@@ -92,6 +93,13 @@ a:hover {
 .banner__link a {
     font-size: 18px;
 }
+
+.banner__position {
+    bottom: -5%;
+}
+
+
+
 
 /*header
     ================
@@ -167,7 +175,6 @@ a:hover {
 */
 .intro {
     height: auto;
-    background: #121212;
     padding-top: 20px;
     display: flex;
     flex-direction: column;
@@ -179,23 +186,18 @@ a:hover {
 /*elipse
     ================
 */
+
 .elipse__right {
     position: absolute;
     margin-left: 1001px;
     margin-top: 458px;
+    opacity:55%;
     background: #6100ff;
     box-shadow: 0px 0px 250px 250px #380080;
-    opacity: 50%;
+    z-index:-1;
 }
 
-.elipse__left {
-    position: absolute;
-    margin-left: 111px;
-    margin-top: 135px;
-    background: #6100ff;
-    box-shadow: 0px 0px 250px 100px #5b00a3;
-    opacity: 70%;
-}
+
 
 /*button
     ================
@@ -267,6 +269,7 @@ a:hover {
     background: #6100ff;
     box-shadow: 0px 0px 250px 250px #380080;
     opacity: 20%;
+    z-index:-1;
 }
 
 .elipse__left__catalog {
@@ -276,6 +279,7 @@ a:hover {
     background: #6100FF;
     box-shadow: 0px 0px 250px 100px #5b00a3;
     opacity: 20%;
+    z-index:-1;
 }
 
 .image__catalog {
@@ -350,34 +354,17 @@ btn__pagin, .btn__pagin:hover {
     ================
 */
 
-.search {
+.form-control-dark {
+    background: #121212;
 }
-
-    .search input {
-        background: white;
-        border-radius: 10px;
-        max-width: 100%;
-        min-width: 25%;
-        max-height: 100%;
-        min-height: 25%;
-    }
-
-
-    .search button {
-        background: #121212;
-        border: none;
-        height: none;
-        width: none;
-    }
-
-
-
-
-
 /* product cart*/
-
 .position {
     text-align: -webkit-center;
+}
+
+.product__link {
+    border: none;
+    background: none;
 }
 
 .product__cart {
@@ -467,4 +454,36 @@ btn__pagin, .btn__pagin:hover {
 .bi {
     vertical-align: -.125em;
     fill: currentColor;
+}
+
+.footer__position {
+    background: rgba(0, 0, 0, .1);
+    margin-top: 10px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex: 0 0 auto;
 }
