@@ -6,5 +6,7 @@
         public string Name { get; set; }
         public byte[] Image { get; set; }
 
+        public List<Commentaries> commentaries { get; set; }
+
     }
 }

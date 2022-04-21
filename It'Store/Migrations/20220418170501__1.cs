@@ -435,6 +435,7 @@ namespace ItStore.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Grade = table.Column<bool>(type: "bit", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -542,6 +543,30 @@ namespace ItStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CommentariesPictures",
+                columns: table => new
+                {
+                    commentariesId = table.Column<int>(type: "int", nullable: false),
+                    picturesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CommentariesPictures", x => new { x.commentariesId, x.picturesId });
+                    table.ForeignKey(
+                        name: "FK_CommentariesPictures_Comments_commentariesId",
+                        column: x => x.commentariesId,
+                        principalTable: "Comments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CommentariesPictures_Pictures_picturesId",
+                        column: x => x.picturesId,
+                        principalTable: "Pictures",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ManufacturerSuppliers",
                 columns: table => new
                 {
@@ -639,6 +664,11 @@ namespace ItStore.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CommentariesPictures_picturesId",
+                table: "CommentariesPictures",
+                column: "picturesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_ProductID",
                 table: "Comments",
                 column: "ProductID");
@@ -720,7 +750,7 @@ namespace ItStore.Migrations
                 name: "CartLine");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "CommentariesPictures");
 
             migrationBuilder.DropTable(
                 name: "ManufacturerSuppliers");
@@ -741,9 +771,6 @@ namespace ItStore.Migrations
                 name: "OrdersPromotions");
 
             migrationBuilder.DropTable(
-                name: "Pictures");
-
-            migrationBuilder.DropTable(
                 name: "RequestHistory");
 
             migrationBuilder.DropTable(
@@ -754,6 +781,12 @@ namespace ItStore.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Pictures");
 
             migrationBuilder.DropTable(
                 name: "Manufacturer");

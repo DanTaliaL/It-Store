@@ -46,7 +46,7 @@
     </div>
 
 
-    <div >
+    <div>
         <div class="container">
 
             <div class="row">
@@ -59,7 +59,11 @@
                             <div class="panel-body comments">
                                 <input type="hidden" asp-for="ProductID" />
                                 <input type="hidden" asp-for="UserName" />
-                                <textarea class="form-control" placeholder="Оставьте Ваш комментарий" asp-action="ProductCart" asp-for="Comment" rows="5"></textarea>
+                                <div class="form-check form-switch">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Ввод флажка переключателя по умолчанию</label>
+                                    <input class="form-check-input" asp-for="@Model.Grade" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                </div>
+                                <textarea class="form-control" placeholder="Оставьте Ваш комментарий" asp-for="Comment" rows="5"></textarea>
                                 <br>
                                 <button type="submit" class="btn btn-info pull-right">Отправить</button>
                                 <div class="clearfix"></div>
@@ -77,7 +81,7 @@
             </div>
         </div>
     </div>
-   
+
 
 </div>
 

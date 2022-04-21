@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ItStore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220417132341__1")]
+    [Migration("20220418170501__1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,21 @@ namespace ItStore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("CommentariesPicture", b =>
+                {
+                    b.Property<int>("commentariesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("picturesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("commentariesId", "picturesId");
+
+                    b.HasIndex("picturesId");
+
+                    b.ToTable("CommentariesPictures", (string)null);
+                });
 
             modelBuilder.Entity("HistoryOrder", b =>
                 {
@@ -156,6 +171,9 @@ namespace ItStore.Migrations
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("Grade")
                         .HasColumnType("bit");
@@ -769,6 +787,21 @@ namespace ItStore.Migrations
                     b.HasIndex("SuppliersId");
 
                     b.ToTable("RequestSuplier", (string)null);
+                });
+
+            modelBuilder.Entity("CommentariesPicture", b =>
+                {
+                    b.HasOne("ItStore.Models.DataFolder.Commentaries", null)
+                        .WithMany()
+                        .HasForeignKey("commentariesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ItStore.Models.DataFolder.Picture", null)
+                        .WithMany()
+                        .HasForeignKey("picturesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HistoryOrder", b =>

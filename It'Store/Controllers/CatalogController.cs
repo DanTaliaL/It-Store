@@ -73,8 +73,8 @@ namespace ItStore.Controllers
             return View(result);
         }
 
-        public IActionResult ProductCart(int Id, string? Name)
-        {
+        public IActionResult ProductCart( int Id, string? Name)
+        {           
             var Result = new ProductCartViewModel
             {
                 Products = Data.Products.Where(q => q.Id == Id),

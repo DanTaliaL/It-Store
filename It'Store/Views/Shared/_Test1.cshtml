@@ -12,105 +12,84 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Open+Sans:wght@300&family=Raleway:wght@200&display=swap" rel="stylesheet">
 </head>
 <body class="container">
-    <header class="header">
-        <div class="header__inner">
 
 
-            @*old*@
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
-                <div class="header__logo">
-                    <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Logo.png"></a>
+    <div class="b-example-divider"></div>
+
+    <header>
+        <div class="px-3 py-2 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <img src="~/Images/Icons/Logo.png">
+                    </a>
+                    
+
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                        <li>
+                            <a asp-area="" asp-controller="Catalog" asp-action="Catalog" class="nav-link text-white">
+                               Каталог
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white">
+                                Гарантия и возврат
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white">
+                                Успей купить
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white">
+                                Контакты
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="navbar-brand">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span><img src="~/Images/Icons/Burger.png" /></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav__link" asp-area="" asp-controller="Catalog" asp-action="Catalog"> Каталог </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Гарантия и возврат </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Успей купить </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Контакты </a>
-                            </li>
-                            <li>
-                                <div class="d-lg-none">
-                                    @if (User.Identity.IsAuthenticated)
-                                    {
-                                        if (User.IsInRole("Admin"))
-                                        {
-                                            <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="AdminProfile"> Профиль </a>
-                                        }
-                                        else
-                                        {
-                                            <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"> Профиль </a>
-                                        }
+            </div>
+        </div>
+        <div class="px-3 py-2 border-bottom mb-3">
+            <div class="container d-flex flex-wrap justify-content-center">
+                <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
+                    <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                </form>
 
-                                    }
-                                    else
-                                    {
-                                        <a class="nav__link" asp-area="" asp-controller="Account" asp-action="Login"> Профиль </a>
-                                    }
-                                </div>
-                            </li>
-                            <li>
-                                <div class="d-lg-none">
-                                    <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart">Корзина</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-
-                <div class="d-none d-lg-block">
-                    <nav class="nav">
-                        <div class="d6 text-white">
-                            <form method="get" asp-action="Catalog" asp-controller="Catalog">
-                                <input type="text" class="form-control-sm text-white" name="searchstring" placeholder="Искать здесь...">
-                                <button type="submit" asp-action="Catalog" asp-controller="Catalog" class="nav__link"><img src="~/Images/Icons/Search.png" /></button>
-                            </form>
-                        </div>
-
-                        @*body test*@
-
-                        <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart"><img src="~/Images/Icons/Basket.png" /></a>
-                        @if (User.Identity.IsAuthenticated)
+                <div class="text-end">
+                    <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart"><img src="~/Images/Icons/Basket.png" /></a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Admin"))
                         {
-                            if (User.IsInRole("Admin"))
-                            {
-                                <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="AdminProfile"><img src="~/Images/Icons/User.png" /></a>
-                            }
-                            else
-                            {
-                                <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a>
-                            }
-
+                            <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="AdminProfile"><img src="~/Images/Icons/User.png" /></a>
                         }
                         else
                         {
-                            <a class="nav__link" asp-area="" asp-controller="Account" asp-action="Login"><img src="~/Images/Icons/User.png" /></a>
+                            <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a>
                         }
 
-
-                    </nav>
+                    }
+                    else
+                    {
+                        <a class="nav__link" asp-area="" asp-controller="Account" asp-action="Login"><img src="~/Images/Icons/User.png" /></a>
+                    }
                 </div>
-
-
-
-            </nav>
-
-
-            @*old*@
+            </div>
         </div>
     </header>
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

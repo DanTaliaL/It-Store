@@ -1,7 +1,9 @@
 ﻿using ItStore.Models.DataFolder;
 using ItStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace ItStore.Controllers
 {
@@ -240,8 +242,9 @@ namespace ItStore.Controllers
         public CommentariesController(DataContext DC) => Data = DC;
 
         [HttpPost]
-        public IActionResult Commentaries(Commentaries commentaries)
+        public IActionResult Commentaries(Commentaries commentaries, string? returnUrl)
         {
+            commentaries.Created = DateTime.Now;
             Data.Comments.Add(commentaries);
             Data.SaveChanges();
             return RedirectToAction("Catalog","Catalog");

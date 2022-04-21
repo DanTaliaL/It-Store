@@ -8,6 +8,8 @@
         public IEnumerable<Commentaries> Commentaries { get; set;}
         public int ProductID { get; set;}
         public string Comment { get; set;}
+        public bool Grade { get; set;}
         public string UserName { get; set;}
+        public string PictureName { get; set;}
     }
 }

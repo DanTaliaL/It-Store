@@ -11,36 +11,68 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Open+Sans:wght@300&family=Raleway:wght@200&display=swap" rel="stylesheet">
 </head>
 <body class="container">
-    <header class="header">
-        <div class="header__inner">
-                    <div class="header__logo">
-                        <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Logo.png"></a>
-                    </div>
-                    <nav class="nav">
-                        <a class="nav__link" asp-area="" asp-controller="Catalog" asp-action="Catalog"> Каталог </a>
-                        <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Гарантия и возврат </a>
-                        <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Успей купить </a>
-                        <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"> Контакты </a>
-                    </nav>
-                    <div>
-                        <a class="nav__link" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Icons/Search.png" /></a>
-                        <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart"><img src="~/Images/Icons/Basket.png" /></a>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            if (User.IsInRole("Admin"))
-                            {
-            <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="AdminProfile"><img src="~/Images/Icons/User.png" /></a> }
-                            else
-                            {
-            <a type="" class="nav__link" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a> }
 
-                        }
+    <header class="header">
+        <div class="px-3 py-2 text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <img src="~/Images/Icons/Logo.png">
+                    </a>
+
+
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                        <li>
+                            <a asp-area="" asp-controller="Catalog" asp-action="Catalog" class="nav-link text-white nav__link">
+                                Каталог
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white nav__link">
+                                Гарантия и возврат
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white nav__link">
+                                Успей купить
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white nav__link">
+                                Контакты
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="px-3 py-2 border-bottom mb-3">
+            <div class="container d-flex flex-wrap justify-content-center">
+
+                <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" method="get" asp-action="Catalog" asp-controller="Catalog">
+                    <input type="text" class="form-control text-white" name="searchstring" placeholder="Искать...">
+
+                </form>
+
+
+                <div class="text-end">
+                    <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart"><img src="~/Images/Icons/Basket.png" /></a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Admin"))
+                        {
+        <a type="" class="nav__link nav__link_icon" asp-area="" asp-controller="Account" asp-action="AdminProfile"><img src="~/Images/Icons/User.png" /></a> }
                         else
                         {
-            <a class="nav__link" asp-area="" asp-controller="Account" asp-action="Login"><img src="~/Images/Icons/User.png" /></a>}
+        <a type="" class="nav__link nav__link_icon" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a> }
 
-                    </div>
-        </div>            
+                    }
+                    else
+                    {
+        <a class="nav__link nav__link_icon" asp-area="" asp-controller="Account" asp-action="Login"><img src="~/Images/Icons/User.png" /></a>}
+                </div>
+            </div>
+        </div>
     </header>
     <div class="row m-1 p-1 text-white">
         <div class="col-2">
@@ -56,6 +88,52 @@
         </div>
     </div>
 
+    <div>
+        <footer class="row row-cols-5 py-5 my-5 border-top">
+            <div class="col">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+                    <img src="~/Images/Icons/Logo.png">
+                </a>
+                <p class="text-muted">&copy; 2021</p>
+            </div>
 
+            <div class="col">
+
+            </div>
+
+            <div class="col">
+                <h5>Section</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <h5>Section</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <h5>Section</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>

@@ -83,6 +83,11 @@ namespace ItStore.Models
                 .WithMany(q => q.Comments)
                 .HasForeignKey(q => q.ProductID);
 
+            builder.Entity<Commentaries>()
+                .HasMany(q => q.pictures)
+                .WithMany(q => q.commentaries)
+                .UsingEntity(q => q.ToTable("CommentariesPictures"));
+
         }
         public static async Task CreateAdminAccount(IServiceProvider sericeProvider,
                 IConfiguration configuration)
