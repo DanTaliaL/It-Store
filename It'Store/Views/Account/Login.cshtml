@@ -1,7 +1,7 @@
 ﻿@model ItStore.Models.SystemsFolder.LoginModel
 <div class="intro container">
-    <div class="container">
-        <form asp-action="login" method="post">
+    <div class=" row">
+        <form asp-action="login" method="post" class="col">
             <div asp-validation-summary="All"></div>
             <p>
                 <label asp-for="Login">Логин</label>
@@ -15,10 +15,10 @@
             <button class="btn" type="submit" asp-controller="Account" asp-action="UserCreate">Регестрация</button>
 
         </form>
-        <div class="showcase showcase__scale">
+        <div class="col">
+            <div class="elipse__right"></div>
             <img src="~/Images/MainPages/Login/Login.png" />
         </div>
     </div>
 
 </div>
-

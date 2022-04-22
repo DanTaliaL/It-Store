@@ -26,7 +26,7 @@ namespace ItStore.Controllers
         public IActionResult Login(string? ReturnUrl)
         {
             ViewBag.ReturnUrl = ReturnUrl;
-            return View();
+            return RedirectToAction(ReturnUrl??"Index","Home");
         }
 
         [HttpPost]
@@ -34,6 +34,10 @@ namespace ItStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model, string? ReturnUrl)
         {
+            if (model.Login == null || model.Password == null)
+            {
+                ModelState.AddModelError(nameof(CreateUserModel.Password),"");
+            }       
             bool AdminStatus = false;
             if (ModelState.IsValid)
             {
@@ -57,7 +61,7 @@ namespace ItStore.Controllers
 
                     }
                 }
-                ModelState.AddModelError(nameof(CreateUserModel.Password), "Invalid Login or Password");
+                ModelState.AddModelError(nameof(CreateUserModel.Password), "Неверный логин или пароль");
             }
             return View(model);
         }
