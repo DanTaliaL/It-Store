@@ -131,17 +131,20 @@ a:hover {
 
 .modal__button {
     display: flex;
-    color:black;
+    color: black;
+    background:none;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 7px;
-    background: rgba(0, 0, 0, .1);
+    padding-left: 15px;
+    padding-right: 15px;
+    background: none;
     font-family: Raleway;
     font-style: normal;
     font-weight: bold;
     font-feature-settings: 'pnum' on, 'lnum' on;
-    border: 1px solid rgba(0, 0, 0, .1);
+    border: 1px solid lightgray;
     box-sizing: border-box;
     border-radius: 10px;
     opacity: 0.70;
@@ -488,6 +491,10 @@ btn__pagin, .btn__pagin:hover {
 .bi {
     vertical-align: -.125em;
     fill: currentColor;
+}
+
+.color-dark {
+    background-color: #212529;
 }
 
 .footer__position {

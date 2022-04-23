@@ -1,73 +1,133 @@
-﻿@model ItStore.Models.DataFolder.ChartViewModel
-<div class="intro">
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model ItStore.Models.DataFolder.ChartViewModel
+<div class="intro container">
     <script src="~/js/chart.min.js"></script>
 
-    <div class="row container">
-        <div class="col">
-            <h3>Дешевая группа</h3>
-            <table>
-                <tr>
-                    <th>Наименование</th>
-                    <th>Группа</th>
-                </tr>
-                @foreach (var q in Model.Products.Where(q => (Model.FirstPoint - q.Price) / (Model.MostBigPrice - Model.SmallPriceFlag) + 1 > 0.75))
-                {
-                    <tr>
-                        <td>
-                            @q.Name
-                        </td>
-                        <td>
-                            @q.Price
-                        </td>
-                    </tr>
-                }
-            </table>
-        </div>
-        <div class="col">
-            <h3>Приемлимая группа</h3>
-            <table>
-                <tr>
-                    <th>Наименование</th>
-                    <th>Группа</th>
-                </tr>
-                @foreach (var q in Model.Products.Where(q => (q.Price - Model.SmallPriceFlag) / (Model.SecondPoint - Model.SmallPriceFlag) > 0.75
-                && (Model.ThirdPoint - q.Price) / (Model.MostBigPrice - Model.ThirdPoint) + 1 > 0.75))
-                {
-                    <tr>
-                        <td>
-                            @q.Name
-                        </td>
-                        <td>
-                            @q.Price
-                        </td>
-                    </tr>
-                }
-            </table>
-        </div>
-        <div class="col">
-            <h3>Дорогая группа</h3>
-            <table>
-                <tr>
-                    <th>Наименование </th>
-                    <th> Цена</th>
-                </tr>
-                @foreach (var q in Model.Products.Where(q => (q.Price - Model.SmallPriceFlag) / (Model.FourthPoint - Model.SmallPriceFlag) > 0.75))
-                {
-                    <tr>
-                        <td>
-                            @q.Name
-                        </td>
-                        <td>
-                            @q.Price
-                        </td>
-                    </tr>
-                }
-            </table>
 
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <div style="background: #7279D8 " class="card text-white mb-4">
+            <div class="card-body">Мнимальная цена</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <div class="row justify-content-between">
+                    <div>
+                        <a style="text-decoration:none;" class="text-black" data-bs-toggle="collapse" href="#Low" role="button" aria-expanded="false" aria-controls="#Low">
+                            Показать
+                        </a>
+                    </div>
+                    <div class="collapse" id="Low">
+                        <div class="card card-body text-black">
+                            <table>
+                                <tr>
+                                    <th>Наименование</th>
+                                    <th>Группа</th>
+                                </tr>
+                                @foreach (var q in Model.Products.Where(q => (Model.FirstPoint - q.Price) / (Model.MostBigPrice - Model.SmallPriceFlag) + 1 > 0.75))
+                                {
+                                    <tr>
+                                        <td>
+                                            @q.Name
+                                        </td>
+                                        <td>
+                                            @q.Price
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <canvas id="myChart" class="container" width="200" height="100"></canvas>
-    <script>
+
+
+    <div class="col-xl-3 col-md-6">
+        <div style="background: #00B74A" class="card text-white mb-4">
+            <div class="card-body">Средняя цена</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <div class="row justify-content-between">
+                    <div>
+                        <a style="text-decoration:none;" class="text-black" data-bs-toggle="collapse" href="#Medium" role="button" aria-expanded="false" aria-controls="#Medium">
+                            Показать
+                        </a>
+                    </div>
+                    <div class="collapse" id="Medium">
+                        <div class="card card-body text-black">
+                            <table>
+                                <tr>
+                                    <th>Наименование</th>
+                                    <th>Цена</th>
+                                </tr>
+                                @foreach (var q in Model.Products.Where(q => (q.Price - Model.SmallPriceFlag) / (Model.SecondPoint - Model.SmallPriceFlag) > 0.75
+                            && (Model.ThirdPoint - q.Price) / (Model.MostBigPrice - Model.ThirdPoint) + 1 > 0.75))
+                                {
+                                    <tr>
+                                        <td>
+                                            @q.Name
+                                        </td>
+                                        <td>
+                                            @q.Price
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xl-3 col-md-6">
+        <div style="background: #FF8700" class="card text-white mb-4">
+            <div class="card-body">Высокая цена</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <div class="row justify-content-between">
+                    <div>
+                        <a style="text-decoration:none;" class="text-black" data-bs-toggle="collapse" href="#High" role="button" aria-expanded="false" aria-controls="#High">
+                            Показать
+                        </a>
+                    </div>
+                    <div class="collapse" id="High">
+                        <div class="card card-body text-black">
+                            <table>
+                                <tr>
+                                    <th>Наименование </th>
+                                    <th> Цена</th>
+                                </tr>
+                                @foreach (var q in Model.Products.Where(q => (q.Price - Model.SmallPriceFlag) / (Model.FourthPoint - Model.SmallPriceFlag) > 0.75))
+                                {
+                                    <tr>
+                                        <td>
+                                            @q.Name
+                                        </td>
+                                        <td>
+                                            @q.Price
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+
+
+
+
+<canvas id="myChart" class="container" width="200" height="100"></canvas>
+<script>
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'line',
@@ -76,32 +136,32 @@
                 datasets:[{
                     label: 'Максимальное значение',
                     data: [@foreach (var q in Model.TopPrice){@q}],
-                    backgroundColor: ['rgba(204, 255, 255, 0.5)'],
-                    borderColor: ['rgba(204, 255, 255, 0.5)'],
+                    backgroundColor: ['rgba(128, 0, 0, 0.5)'],
+                    borderColor: ['rgba(128, 0, 0, 0.5)'],
                     borderWidth: 1
                 },{
                     label: 'Среднее значение',
                     data: [@foreach (var q in Model.MidlePrice){@q}],
-                    backgroundColor: ['rgba(153, 204, 155, 0.5)'],
-                    borderColor: ['rgba(153, 204, 155, 0.5)'],
+                    backgroundColor: ['rgba(0, 128, 128, 0.5)'],
+                    borderColor: ['rgba(0, 128, 128, 0.5)'],
                     borderWidth: 2
                 },{
-                    label: 'Буржуйство',
+                    label: 'Дорого',
                     data: [@foreach (var q in Model.First){@q}],
-                    backgroundColor:['rgba(102, 178, 155, 0.5)'],
-                    borderColor: ['rgba(102, 178, 155, 0.5)'],
+                    backgroundColor: ['rgba(165, 42, 42, 0.5)'],
+                    borderColor: ['rgba(165, 42, 42, 0.5)'],
                     borderWidth: 3
                 },{
-                    label: 'Бедность',
+                    label: 'Дешево',
                     data: [@foreach (var q in Model.Second){@q}],
-                    backgroundColor:['rgba(0, 76, 153, 0.5)'],
-                    borderColor: ['rgba(0, 76, 153, 0.5)'],
+                    backgroundColor: ['rgba(47, 79, 79, 0.5)'],
+                    borderColor: ['rgba(47, 79, 79, 0.5)'],
                     borderWidth: 4
                 },{
-                    label: 'Четкость',
+                    label: 'Приемлимо',
                     data: [@foreach (var q in Model.Third){@q}],
-                    backgroundColor:['rgba(255, 76, 153, 0.5)'],
-                    borderColor: ['rgba(255, 76, 153, 0.5)'],
+                    backgroundColor: ['rgba(189, 183, 107, 0.5)'],
+                    borderColor: ['rgba(189, 183, 107, 0.5)'],
                     borderWidth: 5
                 }]
             },
@@ -113,6 +173,6 @@
                 }
             }
         });
-    </script>
+</script>
 </div>
 

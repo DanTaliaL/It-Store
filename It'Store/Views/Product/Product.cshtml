@@ -1,5 +1,8 @@
-﻿@model IEnumerable<ItStore.Models.DataFolder.Product>
-<div class="intro container">
+﻿@{ 
+    Layout = "_AdminLayout";
+}
+@model IEnumerable<ItStore.Models.DataFolder.Product>
+@*<div class="intro container">
     <table>
         <tr>
             <th>Наименование</th>
@@ -20,5 +23,43 @@
 
 
     </table>
-    <a class="btn" asp-controller="Product" asp-action="ProductForm" > Заполнение продуктов</a>
-</div>
+    <a class="btn" asp-controller="Product" asp-action="ProductForm"> Заполнение продуктов</a>
+</div>*@
+
+
+<div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Product
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Наименование</th>
+                        <th>Цена</th>
+                        <th>Модель</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Нименование</th>
+                        <th>Цена</th>
+                        <th>Модель</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @{
+                        foreach (var q in Model)
+                        {
+                            <tr>
+                                <td>@q.Name.</td>
+                                <td>@q.Price</td>
+                                <td>@q.Model</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
