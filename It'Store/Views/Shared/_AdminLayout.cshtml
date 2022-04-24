@@ -45,17 +45,7 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Основной функционал</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Управление пользователей
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" asp-controller="AdminRole" asp-action="PageRole">Аккаунты</a>
-                            </nav>
-                        </div>
+                        <div class="sb-sidenav-menu-heading">Основной функционал</div> 
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Мэнеджмент
@@ -66,48 +56,32 @@
 
 
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesProduct" aria-expanded="false" aria-controls="pagesProduct">
-                                    Управление продуктом
+                                    CRUD
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
                                 <div class="collapse" id="pagesProduct" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" asp-controller="Product" asp-action="ProductForm">Добавление продукта</a>
-                                        <a class="nav-link" asp-controller="Options" asp-action="OptionsForm">Зполнение Т.Х.</a>
-                                        <a class="nav-link">Редактирование продукта</a> @*none*@
-                                        <a class="nav-link">Редактирование Т.Х</a> @*none*@
-                                        <a class="nav-link">Удаление продукта</a> @*none*@
+                                        <a class="nav-link" asp-controller="Product" asp-action="Product">Товар</a>
+                                        <a class="nav-link" asp-controller="Options" asp-action="Options">Технические характеристики</a>
+                                        <a class="nav-link" asp-controller="WareHouse" asp-action="WareHouse">Склад</a>
+                                        <a class="nav-link" asp-controller="Picture" asp-action="Picture">Изображения</a>
                                     </nav>
                                 </div>
 
 
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesWarehouse" aria-expanded="false" aria-controls="pagesWarehouse">
-                                    Управление складом
+                                    Управление пользователей
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
                                 <div class="collapse" id="pagesWarehouse" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" asp-controller="WareHouse" asp-action="WareHouseForm">Добавить</a>
-                                        <a class="nav-link"> Редактировать</a> @*none*@
-                                        <a class="nav-link"> Удалить</a> @*none*@
-                                    </nav>
-                                </div>
-
-
-
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesPicture" aria-expanded="false" aria-controls="pagesPicture">
-                                    Управление изображениями
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesPicture" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" asp-controller="WareHouse" asp-action="WareHouseForm">Добавить</a>
-                                        <a class="nav-link"> Удалить </a> @*none*@
+                                        <a class="nav-link" asp-controller="AdminRole" asp-action="PageRole">Аккаунты</a>
                                     </nav>
                                 </div>
 
 
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesSupplier" aria-expanded="false" aria-controls="pagesSupplier">
-                                    Управление поставщиками
+                                    Управление поставщиков
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
                                 <div class="collapse" id="pagesSupplier" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
@@ -140,157 +114,75 @@
         </div>
 
 
-
-
         <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid px-4">
-    
-                    @*<div class="row">
-
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        Area Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        Bar Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                        </div>*@
-
-
-
-                    @*<div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                DataTable Example
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>*@
-
+            <main class="container-fluid px-4">               
                     <div class="wrapper">
                         <div class="content">
+
                             @RenderBody()
                         </div>
-
-
                     </div>
-               
+
             </main>
 
-            <div class="footer color-dark">
-                <div class="footer__position">
-                    <div class="container">
-                        <footer class="row row-cols-5 py-5">
-                            <div class="col">
-                                <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-                                    <img src="~/Images/Icons/Logo.png">
-                                </a>
-                                <p class="text-muted">&copy; 2021</p>
-                            </div>
+                <div class="footer color-dark">
+                    <div class="footer__position">
+                        <div class="container">
+                            <footer class="row row-cols-5 py-5">
+                                <div class="col">
+                                    <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+                                        <img src="~/Images/Icons/Logo.png">
+                                    </a>
+                                    <p class="text-muted">&copy; 2021</p>
+                                </div>
 
-                            <div class="col">
+                                <div class="col">
 
-                            </div>
+                                </div>
 
-                            <div class="col">
-                                <h5 class="text-white">Section</h5>
-                                <ul class="nav flex-column">
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                                </ul>
-                            </div>
+                                <div class="col">
+                                    <h5 class="text-white">Section</h5>
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                                    </ul>
+                                </div>
 
-                            <div class="col">
-                                <h5 class="text-white">Section</h5>
-                                <ul class="nav flex-column">
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                                </ul>
-                            </div>
+                                <div class="col">
+                                    <h5 class="text-white">Section</h5>
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                                    </ul>
+                                </div>
 
-                            <div class="col">
-                                <h5 class="text-white">Section</h5>
-                                <ul class="nav flex-column">
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                                </ul>
-                            </div>
-                        </footer>
+                                <div class="col">
+                                    <h5 class="text-white">Section</h5>
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                                    </ul>
+                                </div>
+                            </footer>
+                        </div>
                     </div>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+                    <script src="~/js/scripts.js"></script>
+                    <script src="~/js/datatables.js"></script>
+                    <script src="~/js/admin-table.js"></script>
                 </div>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-                <script src="~/js/scripts.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-                <script src="~/assets/demo/chart-area-demo.js"></script>
-                <script src="~/assets/demo/chart-bar-demo.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-                <script src="~/js/datatables-simple-demo.js"></script>
+
             </div>
-            
         </div>
-    </div>
 </body>
 </html>
 

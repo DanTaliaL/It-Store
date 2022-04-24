@@ -1,138 +1,325 @@
-﻿@model IEnumerable<Options>
-<h3>Процессор</h3>
-<table class="text-white">
+﻿@{
+    Layout = "_AdminLayout";
+}
 
-    <tr>
-        <th>Наименование</th>
-        <th>Количество ядер</th>
-        <th>Количество потоков</th>
-        <th>Частота</th>
-        <th>Масимальная частота автоматического ускорения</th>
-    </tr>
-    <tr>
+@model IEnumerable<Options>
+
+
+
+
+
+<div class="card mb-4">
+    <div class="card-header">
         @foreach (var q in Model)
         {
-            <td>@q.ProcessorModelName</td>
-            <td>@q.QuantityCore</td>
-            <td>@q.NumberOfThreads</td>
-            <td>@q.CPUFrequency</td>
-            <td>@q.MaxCPUFrequency</td>
+            <p>
+                <i class="fas fa-table me-1"></i>
+                Технические характеристики @q.Product.Name
+            </p>
         }
-    </tr>
-</table>
+    </div>
 
-<h3>Классификация</h3>
-<table class="text-white">
 
-    <tr>
-        <th>Наименование</th>
-        <th>Код производителя</th>
-        <th>Год выпуска</th>
-        <th>Операционная система</th>
-    </tr>
-    <tr>
+    <div class="text-center">
+
+            <a asp-action="OptionsForm" asp-route-id="@ViewBag.Id" class="btn btn-primary"> Редактировать </a>
         @foreach (var q in Model)
         {
-            <td>@q.Model</td>
-            <td>@q.ManufacturerCode</td>
-            <td>@q.ReleaseYear</td>
-            <td>@q.OperatingSystem</td>
+            <a asp-action="" asp-route-id="@q.Id" class="btn btn-primary"> Удалить </a>
         }
-    </tr>
-</table>
+    </div>
 
-<h3>Материал</h3>
-<table class="text-white">
+    <div class="card-body">
+        <table id="datatablesSimple">
+            @*Процессор*@
+            <thead>
+                <tr>
+                    <th><h6>Процессор</h6></th>
+                    <th>Наименование</th>
+                    <th>Количество ядер</th>
+                    <th>Количество потоков</th>
+                    <th>Частота</th>
+                    <th>Масимальная частота автоматического ускорения</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var q in Model)
+                {
+                    <tr>
+                        <td></td>
+                        <td>@q.ProcessorModelName</td>
+                        <td>@q.QuantityCore</td>
+                        <td>@q.NumberOfThreads</td>
+                        <td>@q.CPUFrequency</td>
+                        <td>@q.MaxCPUFrequency</td>
+                    </tr>
+                }
+            </tbody>
 
-    <tr>
-        <th>Материал верхней крышки</th>
-        <th>Материал корпуса</th>
-    </tr>
-    <tr>
-        @foreach (var q in Model)
-        {
-            <td>@q.CoverMaterial</td>
-            <td>@q.HousingMaterial</td>
-        }
-    </tr>
-</table>
+            @foreach (var q in Model)
+            {
 
-<h3>Экран</h3>
-<table class="text-white">
+                @*Классификация*@
+                <thead>
 
-    <tr>
-        <th>Тип</th>
-        <th>Диагональ</th>
-        <th>Разрешение</th>
-        <th>Максимальная частота обновления</th>
-        <th>Плотность пикселей</th>
-    </tr>
-    <tr>
-        @foreach (var q in Model)
-        {
-            <td>@q.ScreenType</td>
-            <td>@q.ScreenDiagonal</td>
-            <td>@q.ScreenResolution</td>
-            <td>@q.MaximumScreenRefreshRate</td>
-            <td>@q.PixelDensity</td>
-        }
-    </tr>
-</table>
+                    <tr>
+                        <th><h6>Классификация</h6></th>
+                        <th>Наименование</th>
+                        <th>Код производителя</th>
+                        <th>Год выпуска</th>
+                        <th>Операционная система</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>@q.Model</td>
+                        <td>@q.ManufacturerCode</td>
+                        <td>@q.ReleaseYear</td>
+                        <td>@q.OperatingSystem</td>
+                    </tr>
 
-<h3>Оперативная память</h3>
-<table class="text-white">
+                </tbody>
 
-    <tr>
-        <th>Тип</th>
-        <th>Обьем</th>
-        <th>Частота </th>
+                @*Материал*@
+                <thead>
 
-    </tr>
-    <tr>
-        @foreach (var q in Model)
-        {
-            <td>@q.RAMType</td>
-            <td>@q.RAMMemory</td>
-            <td>@q.RAMFrequency</td>
-        }
-    </tr>
-</table>
+                    <tr>
+                        <th><h6>Материал</h6></th>
+                        <th>Материал верхней крышки</th>
+                        <th>Материал корпуса</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>@q.CoverMaterial</td>
+                        <td>@q.HousingMaterial</td>
+                    </tr>
+                </tbody>
 
-<h3>Графический ускоритель</h3>
-<table class="text-white">
+                @*Экран*@
+                <thead>
+                    <tr>
+                        <th><h6>Экран</h6></th>
+                        <th>Тип</th>
+                        <th>Диагональ</th>
+                        <th>Разрешение</th>
+                        <th>Максимальная частота обновления</th>
+                        <th>Плотность пикселей</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>@q.ScreenType</td>
+                        <td>@q.ScreenDiagonal</td>
+                        <td>@q.ScreenResolution</td>
+                        <td>@q.MaximumScreenRefreshRate</td>
+                        <td>@q.PixelDensity</td>
+                    </tr>
+                </tbody>
 
-    <tr>
-        <th>Тип</th>
-        <th>Встроенный</th>
-        <th>Дискретный </th>
+                @*Оперативная память*@
+                <thead>
 
-    </tr>
-    <tr>
-        @foreach (var q in Model)
-        {
-            <td>@q.TypeOfGraphicsAccelerator</td>
-            <td>@q.BuiltInGraphicsCardModel</td>
-            <td>@q.DiscreteGraphicsCardModel</td>
-        }
-    </tr>
-</table>
+                    <tr>
+                        <th><h6>Оперативная память</h6></th>
+                        <th>Тип</th>
+                        <th>Обьем</th>
+                        <th>Частота </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>@q.RAMType</td>
+                        <td>@q.RAMMemory</td>
+                        <td>@q.RAMFrequency</td>
+                    </tr>
+                </tbody>
 
-<h3>Накопители данных</h3>
-<table class="text-white">
+                @*Графический ускоритель*@
+                <thead>
 
-    <tr>
-        <th>Обьем SSD</th>
-        <th>Обьем HDD</th>
-        <th>Обьем EMMC </th>
+                    <tr>
+                        <th><h6>Графический ускоритель</h6></th>
+                        <th>Тип</th>
+                        <th>Встроенный</th>
+                        <th>Дискретный </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>@q.TypeOfGraphicsAccelerator</td>
+                        <td>@q.BuiltInGraphicsCardModel</td>
+                        <td>@q.DiscreteGraphicsCardModel</td>
+                    </tr>
+                </tbody>
 
-    </tr>
-    <tr>
-        @foreach (var q in Model)
-        {
-            <td>@q.VolumeSSD</td>
-            <td>@q.VolumeHDD</td>
-            <td>@q.VolumeEMMC</td>
-        }
-    </tr>
-</table>
+                @*Накопители данных*@
+                <thead>
+
+                    <tr>
+                        <th><h6>Накопители данных</h6></th>
+                        <th>Обьем SSD</th>
+                        <th>Обьем HDD</th>
+                        <th>Обьем EMMC </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>@q.VolumeSSD</td>
+                        <td>@q.VolumeHDD</td>
+                        <td>@q.VolumeEMMC</td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+
+    </div>
+</div>
+
+
+
+
+
+@*<h3>Процессор</h3>
+    <table class="text-white">
+
+        <tr>
+            <th>Наименование</th>
+            <th>Количество ядер</th>
+            <th>Количество потоков</th>
+            <th>Частота</th>
+            <th>Масимальная частота автоматического ускорения</th>
+        </tr>
+        <tr>
+            @foreach (var q in Model)
+            {
+                <td>@q.ProcessorModelName</td>
+                <td>@q.QuantityCore</td>
+                <td>@q.NumberOfThreads</td>
+                <td>@q.CPUFrequency</td>
+                <td>@q.MaxCPUFrequency</td>
+            }
+        </tr>
+    </table>
+
+    <h3>Классификация</h3>
+    <table class="text-white">
+
+        <tr>
+            <th>Наименование</th>
+            <th>Код производителя</th>
+            <th>Год выпуска</th>
+            <th>Операционная система</th>
+        </tr>
+        <tr>
+            @foreach (var q in Model)
+            {
+                <td>@q.Model</td>
+                <td>@q.ManufacturerCode</td>
+                <td>@q.ReleaseYear</td>
+                <td>@q.OperatingSystem</td>
+            }
+        </tr>
+    </table>
+
+    <h3>Материал</h3>
+    <table class="text-white">
+
+        <tr>
+            <th>Материал верхней крышки</th>
+            <th>Материал корпуса</th>
+        </tr>
+        <tr>
+            @foreach (var q in Model)
+            {
+                <td>@q.CoverMaterial</td>
+                <td>@q.HousingMaterial</td>
+            }
+        </tr>
+    </table>
+
+    <h3>Экран</h3>
+    <table class="text-white">
+
+        <tr>
+            <th>Тип</th>
+            <th>Диагональ</th>
+            <th>Разрешение</th>
+            <th>Максимальная частота обновления</th>
+            <th>Плотность пикселей</th>
+        </tr>
+        <tr>
+            @foreach (var q in Model)
+            {
+                <td>@q.ScreenType</td>
+                <td>@q.ScreenDiagonal</td>
+                <td>@q.ScreenResolution</td>
+                <td>@q.MaximumScreenRefreshRate</td>
+                <td>@q.PixelDensity</td>
+            }
+        </tr>
+    </table>
+
+    <h3>Оперативная память</h3>
+    <table class="text-white">
+
+        <tr>
+            <th>Тип</th>
+            <th>Обьем</th>
+            <th>Частота </th>
+
+        </tr>
+        <tr>
+            @foreach (var q in Model)
+            {
+                <td>@q.RAMType</td>
+                <td>@q.RAMMemory</td>
+                <td>@q.RAMFrequency</td>
+            }
+        </tr>
+    </table>
+
+    <h3>Графический ускоритель</h3>
+    <table class="text-white">
+
+        <tr>
+            <th>Тип</th>
+            <th>Встроенный</th>
+            <th>Дискретный </th>
+
+        </tr>
+        <tr>
+            @foreach (var q in Model)
+            {
+                <td>@q.TypeOfGraphicsAccelerator</td>
+                <td>@q.BuiltInGraphicsCardModel</td>
+                <td>@q.DiscreteGraphicsCardModel</td>
+            }
+        </tr>
+    </table>
+
+    <h3>Накопители данных</h3>
+    <table class="text-white">
+
+        <tr>
+            <th>Обьем SSD</th>
+            <th>Обьем HDD</th>
+            <th>Обьем EMMC </th>
+
+        </tr>
+        <tr>
+            @foreach (var q in Model)
+            {
+                <td>@q.VolumeSSD</td>
+                <td>@q.VolumeHDD</td>
+                <td>@q.VolumeEMMC</td>
+            }
+        </tr>
+    </table>*@
 

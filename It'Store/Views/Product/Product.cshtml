@@ -2,35 +2,11 @@
     Layout = "_AdminLayout";
 }
 @model IEnumerable<ItStore.Models.DataFolder.Product>
-@*<div class="intro container">
-    <table>
-        <tr>
-            <th>Наименование</th>
-            <th>Цена</th>
-            <th>Модель</th>
-        </tr>
-
-        @{
-            foreach (var q in Model)
-            {
-                <tr>
-                    <td>@q.Name.</td>
-                    <td>@q.Price</td>
-                    <td>@q.Model</td>
-                </tr>
-            }
-        }
-
-
-    </table>
-    <a class="btn" asp-controller="Product" asp-action="ProductForm"> Заполнение продуктов</a>
-</div>*@
-
 
 <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            Product
+            Таблица товара
         </div>
         <div class="card-body">
             <table id="datatablesSimple">
@@ -39,6 +15,7 @@
                         <th>Наименование</th>
                         <th>Цена</th>
                         <th>Модель</th>
+                        <th>Управление</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -56,10 +33,16 @@
                                 <td>@q.Name.</td>
                                 <td>@q.Price</td>
                                 <td>@q.Model</td>
+                                <td>
+                                    <a asp-controller="Options" asp-action="Options" asp-route-id="@q.Id" class="btn btn-primary"> Технические характеристики </a>
+                                    <a asp-action="ProductUpdate" asp-route-id="@q.Id" class="btn btn-primary"> Редактировать </a>
+                                    <a asp-action="ProductDelete" asp-route-id="@q.Id" class="btn btn-primary"> Удалить </a>
+                                </td>
                             </tr>
                         }
                     }
                 </tbody>
             </table>
+            <a class="btn btn-primary text-center" asp-controller="Product" asp-action="ProductForm">Добавить продукт</a>
         </div>
     </div>

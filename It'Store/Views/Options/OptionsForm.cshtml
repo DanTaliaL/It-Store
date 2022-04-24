@@ -4,7 +4,7 @@
     <div asp-validation-summary="All" class="text-white">
         <p>
             <label asp-for="ProductId">Id продукта</label>
-            <input class="form-control" asp-for="ProductId" />
+            <input type="hidden"  asp-for="ProductId" value="@ViewBag.Id"/>
         </p>
         <h4>Процессор</h4>
         <p>

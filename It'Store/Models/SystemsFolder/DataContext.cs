@@ -83,7 +83,7 @@ namespace ItStore.Models
                 .WithMany(q => q.Comments)
                 .HasForeignKey(q => q.ProductID);
 
-            builder.Entity<Commentaries>()
+            builder.Entity<Commentaries>() //delete
                 .HasMany(q => q.pictures)
                 .WithMany(q => q.commentaries)
                 .UsingEntity(q => q.ToTable("CommentariesPictures"));

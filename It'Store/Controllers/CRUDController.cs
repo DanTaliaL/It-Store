@@ -64,14 +64,18 @@ namespace ItStore.Controllers
             return RedirectToAction();
         }
 
-        public IActionResult Options()
+        public IActionResult Options(int Id)
         {
-            IQueryable<Options> options = Data.Options
+            ViewBag.Id = Id;
+            IQueryable<Options> options = Data.Options.Where(q=>q.ProductId==Id)
                 .Include(q => q.Product);
-            return View(Data.Options.OrderBy(q => q.Id));
-
+            return View(options);
         }
-        public IActionResult OptionsForm() => View();
+        public IActionResult OptionsForm(int Id)
+        {
+            ViewBag.Id=Id;
+            return View();
+        }
     }
 
     public class OrderController : Controller
@@ -131,12 +135,24 @@ namespace ItStore.Controllers
         //for Image
         private byte[] ConvertToBytes(IFormFile file)
         {
-            Stream stream = file.OpenReadStream();
-            using (var memoryStream = new MemoryStream())
+            try
             {
-                stream.CopyTo(memoryStream);
-                return memoryStream.ToArray();
+                Stream stream = file.OpenReadStream();
+                using (var memoryStream = new MemoryStream())
+                {
+                    stream.CopyTo(memoryStream);
+                    return memoryStream.ToArray();
+                }
             }
+            catch (NullReferenceException)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    memoryStream.SetLength(1);
+                    return memoryStream.ToArray();
+                }
+            }
+
         }
 
         public IActionResult Product()
@@ -164,6 +180,33 @@ namespace ItStore.Controllers
             return View();
         }
         public IActionResult ProductForm() => View();
+
+        public IActionResult ProductDelete(int Id)
+        {
+            Product product = Data.Products.Where(q => q.Id == Id).FirstOrDefault();
+            Data.Products.Remove(product);
+            Data.SaveChanges();
+            return RedirectToAction("Product");
+        }
+
+        [HttpPost]
+        public IActionResult ProductUpdate(Product product, IFormFile file)
+        {
+            
+            Product update = Data.Products.FirstOrDefault(q=>q.Id==product.Id);
+            update.Name = product.Name;
+            update.Price = product.Price;
+            update.Model = product.Model;
+            update.Categories= product.Categories;
+            update.WareHouseId = product.WareHouseId;
+            byte[] ImageData = ConvertToBytes(file);
+            update.Image = ImageData;
+            Data.SaveChanges();
+           return RedirectToAction("Product");
+        }
+
+        public IActionResult ProductUpdate(int Id) => View(Data.Products.FirstOrDefault(q=>q.Id==Id));
+
     }
 
     public class RequestController : Controller
