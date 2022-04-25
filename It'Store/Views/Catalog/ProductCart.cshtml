@@ -59,6 +59,8 @@
                             <div class="panel-body comments">
                                 <input type="hidden" asp-for="ProductID" />
                                 <input type="hidden" asp-for="UserName" />
+                                <input type="hidden" name="ProdId" value="@ViewBag.Id"/>
+                                <input type="hidden" name="ProdName" value="@ViewBag.Name"/>
                                 <div class="form-check form-switch">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Ввод флажка переключателя по умолчанию</label>
                                     <input class="form-check-input" asp-for="@Model.Grade" type="checkbox" role="switch" id="flexSwitchCheckDefault">

@@ -25,7 +25,7 @@
             <a asp-action="OptionsForm" asp-route-id="@ViewBag.Id" class="btn btn-primary"> Редактировать </a>
         @foreach (var q in Model)
         {
-            <a asp-action="" asp-route-id="@q.Id" class="btn btn-primary"> Удалить </a>
+            <a asp-action="OptionsDelete" asp-route-id="@q.Id" class="btn btn-primary"> Удалить </a>
         }
     </div>
 

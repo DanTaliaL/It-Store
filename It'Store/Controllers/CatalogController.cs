@@ -73,15 +73,17 @@ namespace ItStore.Controllers
             return View(result);
         }
 
-        public IActionResult ProductCart( int Id, string? Name)
-        {           
+        public IActionResult ProductCart( int ProdId, string? ProdName)
+        {   
+            ViewBag.Id = ProdId;
+            ViewBag.Name = ProdName;
             var Result = new ProductCartViewModel
             {
-                Products = Data.Products.Where(q => q.Id == Id),
-                Pictures = Data.Pictures.Where(q => q.Name == Name),
-                Options = Data.Options.Where(q => q.ProductId == Id),
-                ProductID = Id,
-                Commentaries = Data.Comments.Where(q=>q.ProductID==Id),
+                Products = Data.Products.Where(q => q.Id == ProdId),
+                Pictures = Data.Pictures.Where(q => q.Name == ProdName),
+                Options = Data.Options.Where(q => q.ProductId == ProdId),
+                ProductID = ProdId,
+                Commentaries = Data.Comments.Where(q=>q.ProductID== ProdId),
                 UserName = User.Identity.Name,
             };
             return View(Result);

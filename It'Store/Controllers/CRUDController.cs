@@ -61,7 +61,7 @@ namespace ItStore.Controllers
         {
             Data.Options.Add(options);
             Data.SaveChanges();
-            return RedirectToAction();
+            return RedirectToAction("Product","Product");
         }
 
         public IActionResult Options(int Id)
@@ -75,6 +75,14 @@ namespace ItStore.Controllers
         {
             ViewBag.Id=Id;
             return View();
+        }
+
+        public IActionResult OptionsDelete(int Id)
+        {
+            Options options = Data.Options.Where(q => q.Id == Id).FirstOrDefault();
+            Data.Options.Remove(options);
+            Data.SaveChanges();
+            return RedirectToAction("Product","Product");
         }
     }
 
@@ -285,12 +293,12 @@ namespace ItStore.Controllers
         public CommentariesController(DataContext DC) => Data = DC;
 
         [HttpPost]
-        public IActionResult Commentaries(Commentaries commentaries, string? returnUrl)
+        public IActionResult Commentaries(Commentaries commentaries, int ProdId, string ProdName)
         {
             commentaries.Created = DateTime.Now;
             Data.Comments.Add(commentaries);
             Data.SaveChanges();
-            return RedirectToAction("Catalog","Catalog");
+            return RedirectToAction("ProductCart", "Catalog", new { ProdId, ProdName });
         }
     }
 }
