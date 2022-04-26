@@ -86,7 +86,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Войти или зарегестрироваться</h5>
+                    <h5 class="modal-title text-black" id="exampleModalLabel">Войти или зарегестрироваться</h5>
                     <button type="button" class="button__none" data-bs-dismiss="modal" aria-label="Close">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z" />
@@ -98,19 +98,19 @@
                     <div class="modal-body">
 
                         <div asp-validation-summary="All"></div>
-                        <p>
+                        <p class="text-black">
                             <label>Логин</label>
                             <input class="form-control" name="Login" />
                         </p>
-                        <p>
+                        <p class="text-black">
                             <label>Пароль</label>
                             <input class="form-control" name="Password" />
                         </p>
 
                     </div>
                     <div class="modal-footer text-black">
-                        <button class="modal__button">Войти</button>
-                        <button class=" modal__button" asp-controller="Account" asp-action="UserCreate">Регестрация</button>
+                        <button type="submit" class="modal__button">Войти</button>
+                        <a class="nav__link text-black modal__button" asp-controller="Account" asp-action="UserCreate">Регестрация</a>
                     </div>
                 </form>
             </div>

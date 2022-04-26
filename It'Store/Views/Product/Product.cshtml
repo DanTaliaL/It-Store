@@ -34,7 +34,7 @@
                                 <td>@q.Price</td>
                                 <td>@q.Model</td>
                                 <td>
-                                    <a asp-controller="Options" asp-action="Options" asp-route-id="@q.Id" class="btn btn-primary"> Технические характеристики </a>
+                                    <a asp-controller="Options" asp-action="Options" asp-route-ProdId="@q.Id" class="btn btn-primary"> Технические характеристики </a>
                                     <a asp-action="ProductUpdate" asp-route-id="@q.Id" class="btn btn-primary"> Редактировать </a>
                                     <a asp-action="ProductDelete" asp-route-id="@q.Id" class="btn btn-primary"> Удалить </a>
                                 </td>

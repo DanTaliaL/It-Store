@@ -57,32 +57,73 @@ namespace ItStore.Controllers
         public OptionsController(DataContext DC) => Data = DC;
 
         [HttpPost]
-        public IActionResult Options(Options options)
+        public IActionResult Options(Options options, int ProdId)
         {
             Data.Options.Add(options);
             Data.SaveChanges();
-            return RedirectToAction("Product","Product");
+            return RedirectToAction("Options", new { ProdId });
         }
 
-        public IActionResult Options(int Id)
+        public IActionResult Options(int ProdId)
         {
-            ViewBag.Id = Id;
-            IQueryable<Options> options = Data.Options.Where(q=>q.ProductId==Id)
+            ViewBag.ProdId = ProdId;
+            IQueryable<Options> options = Data.Options.Where(q => q.ProductId == ProdId)
                 .Include(q => q.Product);
             return View(options);
         }
-        public IActionResult OptionsForm(int Id)
+        public IActionResult OptionsForm(int ProdId)
         {
-            ViewBag.Id=Id;
+            ViewBag.ProdId = ProdId;
             return View();
         }
 
-        public IActionResult OptionsDelete(int Id)
+        public IActionResult OptionsDelete(int ProdId)
         {
-            Options options = Data.Options.Where(q => q.Id == Id).FirstOrDefault();
+            Options options = Data.Options.Where(q => q.ProductId == ProdId).FirstOrDefault();
             Data.Options.Remove(options);
             Data.SaveChanges();
-            return RedirectToAction("Product","Product");
+            return RedirectToAction("Options", new { ProdId });
+        }
+
+        public IActionResult OptionsUpdate(Options options, int ProdId)
+        {
+            Options update = Data.Options.Where(q => q.ProductId == ProdId).FirstOrDefault();
+
+            update.ProductId = ProdId;
+
+            update.ProcessorModelName = options.ProcessorModelName;
+            update.QuantityCore = options.QuantityCore;
+            update.NumberOfThreads = options.NumberOfThreads;
+            update.CPUFrequency = options.CPUFrequency;
+            update.MaxCPUFrequency = options.MaxCPUFrequency;
+
+            update.Model = options.Model;
+            update.ManufacturerCode = options.ManufacturerCode;
+            update.ReleaseYear = options.ReleaseYear;
+            update.OperatingSystem = options.OperatingSystem;
+
+            update.CoverMaterial = options.CoverMaterial;
+            update.HousingMaterial = options.HousingMaterial;
+
+            update.ScreenType = options.ScreenType;
+            update.ScreenDiagonal = options.ScreenDiagonal;
+            update.ScreenResolution = options.ScreenResolution;
+            update.MaximumScreenRefreshRate = options.MaximumScreenRefreshRate;
+            update.PixelDensity = options.PixelDensity;
+
+            update.RAMType = options.RAMType;
+            update.RAMMemory = options.RAMMemory;
+            update.RAMFrequency = options.RAMFrequency;
+
+            update.TypeOfGraphicsAccelerator = options.TypeOfGraphicsAccelerator;
+            update.BuiltInGraphicsCardModel = options.BuiltInGraphicsCardModel;
+            update.DiscreteGraphicsCardModel = options.DiscreteGraphicsCardModel;
+
+            update.VolumeSSD = options.VolumeSSD;
+            update.VolumeHDD = options.VolumeHDD;
+            update.VolumeEMMC = options.VolumeEMMC;
+            Data.SaveChanges();
+            return RedirectToAction("Options", new { ProdId });
         }
     }
 
@@ -171,7 +212,7 @@ namespace ItStore.Controllers
                 .Include(q => q.Options)
                 .Include(q => q.Suppliers)
                 .Include(q => q.Orders);
-            return View(Data.Products.OrderBy(q=>q.Id));
+            return View(Data.Products.OrderBy(q => q.Id));
         }
 
         [HttpPost]
@@ -200,20 +241,20 @@ namespace ItStore.Controllers
         [HttpPost]
         public IActionResult ProductUpdate(Product product, IFormFile file)
         {
-            
-            Product update = Data.Products.FirstOrDefault(q=>q.Id==product.Id);
+
+            Product update = Data.Products.FirstOrDefault(q => q.Id == product.Id);
             update.Name = product.Name;
             update.Price = product.Price;
             update.Model = product.Model;
-            update.Categories= product.Categories;
+            update.Categories = product.Categories;
             update.WareHouseId = product.WareHouseId;
             byte[] ImageData = ConvertToBytes(file);
             update.Image = ImageData;
             Data.SaveChanges();
-           return RedirectToAction("Product");
+            return RedirectToAction("Product");
         }
 
-        public IActionResult ProductUpdate(int Id) => View(Data.Products.FirstOrDefault(q=>q.Id==Id));
+        public IActionResult ProductUpdate(int Id) => View(Data.Products.FirstOrDefault(q => q.Id == Id));
 
     }
 

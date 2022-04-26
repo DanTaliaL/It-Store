@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     Layout = "_AdminLayout";
 }
 @model Options
@@ -11,11 +11,11 @@
         </p>
     </div>
 
-    <form  asp-action="Options" method="post">
+    <form asp-action="OptionsUpdate" method="post">
         <div class="text-center">
             <a asp-action="Options" asp-route-ProdId="@ViewBag.ProdId" class="btn btn-primary"> Назад </a>
             <input type="hidden" name="ProdId" value="@ViewBag.ProdId" />
-            <button type="submit" class="btn btn-primary" >Заполнить </button>
+            <button type="submit" class="btn btn-primary">Заполнить </button>
         </div>
 
         <input type="hidden" asp-for="ProductId" value="@ViewBag.ProdId" />
