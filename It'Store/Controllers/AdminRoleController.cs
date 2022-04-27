@@ -76,8 +76,8 @@ namespace ItStore.Controllers
             return View(new RoleEditModel
             {
                 Role = role,
-                Members = members,
-                NonMembers = nonMembers
+                Members = members.OrderBy(q=>q.NormalizedUserName),
+                NonMembers = nonMembers.OrderBy(q=>q.NormalizedUserName)
             });
         }
         [HttpPost]

@@ -5,17 +5,18 @@
 
 
 <div class="intro text-black">
-        <div><h4>Изменения уровня доступа</h4></div>
+    <div><h4>Изменения уровня доступа</h4></div>
 
-        <div asp-validation-summary="All" class="text-danger"></div>
+    <div asp-validation-summary="All" class="text-danger"></div>
 
-        <form asp-action="EditRole" method="post" class="text-white">
+    <form asp-action="EditRole" method="post" class="text-white">
 
-            <input type="hidden" name="roleName" value="@Model.Role.Name" />
-            <input type="hidden" name="roleId" value="@Model.Role.Id" />
-            <h6>Add to @Model.Role.Name</h6>
+        <input type="hidden" name="roleName" value="@Model.Role.Name" />
+        <input type="hidden" name="roleId" value="@Model.Role.Id" />
+        <h6>Add to @Model.Role.Name</h6>
 
-            <h6 class="text-black">Дать статус @Model.Role.Name</h6>
+        <h6 class="text-black">Дать статус @Model.Role.Name</h6>
+        <div style="overflow-y:scroll; height:15rem" tabindex="0" class="scrollarea">
             <table class="table table-bordered">
                 <tr>
                     <th>Имя пользователя</th>
@@ -42,8 +43,9 @@
                 }
 
             </table>
-
-            <h6 class="text-black">Лишить статуса @Model.Role.Name</h6>
+        </div>
+        <h6 class="text-black">Лишить статуса @Model.Role.Name</h6>
+        <div style="overflow-y:scroll; height:15rem" tabindex="0" class="scrollarea">
             <table class="text-black table table-bordered">
                 <tr>
                     <th>Имя пользователя</th>
@@ -79,8 +81,9 @@
                     }
                 }
             </table>
-            
-            <button type="submit" asp-route-UsrName="@User.Identity.Name" class="btn btn-primary">Сохранить</button>
-            <a asp-action="PageRole" class="btn btn-primary">Назад</a>
-        </form>
-    </div>
+        </div>
+
+        <button type="submit" asp-route-UsrName="@User.Identity.Name" class="btn btn-primary">Сохранить</button>
+        <a asp-action="PageRole" class="btn btn-primary">Назад</a>
+    </form>
+</div>
