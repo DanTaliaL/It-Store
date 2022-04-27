@@ -1,62 +1,86 @@
-﻿@model ItStore.Models.SystemsFolder.RoleEditModel
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model ItStore.Models.SystemsFolder.RoleEditModel
 
 
+<div class="intro text-black">
+        <div><h4>Изменения уровня доступа</h4></div>
 
-<div class="intro">
-    <div class=" text-white"><h4>Edit role</h4></div>
+        <div asp-validation-summary="All" class="text-danger"></div>
 
-    <div asp-validation-summary="All" class="text-danger"></div>
+        <form asp-action="EditRole" method="post" class="text-white">
 
-    <form asp-action="EditRole" method="post" class="text-white">
+            <input type="hidden" name="roleName" value="@Model.Role.Name" />
+            <input type="hidden" name="roleId" value="@Model.Role.Id" />
+            <h6>Add to @Model.Role.Name</h6>
 
-        <input type="hidden" name="roleName" value="@Model.Role.Name" />
-        <input type="hidden" name="roleId" value="@Model.Role.Id" />
-        <h6 class="text-white">Add to @Model.Role.Name</h6>
-
-        <table class="table table-bordered">
-
-            @if (Model.NonMembers.Count() == 0)
-            {
-                <tr><td colspan="2">All Users Are Members</td></tr>
-            }
-            else
-            {
-                @foreach (var user in Model.NonMembers)
+            <h6 class="text-black">Дать статус @Model.Role.Name</h6>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Имя пользователя</th>
+                    <th>Изменить роль</th>
+                </tr>
+                @if (Model.NonMembers.Count() == 0)
                 {
                     <tr>
-                        <td>@user.UserName</td>
-                        <td>
-                            <input type="checkbox" name="IdsToAdd" value="@user.Id" />
-                        </td>
+                        <td colspan="2">Все пользователи администраторы</td>
                     </tr>
+
                 }
-            }
-
-        </table>
-
-        <h6 class="text-white">Remove from @Model.Role.Name</h6>
-        <table>
-            @if (Model.Members.Count() == 0)
-            {
-
-
-                <tr><td colspan="2">No Users Are Members</td></tr>
-            }
-            else
-            {
-                @foreach (var user in Model.Members)
+                else
                 {
-                    <tr>
-                        <td>@user.UserName</td>
-                        <td>
-                            <input type="checkbox" name="IdsToDelete" value="@user.Id" />
-                        </td>
-                    </tr>
+                    @foreach (var user in Model.NonMembers)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>
+                                <input type="checkbox" name="IdsToAdd" value="@user.Id" />
+                            </td>
+                        </tr>
+                    }
                 }
-            }
-        </table>
-        <button type="submit" class="btn ">Save</button>
-        <a asp-action="AdminPage" class="btn">Cancel</a>
-    </form>
 
-</div>
+            </table>
+
+            <h6 class="text-black">Лишить статуса @Model.Role.Name</h6>
+            <table class="text-black table table-bordered">
+                <tr>
+                    <th>Имя пользователя</th>
+                    <th>Изменить роль</th>
+                </tr>
+                @if (Model.Members.Count() == 1)
+                {
+
+                    @foreach (var user in Model.Members)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z" />
+                                    <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z" />
+                                </svg>
+                            </td>
+                        </tr>
+                    }
+
+                }
+                else
+                {
+                    @foreach (var user in Model.Members)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>
+                                <input type="checkbox" name="IdsToDelete" value="@user.Id" />
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+            
+            <button type="submit" asp-route-UsrName="@User.Identity.Name" class="btn btn-primary">Сохранить</button>
+            <a asp-action="PageRole" class="btn btn-primary">Назад</a>
+        </form>
+    </div>

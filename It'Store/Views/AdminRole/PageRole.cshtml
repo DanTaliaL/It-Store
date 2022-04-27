@@ -1,38 +1,40 @@
 ﻿@model IEnumerable<IdentityRole>
 @{
-    Layout = null;
+    Layout = "_AdminLayout";
 }
-<div class="bg-primary m-1 p-l"><h4>Roles</h4></div>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Роли
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Наименование статуса</th>
+                    <th>Управление</th>
+                </tr>
 
-<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            </thead>
+            <tbody>
+                @foreach (var q in Model)
+                {
+                    <tr>
+                        <td>@q.Name</td>
+                        <td>
+                            <form asp-action="DeleteRole" asp-route-id="@q.Id" method="post">
+                                <a class="btn btn-primary btn-sm" asp-action="EditRole" asp-route-id="@q.Id">Редактировать</a>
+                                @if (q.Name != "Admin")
+                                {
+                                    <button class="btn btn-sm btn-danger" type="submit">Удалить</button>
+                                }
+                            </form>
+                        </td>
+                    </tr>
+                }
 
-<table class="table table-sm table-bordered">
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Users</th>
-        <th></th>
-    </tr>
-    @if (Model.Count() == 0)
-    {
-        <tr><td colspan="4" class="text-center">No Roles</td></tr>
-    }
-    else
-    {
-        foreach (var role in Model)
-        {
-            <tr>
-                <td>@role.Id</td>
-                <td>@role.Name</td>
-                <td identity-role="@role.Id"></td>
-                <td>
-                    <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
-                        <a class="btn btn-primary btn-sm" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
-                        <button class="btn btn-sm btn-danger" type="submit">Delete</button>
-                    </form>
-                </td>
-            </tr>
-        }
-    }
-</table>
-<a class="btn btn-primary" asp-action="CreateRole">Create</a>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" asp-action="CreateRole">Создать новую роль</a>
+    </div>
+</div>

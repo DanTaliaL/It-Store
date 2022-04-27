@@ -85,8 +85,9 @@ namespace ItStore.Controllers
             return RedirectToAction("Options", new { ProdId });
         }
 
+        [HttpPost]
         public IActionResult OptionsUpdate(Options options, int ProdId)
-        {
+        {         
             Options update = Data.Options.Where(q => q.ProductId == ProdId).FirstOrDefault();
 
             update.ProductId = ProdId;
@@ -124,6 +125,12 @@ namespace ItStore.Controllers
             update.VolumeEMMC = options.VolumeEMMC;
             Data.SaveChanges();
             return RedirectToAction("Options", new { ProdId });
+        }
+
+        public IActionResult OptionsUpdate(int ProdId)
+        {
+           ViewBag.ProdId = ProdId;
+           return View(Data.Options.Include(q => q.Product).Where(q => q.ProductId == ProdId && q.Product.Id == ProdId).FirstOrDefault());
         }
     }
 

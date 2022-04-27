@@ -15,9 +15,13 @@ namespace ItStore.Controllers
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
-        } 
-        public UserManager<AppUser> userManager { get; set; }      
-        public IActionResult PageRole() => View(roleManager.Roles);      
+        }
+        public UserManager<AppUser> userManager { get; set; }
+        public IActionResult PageRole()
+        {
+          return View(roleManager.Roles);
+        }
+        
         public IActionResult CreateRole() => View();
         [HttpPost]
         public async Task<IActionResult> CreateRole([Required] string Name)
@@ -77,12 +81,12 @@ namespace ItStore.Controllers
             });
         }
         [HttpPost]
-        public async Task<IActionResult> EditRole(RoleModificationModel model)
+        public async Task<IActionResult> EditRole(RoleModificationModel model, string UsrName)
         {
             IdentityResult result;
             if (ModelState.IsValid)
             {
-                foreach(string userId in model.IdsToAdd ?? new string[] { })
+                foreach (string userId in model.IdsToAdd ?? new string[] { })
                 {
                     AppUser user = await userManager.FindByIdAsync(userId);
                     if (user != null)
@@ -91,6 +95,23 @@ namespace ItStore.Controllers
                         if (!result.Succeeded)
                         {
                             AddErrorsFromResult(result);
+                        }
+                    }
+                }
+                foreach (string userId in model.IdsToDelete ?? new string[] { })
+                {   
+                    
+                    AppUser user = await userManager.FindByIdAsync(userId);
+                    AppUser userName = await userManager.FindByNameAsync(UsrName);             
+                    if (user != null && userName !=null)
+                    {
+                        if (user != userName)
+                        {
+                            result = await userManager.RemoveFromRoleAsync(user, model.RoleName);
+                            if (!result.Succeeded)
+                            {
+                                AddErrorsFromResult(result);
+                            }
                         }
                     }
                 }
