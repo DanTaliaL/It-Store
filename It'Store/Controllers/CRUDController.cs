@@ -7,27 +7,6 @@ using System.Text;
 
 namespace ItStore.Controllers
 {
-    public class CustomerController : Controller
-    {
-        private DataContext Data { get; set; }
-        public CustomerController(DataContext DC) => Data = DC;
-
-        [HttpPost]
-        public IActionResult Customer(Customer customer)
-        {
-            Data.Customers.Add(customer);
-            Data.SaveChanges();
-            return RedirectToAction();
-        }
-
-        public IActionResult Customer()
-        {
-            IQueryable<Customer> customers = Data.Customers
-                .Include(q => q.Requests);
-            return View(customers.OrderBy(q => q.Id));
-        }
-        public IActionResult CustomerForm() => View();
-    }
 
     public class ManufacturerController : Controller
     {
@@ -280,7 +259,6 @@ namespace ItStore.Controllers
         public new IActionResult Request()
         {
             IQueryable<Request> query = Data.Requests
-                .Include(q => q.Customer)
                 .Include(q => q.Suppliers);
             return View(Data.Requests.OrderBy(q => q.Id));
         }

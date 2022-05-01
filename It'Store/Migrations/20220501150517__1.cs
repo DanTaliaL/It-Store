@@ -49,20 +49,6 @@ namespace ItStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Histories",
                 columns: table => new
                 {
@@ -136,6 +122,22 @@ namespace ItStore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Promotions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Requests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductPrice = table.Column<int>(type: "int", nullable: false),
+                    PurshaceMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Requests", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -259,29 +261,6 @@ namespace ItStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Requests",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductPrice = table.Column<int>(type: "int", nullable: false),
-                    PurshaceMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Requests", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Requests_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OrderHistory",
                 columns: table => new
                 {
@@ -330,30 +309,6 @@ namespace ItStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<int>(type: "int", nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Categories = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    WareHouseId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_WareHouse_WareHouseId",
-                        column: x => x.WareHouseId,
-                        principalTable: "WareHouse",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OrderRequest",
                 columns: table => new
                 {
@@ -397,6 +352,30 @@ namespace ItStore.Migrations
                         name: "FK_RequestHistory_Requests_RequestsId",
                         column: x => x.RequestsId,
                         principalTable: "Requests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Categories = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    WareHouseId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_WareHouse_WareHouseId",
+                        column: x => x.WareHouseId,
+                        principalTable: "WareHouse",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -456,31 +435,31 @@ namespace ItStore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProcessorModelName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QuantityCore = table.Column<int>(type: "int", nullable: false),
-                    NumberOfThreads = table.Column<int>(type: "int", nullable: false),
-                    CPUFrequency = table.Column<int>(type: "int", nullable: false),
-                    MaxCPUFrequency = table.Column<int>(type: "int", nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ManufacturerCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReleaseYear = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OperatingSystem = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CoverMaterial = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HousingMaterial = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ScreenType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ScreenDiagonal = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ScreenResolution = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaximumScreenRefreshRate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PixelDensity = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RAMType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RAMMemory = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RAMFrequency = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TypeOfGraphicsAccelerator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BuiltInGraphicsCardModel = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DiscreteGraphicsCardModel = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VolumeSSD = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VolumeHDD = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VolumeEMMC = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProcessorModelName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    QuantityCore = table.Column<int>(type: "int", nullable: true),
+                    NumberOfThreads = table.Column<int>(type: "int", nullable: true),
+                    CPUFrequency = table.Column<int>(type: "int", nullable: true),
+                    MaxCPUFrequency = table.Column<int>(type: "int", nullable: true),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ManufacturerCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReleaseYear = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OperatingSystem = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CoverMaterial = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HousingMaterial = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ScreenType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ScreenDiagonal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ScreenResolution = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MaximumScreenRefreshRate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PixelDensity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RAMType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RAMMemory = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RAMFrequency = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TypeOfGraphicsAccelerator = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BuiltInGraphicsCardModel = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DiscreteGraphicsCardModel = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VolumeSSD = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VolumeHDD = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VolumeEMMC = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -495,7 +474,7 @@ namespace ItStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrdersProduct",
+                name: "OrderProduct",
                 columns: table => new
                 {
                     OrdersId = table.Column<int>(type: "int", nullable: false),
@@ -503,15 +482,15 @@ namespace ItStore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrdersProduct", x => new { x.OrdersId, x.ProductsId });
+                    table.PrimaryKey("PK_OrderProduct", x => new { x.OrdersId, x.ProductsId });
                     table.ForeignKey(
-                        name: "FK_OrdersProduct_Orders_OrdersId",
+                        name: "FK_OrderProduct_Orders_OrdersId",
                         column: x => x.OrdersId,
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrdersProduct_Products_ProductsId",
+                        name: "FK_OrderProduct_Products_ProductsId",
                         column: x => x.ProductsId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -538,30 +517,6 @@ namespace ItStore.Migrations
                         name: "FK_Suppliers_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CommentariesPictures",
-                columns: table => new
-                {
-                    commentariesId = table.Column<int>(type: "int", nullable: false),
-                    picturesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CommentariesPictures", x => new { x.commentariesId, x.picturesId });
-                    table.ForeignKey(
-                        name: "FK_CommentariesPictures_Comments_commentariesId",
-                        column: x => x.commentariesId,
-                        principalTable: "Comments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CommentariesPictures_Pictures_picturesId",
-                        column: x => x.picturesId,
-                        principalTable: "Pictures",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -664,11 +619,6 @@ namespace ItStore.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CommentariesPictures_picturesId",
-                table: "CommentariesPictures",
-                column: "picturesId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Comments_ProductID",
                 table: "Comments",
                 column: "ProductID");
@@ -689,14 +639,14 @@ namespace ItStore.Migrations
                 column: "OrdersId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderProduct_ProductsId",
+                table: "OrderProduct",
+                column: "ProductsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderRequest_RequestsId",
                 table: "OrderRequest",
                 column: "RequestsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrdersProduct_ProductsId",
-                table: "OrdersProduct",
-                column: "ProductsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrdersPromotions_PromotionId",
@@ -712,11 +662,6 @@ namespace ItStore.Migrations
                 name: "IX_RequestHistory_RequestsId",
                 table: "RequestHistory",
                 column: "RequestsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Requests_CustomerId",
-                table: "Requests",
-                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RequestSuplier_SuppliersId",
@@ -750,7 +695,7 @@ namespace ItStore.Migrations
                 name: "CartLine");
 
             migrationBuilder.DropTable(
-                name: "CommentariesPictures");
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "ManufacturerSuppliers");
@@ -762,13 +707,16 @@ namespace ItStore.Migrations
                 name: "OrderHistory");
 
             migrationBuilder.DropTable(
+                name: "OrderProduct");
+
+            migrationBuilder.DropTable(
                 name: "OrderRequest");
 
             migrationBuilder.DropTable(
-                name: "OrdersProduct");
+                name: "OrdersPromotions");
 
             migrationBuilder.DropTable(
-                name: "OrdersPromotions");
+                name: "Pictures");
 
             migrationBuilder.DropTable(
                 name: "RequestHistory");
@@ -781,12 +729,6 @@ namespace ItStore.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Comments");
-
-            migrationBuilder.DropTable(
-                name: "Pictures");
 
             migrationBuilder.DropTable(
                 name: "Manufacturer");
@@ -805,9 +747,6 @@ namespace ItStore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Suppliers");
-
-            migrationBuilder.DropTable(
-                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Products");

@@ -12,6 +12,6 @@
         public int ProductID { get; set; }
         public Product Product { get; set; }
 
-        public List<Picture> pictures { get; set; }
+
     }
 }

@@ -83,7 +83,7 @@ namespace ItStore.Controllers
                 Pictures = Data.Pictures.Where(q => q.Name == ProdName),
                 Options = Data.Options.Where(q => q.ProductId == ProdId),
                 ProductID = ProdId,
-                Commentaries = Data.Comments.Where(q=>q.ProductID== ProdId),
+                Commentaries = Data.Comments.Where(q=>q.ProductID== ProdId).OrderByDescending(q=>q.Id),
                 UserName = User.Identity.Name,
             };
             return View(Result);

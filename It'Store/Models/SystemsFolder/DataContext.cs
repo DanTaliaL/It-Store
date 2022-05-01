@@ -11,7 +11,6 @@ namespace ItStore.Models
     public class DataContext : IdentityDbContext<AppUser>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-        public DbSet<Customer> Customers { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<WareHouse> WareHouse { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
@@ -27,16 +26,6 @@ namespace ItStore.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Request>()
-                 .HasOne(q => q.Customer)
-                 .WithMany(q => q.Requests)
-                 .HasForeignKey(q => q.CustomerId);
-
-            builder.Entity<Product>() //product orders many to many
-                .HasMany(q => q.Orders)
-                .WithMany(q => q.Products)
-                .UsingEntity(q => q.ToTable("OrdersProduct"));
-
 
             builder.Entity<Product>()
                 .HasOne(q => q.WareHouse)
@@ -83,10 +72,6 @@ namespace ItStore.Models
                 .WithMany(q => q.Comments)
                 .HasForeignKey(q => q.ProductID);
 
-            builder.Entity<Commentaries>() //delete
-                .HasMany(q => q.pictures)
-                .WithMany(q => q.commentaries)
-                .UsingEntity(q => q.ToTable("CommentariesPictures"));
 
         }
         public static async Task CreateAdminAccount(IServiceProvider sericeProvider,

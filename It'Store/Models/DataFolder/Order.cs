@@ -21,11 +21,7 @@ namespace ItStore.Models.DataFolder
 
         //old column
         public DateTime TimeOrders { get; set; }
-        //public int ProductPrice { get; set; }
-        //public int OrderPrice { get; set; }
         public string DeliveryMethod { get; set; }
-        //public string PurshaceStatus { get; set; }
-        //public string Status { get; set; }
 
         [BindNever]
         public List<Product>? Products { get; set; }

@@ -22,21 +22,6 @@ namespace ItStore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("CommentariesPicture", b =>
-                {
-                    b.Property<int>("commentariesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("picturesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("commentariesId", "picturesId");
-
-                    b.HasIndex("picturesId");
-
-                    b.ToTable("CommentariesPictures", (string)null);
-                });
-
             modelBuilder.Entity("HistoryOrder", b =>
                 {
                     b.Property<int>("HistoryId")
@@ -188,27 +173,6 @@ namespace ItStore.Migrations
                     b.HasIndex("ProductID");
 
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("ItStore.Models.DataFolder.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("ItStore.Models.DataFolder.History", b =>
@@ -474,9 +438,6 @@ namespace ItStore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -493,8 +454,6 @@ namespace ItStore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("Requests");
                 });
@@ -718,7 +677,7 @@ namespace ItStore.Migrations
 
                     b.HasIndex("ProductsId");
 
-                    b.ToTable("OrdersProduct", (string)null);
+                    b.ToTable("OrderProduct");
                 });
 
             modelBuilder.Entity("OrderPromotion", b =>
@@ -764,21 +723,6 @@ namespace ItStore.Migrations
                     b.HasIndex("SuppliersId");
 
                     b.ToTable("RequestSuplier", (string)null);
-                });
-
-            modelBuilder.Entity("CommentariesPicture", b =>
-                {
-                    b.HasOne("ItStore.Models.DataFolder.Commentaries", null)
-                        .WithMany()
-                        .HasForeignKey("commentariesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ItStore.Models.DataFolder.Picture", null)
-                        .WithMany()
-                        .HasForeignKey("picturesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("HistoryOrder", b =>
@@ -857,17 +801,6 @@ namespace ItStore.Migrations
                         .IsRequired();
 
                     b.Navigation("WareHouse");
-                });
-
-            modelBuilder.Entity("ItStore.Models.DataFolder.Request", b =>
-                {
-                    b.HasOne("ItStore.Models.DataFolder.Customer", "Customer")
-                        .WithMany("Requests")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("ItStore.Models.DataFolder.Supplier", b =>
@@ -1005,11 +938,6 @@ namespace ItStore.Migrations
                         .HasForeignKey("SuppliersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ItStore.Models.DataFolder.Customer", b =>
-                {
-                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("ItStore.Models.DataFolder.Order", b =>

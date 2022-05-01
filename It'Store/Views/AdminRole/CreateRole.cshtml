@@ -1,21 +1,21 @@
 ﻿@model string
 @{
-    Layout = null;
+    Layout = "_AdminLayout";
 }
-<div class="bg-primary m-1 p-1"><h4>Create Role</h4></div>
+<div class="row-cols-md-5">
 
-<div class="text-danger" asp-validation-summary="All"></div>
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <form asp-action="CreateRole" method="post">
 
-<form asp-action="CreateRole" method="post">
-    
-    <div class="form-group">
+        <div class="form-group">
 
-        <label for="name"></label>
-        <input name="name" class="form-control" />
+            <h4>Добавить новую роль</h4>
+            <input name="name" class="form-control" />
 
-    </div>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a asp-action="AdminPage" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary mt-2">Добавить</button>
+        <a asp-controller="AdminRole" asp-action="PageRole" class="btn btn-secondary mt-2">Назад</a>
 
-</form>
+    </form>
+</div>

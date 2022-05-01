@@ -1,17 +1,128 @@
 ﻿@model Options
-<div class="row justify-content-between">
+@*Processor*@
+<div class="row justify-content-between mb-3">
     <div>
-            <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                Процессор @Model.ProcessorModelName .....
-            </a>
+        <a  data-bs-toggle="collapse" href="#collapseProcessor" role="button" aria-expanded="false" aria-controls="collapseProcessor">
+            <span><b> Процессор</b> @Model.ProcessorModelName </span>  <span style="float:right">Подробнее...</span>
+        </a>
+    </div>
+
+    <div class="collapse" id="collapseProcessor">
+        <div style="background-color: #161515" class="card card-body text-black">
+            <p> Количество ядер: @Model.QuantityCore</p>
+            <p> Количество потоков: @Model.NumberOfThreads</p>
+            <p> Частота: @Model.CPUFrequency</p>
+            <p> Максимальная частота автоматического ускорения: @Model.MaxCPUFrequency</p>
+        </div>
+    </div>
+</div>
+
+@*Classification*@
+
+<div class="row justify-content-between mb-3">
+    <div>
+        <a data-bs-toggle="collapse" href="#collapseClassification" role="button" aria-expanded="false" aria-controls="collapseClassification">
+            <span><b> Классификация</b> @Model.Model </span>  <span style="float:right">Подробнее...</span>
+        </a>
 
     </div>
-    <p>
-        
-    </p>
-    <div class="collapse" id="collapseExample">
-        <div class="card card-body text-black">
-            <p> Частота @Model.MaxCPUFrequency</p>
+
+    <div class="collapse" id="collapseClassification">
+        <div style="background-color: #161515" class="card card-body text-black">
+            <p> Код производителя: @Model.ManufacturerCode</p>
+            <p> Год выпуска: @Model.ReleaseYear</p>
+            <p> Операционная система: @Model.OperatingSystem</p>
+        </div>
+    </div>
+</div>
+
+@*Appearance*@
+
+<div class="row justify-content-between mb-3">
+    <div>
+        <a data-bs-toggle="collapse" href="#collapseAppearance" role="button" aria-expanded="false" aria-controls="collapseAppearance">
+            <span><b> Материал верхней крышки</b> @Model.CoverMaterial </span>  <span style="float:right">Подробнее...</span>
+        </a>
+
+    </div>
+
+    <div class="collapse" id="collapseAppearance">
+        <div style="background-color: #161515" class="card card-body text-black">
+            <p> Материал корпуса: @Model.HousingMaterial</p>
+        </div>
+    </div>
+</div>
+
+@*Screen*@
+
+<div class="row justify-content-between mb-3">
+    <div>
+        <a data-bs-toggle="collapse" href="#collapseScreen" role="button" aria-expanded="false" aria-controls="collapseScreen">
+            <span><b> Тип экрана</b> @Model.ScreenType </span>  <span style="float:right">Подробнее...</span>
+        </a>
+
+    </div>
+
+    <div class="collapse" id="collapseScreen">
+        <div style="background-color: #161515" class="card card-body text-black">
+            <p> Диагональ: @Model.ScreenDiagonal</p>
+            <p> Разрешение: @Model.ScreenResolution</p>
+            <p> Максимальная частота обновления: @Model.MaximumScreenRefreshRate</p>
+            <p> Плотность пикселей: @Model.PixelDensity</p>
+        </div>
+    </div>
+</div>
+
+@*RAM*@
+
+<div class="row justify-content-between mb-3">
+    <div>
+        <a data-bs-toggle="collapse" href="#collapseRAM" role="button" aria-expanded="false" aria-controls="collapseRAM">
+            <span><b> Тип оперативной памяти</b> @Model.RAMType </span>  <span style="float:right">Подробнее...</span>
+        </a>
+
+    </div>
+
+    <div class="collapse" id="collapseRAM">
+        <div style="background-color: #161515" class="card card-body text-black">
+            <p> Обьем: @Model.RAMMemory</p>
+            <p> Частота: @Model.RAMFrequency</p>
+        </div>
+    </div>
+</div>
+
+@*graphics accelerator*@
+
+<div class="row justify-content-between mb-3">
+    <div>
+        <a data-bs-toggle="collapse" href="#collapseGraphicsAccelerator" role="button" aria-expanded="false" aria-controls="collapseGraphicsAccelerator">
+            <span><b> Тип графического ускорителя</b> @Model.TypeOfGraphicsAccelerator </span>  <span style="float:right">Подробнее...</span>
+        </a>
+
+    </div>
+
+    <div class="collapse" id="collapseGraphicsAccelerator">
+        <div style="background-color: #161515" class="card card-body text-black">
+            <p> Встроенный: @Model.BuiltInGraphicsCardModel</p>
+            <p> Дискретный: @Model.DiscreteGraphicsCardModel</p>
+        </div>
+    </div>
+</div>
+
+@*Data drives*@
+
+<div class="row justify-content-between mb-3">
+    <div>
+        <a data-bs-toggle="collapse" href="#collapseDataDrives" role="button" aria-expanded="false" aria-controls="collapseDataDrives">
+            <span><b> Накопители данных SSD:</b> @Model.VolumeSSD </span>  <span style="float:right">Подробнее...</span>
+        </a>
+
+    </div>
+
+    <div class="collapse" id="collapseDataDrives">
+        <div style="background-color: #161515" class="card card-body text-black">
+            <p> Обьем HDD: @Model.VolumeHDD</p>
+            <p> Обьем EMMC: @Model.VolumeEMMC</p>
         </div>
     </div>
 </div>

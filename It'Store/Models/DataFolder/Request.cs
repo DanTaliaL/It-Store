@@ -10,9 +10,6 @@ namespace ItStore.Models.DataFolder
         public string PurshaceMethod { get; set; }
         public string Quantity { get; set; }
 
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
-
         public List<Supplier> Suppliers { get; set; }
         public List<Order> Orders { get; set; }
         public List<History> History { get; set; }
