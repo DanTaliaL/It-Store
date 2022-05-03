@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ItStore.Controllers
 {
@@ -66,7 +67,7 @@ namespace ItStore.Controllers
 
         [HttpPost]
         public IActionResult OptionsUpdate(Options options, int ProdId)
-        {         
+        {
             Options update = Data.Options.Where(q => q.ProductId == ProdId).FirstOrDefault();
 
             update.ProductId = ProdId;
@@ -108,30 +109,35 @@ namespace ItStore.Controllers
 
         public IActionResult OptionsUpdate(int ProdId)
         {
-           ViewBag.ProdId = ProdId;
-           return View(Data.Options.Include(q => q.Product).Where(q => q.ProductId == ProdId && q.Product.Id == ProdId).FirstOrDefault());
+            ViewBag.ProdId = ProdId;
+            return View(Data.Options.Include(q => q.Product).Where(q => q.ProductId == ProdId && q.Product.Id == ProdId).FirstOrDefault());
         }
     }
 
     public class OrderController : Controller
     {
+        private DataContext Data { get; set; }
         private IOrderRepository repository { get; set; }
         private Cart cart { get; set; }
-        public OrderController(IOrderRepository repository, Cart cart)
+        public OrderController(IOrderRepository repository, Cart cart, DataContext DC)
         {
             this.repository = repository;
             this.cart = cart;
+            Data = DC;
         }
 
         [HttpPost]
         public IActionResult OrderForm(Order order)
         {
+            order.Name = User.Identity.Name;
+            order.TotalPrice = cart.ComputeTotalValue();
             if (cart.Lines.Count() == 0)
             {
                 ModelState.AddModelError("", "Ваша корзина пуста");
             }
             if (ModelState.IsValid)
             {
+
                 order.Lines = cart.Lines.ToArray();
                 repository.SaveOrder(order);
                 return RedirectToAction(nameof(Completed));
@@ -311,6 +317,22 @@ namespace ItStore.Controllers
         }
 
         public IActionResult WareHouseForm() => View();
+    }
+    public class PromotionController : Controller
+    {
+        private DataContext Data { get; set; }
+        public PromotionController(DataContext DC) => Data = DC;
+
+        [HttpPost]
+        public IActionResult Promotion(Promotion promotion)
+        {
+            promotion.PromotionCode = Regex.Replace(Convert.ToBase64String(Guid.NewGuid().ToByteArray()), "[/+=]", "");
+            Data.Promotions.Add(promotion);
+            Data.SaveChanges();
+            return RedirectToAction();
+        }
+        public IActionResult Promotion() => View(Data.Promotions);
+        public IActionResult PromotionForm() => View();
     }
 
     public class CommentariesController : Controller

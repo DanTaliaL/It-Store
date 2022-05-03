@@ -1,31 +1,24 @@
 ﻿@model Order
 <div class="intro intro__inner container ">
     <form asp-action="OrderForm" method="post">
-        <div asp-validation-summary="All" class="text-white" ></div>
-            <p class="text-white">
-                <label asp-for="Name">Наименование товара</label>
-                <input class="form-control" asp-for="Name" />
-            </p>
-            <p class="text-white">
-                <label asp-for="Street">Улица</label>
-                <input class="form-control" asp-for="Street" />
-            </p>
-            <p class="text-white">
-                <label asp-for="City">Город</label>
-                <input class="form-control" asp-for="City" />
-            </p>
-            <p class="text-white">
-                <label asp-for="TimeOrders">Дата заказа</label>
-                <input class="form-control" asp-for="TimeOrders" type="date" />
-            </p>           
-            <p class="text-white">
-                <label asp-for="DeliveryMethod">Метод доставки</label>
-                <input class="form-control" asp-for="DeliveryMethod" />
-            </p>
-     
-            <div>
-                <input type="submit" class="btn" value="Completed Order" />
-            </div>
-        
+        <div asp-validation-summary="All" class="text-white"></div>
+        <input type="hidden" name="Name" value="@User.Identity.Name" />
+        <input type="hidden" name="TimeOrders" value="@DateTime.Now"/>
+        <p class="text-white">
+            <label asp-for="Street">Улица</label>
+            <input class="form-control" asp-for="Street" />
+        </p>
+        <p class="text-white">
+            <label asp-for="City">Город</label>
+            <input class="form-control" asp-for="City" />
+        </p>
+        <p class="text-white">
+            <label asp-for="DeliveryMethod">Метод доставки</label>
+            <input class="form-control" asp-for="DeliveryMethod" />
+        </p>
+
+        <div>
+            <input type="submit" class="btn" value="Completed Order" />
+        </div>
     </form>
 </div>

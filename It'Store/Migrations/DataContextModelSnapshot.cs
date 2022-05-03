@@ -339,6 +339,9 @@ namespace ItStore.Migrations
                     b.Property<DateTime>("TimeOrders")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Orders");
@@ -424,6 +427,9 @@ namespace ItStore.Migrations
                     b.Property<string>("PromotionCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

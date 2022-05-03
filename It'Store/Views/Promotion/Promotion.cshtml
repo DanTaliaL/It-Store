@@ -1,0 +1,44 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model IEnumerable<Promotion>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Таблица товара
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Наименование промокода</th>
+                    <th>Процент скидки</th>
+                    <th>Количество</th>
+                    <th>Описание промокода</th>
+                    <th>Промокод</th>
+                    <th>Управление</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var q in Model)
+                    {
+                        <tr>
+                            <td>@q.Name</td>
+                            <td>@q.Percentage</td>
+                            <td>@q.Quantity</td>
+                            <td>@q.Description</td>
+                            <th>@q.PromotionCode</th>
+                            <td>
+                                <a asp-action="" asp-route-id="@q.Id" class="btn btn-primary"> Редактировать </a>
+                                <a asp-action="" asp-route-id="@q.Id" class="btn btn-primary"> Удалить </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <a class="btn btn-primary text-center" asp-controller="Promotion" asp-action="PromotionForm">Добавить промокд</a>
+    </div>
+</div>

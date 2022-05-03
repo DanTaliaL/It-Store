@@ -1,0 +1,47 @@
+﻿@{ 
+    Layout = "_AdminLayout";
+}
+@model Promotion
+<div class="container text-center">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Добавление
+    </div>
+
+    <div class="card-body">
+        <form class="text-black" asp-validation-summary="All" asp-action="Promotion" method="post" enctype="multipart/form-data">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Наименование промокода</th>
+                        <th>Процент скидки</th>
+                        <th>Количество</th>
+                        <th>Описание промокода</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input class="form-control" asp-for="Name" />
+                        </td>
+
+                        <td>
+                            <input class="form-control" asp-for="Percentage" />
+                        </td>
+
+                        <td>
+                            <input class="form-control" asp-for="Quantity" />
+                        </td>
+
+                        <td>
+                            <input class="form-control" asp-for="Description" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-primary col" asp-action="Product"> Назад </a>
+            <button class="btn btn-primary col" type="submit">Заполнить</button>
+        </form>
+    </div>
+</div>

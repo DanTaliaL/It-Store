@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ItStore.Models.DataFolder.Picture>
+﻿@model HistoryViewModel
 <div class="intro">
     <div class="container">
         <form asp-action="Logout method="post">
@@ -7,11 +7,31 @@
             </p>
         </form>
         <h1>Hi @User.Identity.Name</h1>
-        @foreach (var q in Model.Where(q=>q.Name==User.Identity.Name))
-        {
-            @Html.Raw("<img style='width:240px; height:320px;' src=\"data:image/jpeg;base64,"
-                                        + Convert.ToBase64String(q.Image) + "\" />")
-        }
     </div>
 </div>
 
+<table class="row-col-md-4">
+    <tr>
+        <th>Наименование</th>
+        <th>Количество</th>
+        <th>Цена</th>
+        <th>Дата заказа</th>
+    </tr>
+    @foreach (var order in Model.Order)
+    {
+        @foreach (var cartline in Model.CartLine)
+        {
+            @foreach (var product in order.Lines.Where(q => q.CartLineId == cartline.CartLineId))
+            {
+
+                <tr>
+                    <td>@product.Product.Name</td>
+                    <td>@cartline.Quantity</td>
+                    <td>@order.TotalPrice</td>
+                    <td>@order.TimeOrders</td>
+                </tr>
+            }
+        }
+    }
+
+</table>

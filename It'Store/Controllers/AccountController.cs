@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using ItStore.Models.SystemsFolder;
 using ItStore.Models;
 using System.Threading.Tasks;
+using ItStore.Models.DataFolder;
+using Microsoft.EntityFrameworkCore;
 
 namespace ItStore.Controllers
 {
@@ -113,7 +115,23 @@ namespace ItStore.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-        public async Task<IActionResult> Profile() => View(Data.Pictures);
-        public IActionResult AdminProfile() => View(Data.Pictures);
+        public IActionResult Profile()
+        {
+            var result = new HistoryViewModel
+            {
+                CartLine = Data.CartLine.Include(q=>q.Product),
+                Order =Data.Orders.Include(q=>q.Lines).Where(q=>q.Name==User.Identity.Name)
+            };
+            return View(result);
+        }
+        public IActionResult AdminProfile()
+        {
+            var result = new HistoryViewModel
+            {
+                CartLine = Data.CartLine.Include(q => q.Product),
+                Order = Data.Orders.Include(q => q.Lines).Where(q => q.Name == User.Identity.Name)
+            };
+            return View(result);
+        }
     }
 }

@@ -86,6 +86,7 @@ namespace ItStore.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TimeOrders = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeliveryMethod = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -116,6 +117,7 @@ namespace ItStore.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Percentage = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PromotionCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },

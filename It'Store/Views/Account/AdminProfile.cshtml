@@ -1,30 +1,34 @@
-﻿@{ 
+﻿@{
     Layout = "_AdminLayout";
 }
-
+@model HistoryViewModel
 
 <div class="container" style="align-content:center;">
-    <img src="~/Images/MainPages/AdminPicture.png"/>
+    <img src="~/Images/MainPages/AdminPicture.png" />
 </div>
 
+<table class="row-col-md-4">
+    <tr>
+        <th>Наименование</th>
+        <th>Количество</th>
+        <th>Цена</th>
+        <th>Дата заказа</th>
+    </tr>
+    @foreach (var order in Model.Order)
+    {
+        @foreach (var cartline in Model.CartLine)
+        {
+            @foreach (var product in order.Lines.Where(q => q.CartLineId == cartline.CartLineId))
+            {
 
-@*<div class="intro">
-    <div class="container">
-        <h1>Аккаунт администратора: @User.Identity.Name</h1>
-        <form asp-action="Logout method="post">
-            <button class="btn" asp-area="" asp-controller="Account" asp-action="Logout">Выйти</button>
-        </form>
-        <p>
-            <a class="btn" asp-controller="Picture" asp-action="Picture">Библиотека изображений</a>
-            <a class="btn" asp-controller="Picture" asp-action="Create">Добавление изображений</a>
-            <a class="btn" asp-controller="AdminRole" asp-action="PageRole"> Управление доступа пользоваталей</a>
+                <tr>
+                    <td>@product.Product.Name</td>
+                    <td>@cartline.Quantity</td>
+                    <td>@order.TotalPrice</td>
+                    <td>@order.TimeOrders</td>
+                </tr>
+            }
+        }
+    }
 
-            <a class="btn" asp-controller="WareHouse" asp-action="WareHouseForm">Заполнение данных о складе</a>
-            <a class="btn" asp-controller="Product" asp-action="ProductForm">Форма заполнения товара</a>
-            <a class="btn" asp-controller="Options" asp-action="OptionsForm">Форма заполнения подробных свойств товара</a>
-
-            <a class="btn" asp-controller="Chart" asp-action="Chart">Аналитика продаж</a>
-        </p>
-
-    </div>
-</div>*@
+</table>

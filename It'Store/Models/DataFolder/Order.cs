@@ -18,6 +18,7 @@ namespace ItStore.Models.DataFolder
         public string Street { get; set; }
         [Required(ErrorMessage = "Название города не может быть пустым")]
         public string City { get; set; }
+        public decimal TotalPrice { get; set; }
 
         //old column
         public DateTime TimeOrders { get; set; }
