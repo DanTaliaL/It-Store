@@ -1,6 +1,12 @@
 ﻿@model CartIndexViewModel
 <div class="intro text-white container">
     <h2>Корзина</h2>
+    <form asp-action="Cart">
+        <labl>Промокод</labl>
+        <input name="PromotionCode" />
+        <button type="submit">Активировать</button>
+    </form>
+    
     <table class="table text-white">
         <tr>
             <td>Количество</td>
@@ -11,24 +17,26 @@
         </tr>
         @foreach (var q in Model.Cart.Lines)
         {
-    <tr>
-        <th class="text-left">@q.Quantity</th>
-        <th class="text-left">@q.Product.Name</th>
-        <th class="text-right"> @q.Product.Price.ToString("c")</th>
-        <th class="text-right"> @((q.Quantity*q.Product.Price).ToString("c")) </th>
-        <th>
-            <form asp-action="RemoveFromCart" method="post">
-                <input type="hidden" name="Id" value="@q.Product.Id" />
-                <input type="hidden" name="returnUrl" value="@Model.ReturnUrl"/>
-                <button type="submit" class="btn">Удалить</button>              
-            </form>
-        </th>
-    </tr>
+            <tr>
+                <th class="text-left">@q.Quantity</th>
+                <th class="text-left">@q.Product.Name</th>
+                <th class="text-right"> @q.Product.Price.ToString("c")</th>
+                <th class="text-right"> @((q.Quantity*q.Product.Price).ToString("c")) </th>
+                <th>
+                    <form asp-action="RemoveFromCart" method="post">
+                        <input type="hidden" name="Id" value="@q.Product.Id" />
+                        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                        <button type="submit" class="btn">Удалить</button>
+                    </form>
+                </th>
+            </tr>
         }
         <tfoot>
             <tr>
                 <td colspan="3" class="text-right">Итого</td>
-                <td class="text-right">@Model.Cart.ComputeTotalValue().ToString("c")</td>
+                <td class="text-right">
+                   @ViewBag.TotalPrice ₽
+                </td>
                 <td></td>
             </tr>
         </tfoot>
