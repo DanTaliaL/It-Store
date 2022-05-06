@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ItStore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220503141139__1")]
+    [Migration("20220506171402__1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -332,6 +332,9 @@ namespace ItStore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Promotions")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Street")

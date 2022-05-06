@@ -120,7 +120,8 @@ namespace ItStore.Controllers
             var result = new HistoryViewModel
             {
                 CartLine = Data.CartLine.Include(q=>q.Product),
-                Order =Data.Orders.Include(q=>q.Lines).Where(q=>q.Name==User.Identity.Name)
+                Order =Data.Orders.Include(q=>q.Lines).Where(q=>q.Name==User.Identity.Name),
+                Promotion = Data.Promotions
             };
             return View(result);
         }
@@ -129,7 +130,8 @@ namespace ItStore.Controllers
             var result = new HistoryViewModel
             {
                 CartLine = Data.CartLine.Include(q => q.Product),
-                Order = Data.Orders.Include(q => q.Lines).Where(q => q.Name == User.Identity.Name)
+                Order = Data.Orders.Include(q => q.Lines).Where(q => q.Name == User.Identity.Name),
+                Promotion = Data.Promotions
             };
             return View(result);
         }

@@ -18,19 +18,12 @@
                         <th>Управление</th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th>Нименование</th>
-                        <th>Цена</th>
-                        <th>Модель</th>
-                    </tr>
-                </tfoot>
                 <tbody>
                     @{
                         foreach (var q in Model)
                         {
                             <tr>
-                                <td>@q.Name.</td>
+                                <td>@q.Name</td>
                                 <td>@q.Price</td>
                                 <td>@q.Model</td>
                                 <td>

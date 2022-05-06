@@ -3,32 +3,63 @@
 }
 @model HistoryViewModel
 
-<div class="container" style="align-content:center;">
-    <img src="~/Images/MainPages/AdminPicture.png" />
-</div>
-
-<table class="row-col-md-4">
-    <tr>
-        <th>Наименование</th>
-        <th>Количество</th>
-        <th>Цена</th>
-        <th>Дата заказа</th>
-    </tr>
+<div class="row-cols-md-2">
+    <h3>История покупок</h3>
     @foreach (var order in Model.Order)
     {
-        @foreach (var cartline in Model.CartLine)
-        {
-            @foreach (var product in order.Lines.Where(q => q.CartLineId == cartline.CartLineId))
-            {
 
-                <tr>
-                    <td>@product.Product.Name</td>
-                    <td>@cartline.Quantity</td>
-                    <td>@order.TotalPrice</td>
-                    <td>@order.TimeOrders</td>
-                </tr>
-            }
-        }
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Дата покупки @order.TimeOrders
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Наименование</th>
+                            <th>Количество</th>
+                            <th>Цена</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var cartline in Model.CartLine)
+                        {
+                            @foreach (var product in order.Lines.Where(q => q.CartLineId == cartline.CartLineId))
+                            {
+
+                                <tr>
+                                    <td>@product.Product.Name</td>
+                                    <td>@cartline.Quantity</td>
+                                    <td>@(product.Product.Price * cartline.Quantity)</td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            @if (order.Promotions != null)
+                            {
+                                @foreach (var promotion in Model.Promotion)
+                                {
+
+                                    <td>Активирован промокод @order.Promotions применена скидка на @promotion.Percentage процента</td>
+
+                                }
+                            }                       
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <span><b>Итого</b></span>
+                                <span style="float:right;">@order.TotalPrice</span>
+                            </td>
+                        </tr>
+
+                    </tfoot>
+                </table>
+            </div>
+        </div>
     }
-
-</table>
+</div>

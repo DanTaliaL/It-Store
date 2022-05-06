@@ -87,6 +87,7 @@ namespace ItStore.Migrations
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Promotions = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TimeOrders = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeliveryMethod = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },

@@ -2,13 +2,9 @@
 
 <div class="intro intro__inner container  row-cols-md-4">
 
-    <form asp-action="PromotionRemains" method="post">
-        <input type="hidden" name="TotalPrc" value="@ViewBag.TotalPrice"/>
-        <labl>Промокод</labl>
-        <input name="PromotionCode" />
-        <button type="submit">Активировать</button>
-    </form>
-    <p class="text-white">@ViewBag.TotalPrice</p>
+
+
+    <p class="text-white">Сумма заказа составляет @ViewBag.TotalPrice</p>
     @if (ViewBag.PromotionStatus != null)
     {
         <p class="text-white">@ViewBag.PromotionStatus</p>
@@ -32,8 +28,16 @@
         </p>
 
         <div>
-            <input type="hidden"  name="TotalPrice" value="@ViewBag.TotalPrice"/>
-            <button type="submit" > Завершить </button>
+            <input type="hidden" name="TotalPrice" value="@ViewBag.TotalPrice" />
+            <input type="hidden" name="PromotionCode" value="@ViewBag.PromotionCode" />
+            <button class="btn" type="submit"> Завершить </button>
         </div>
+    </form>
+
+    <form asp-action="PromotionRemains" method="post">
+        <input type="hidden" name="TotalPrc" value="@ViewBag.TotalPrice" />
+        <labl>Проверить промокод</labl>
+        <input class="form-control" name="PromotionCode" />
+        <button class="btn" type="submit">Проверить</button>
     </form>
 </div>

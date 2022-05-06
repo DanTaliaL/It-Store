@@ -127,7 +127,7 @@ namespace ItStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult OrderForm(Order order, string TotalPrice)
+        public IActionResult OrderForm(Order order, decimal TotalPrice, string? PromotionCode)
         {
             order.Name = User.Identity.Name;
             order.TotalPrice = cart.ComputeTotalValue();
@@ -137,12 +137,12 @@ namespace ItStore.Controllers
             }
             if (ModelState.IsValid)
             {
-
                 order.Lines = cart.Lines.ToArray();
-                if (TotalPrice !=null)
+                if (TotalPrice != null)
                 {
-                    order.TotalPrice = Convert.ToDecimal(TotalPrice);
-                }               
+                    order.TotalPrice = TotalPrice;
+                    order.Promotions = PromotionCode;
+                }
                 repository.SaveOrder(order);
                 return RedirectToAction(nameof(Completed));
             }
@@ -165,12 +165,13 @@ namespace ItStore.Controllers
             return View(repository.Orders.OrderBy(q => q.Id));
         }
 
-        public IActionResult OrderForm(string PromotionStatus, string TotalPrice)
+        public IActionResult OrderForm(string? PromotionStatus, decimal? TotalPrice, string? PromotionCode)
         {
-
             ViewBag.TotalPrice = TotalPrice;
             ViewBag.PromotionStatus = PromotionStatus;
-            return View(); //***********************************
+            ViewBag.PromotionCode = PromotionCode;
+            return View();
+
         }
 
         [HttpPost]
@@ -178,7 +179,13 @@ namespace ItStore.Controllers
         {
             Promotion promotion = Data.Promotions.Where(q => q.PromotionCode == PromotionCode).FirstOrDefault();
 
-            if (promotion.Quantity >= 1)
+            if (promotion == null)
+            {
+                string PromotionStatus = "Промокод не найден, обратитесь в поддержку.";
+                decimal TotalPrice = cart.ComputeTotalValue();
+                return RedirectToAction("OrderForm", new { PromotionStatus, TotalPrice });
+            }
+            else if (promotion.Quantity >= 1)
             {
                 promotion.Quantity -= 1;
                 string PromotionStatus = $"Промокод на {promotion.Percentage}% успешно применен";
@@ -187,15 +194,17 @@ namespace ItStore.Controllers
                 int Percent = promotion.Percentage;
                 decimal TotalValue = Convert.ToDecimal(Percent / 100.0);
                 decimal TotalPrice = cart.ComputeTotalValue() - (cart.ComputeTotalValue() * TotalValue);
-                
-                return RedirectToAction("OrderForm", new { PromotionStatus, TotalPrice });
+
+                return RedirectToAction("OrderForm", new { PromotionStatus, TotalPrice, PromotionCode });
             }
             else
             {
                 string PromotionStatus = "Количество промокодов ограничено, к сожалению вы не успели";
                 decimal TotalPrice = cart.ComputeTotalValue();
-                return RedirectToAction("OrderForm", new { PromotionStatus, TotalPrice }); //********************************
+                return RedirectToAction("OrderForm", new { PromotionStatus, TotalPrice });
+
             }
+
         }
 
     }
