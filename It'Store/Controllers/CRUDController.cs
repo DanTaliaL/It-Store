@@ -127,7 +127,7 @@ namespace ItStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult OrderForm(Order order)
+        public IActionResult OrderForm(Order order, string TotalPrice)
         {
             order.Name = User.Identity.Name;
             order.TotalPrice = cart.ComputeTotalValue();
@@ -139,6 +139,10 @@ namespace ItStore.Controllers
             {
 
                 order.Lines = cart.Lines.ToArray();
+                if (TotalPrice !=null)
+                {
+                    order.TotalPrice = Convert.ToDecimal(TotalPrice);
+                }               
                 repository.SaveOrder(order);
                 return RedirectToAction(nameof(Completed));
             }
@@ -146,13 +150,10 @@ namespace ItStore.Controllers
             {
                 return View(order);
             }
-
-            //Data.Orders.Add(order);
-            //Data.SaveChanges();
-            //return RedirectToAction();
         }
-        public IActionResult Completed()
+        public IActionResult Completed(string PromotionStatus)
         {
+            ViewBag.PromotionStatus = PromotionStatus;
             cart.Clear();
             return View(cart);
         }
@@ -164,7 +165,39 @@ namespace ItStore.Controllers
             return View(repository.Orders.OrderBy(q => q.Id));
         }
 
-        public IActionResult OrderForm() => View(new Order());
+        public IActionResult OrderForm(string PromotionStatus, string TotalPrice)
+        {
+
+            ViewBag.TotalPrice = TotalPrice;
+            ViewBag.PromotionStatus = PromotionStatus;
+            return View(); //***********************************
+        }
+
+        [HttpPost]
+        public IActionResult PromotionRemains(string PromotionCode)
+        {
+            Promotion promotion = Data.Promotions.Where(q => q.PromotionCode == PromotionCode).FirstOrDefault();
+
+            if (promotion.Quantity >= 1)
+            {
+                promotion.Quantity -= 1;
+                string PromotionStatus = $"Промокод на {promotion.Percentage}% успешно применен";
+                Data.SaveChanges();
+
+                int Percent = promotion.Percentage;
+                decimal TotalValue = Convert.ToDecimal(Percent / 100.0);
+                decimal TotalPrice = cart.ComputeTotalValue() - (cart.ComputeTotalValue() * TotalValue);
+                
+                return RedirectToAction("OrderForm", new { PromotionStatus, TotalPrice });
+            }
+            else
+            {
+                string PromotionStatus = "Количество промокодов ограничено, к сожалению вы не успели";
+                decimal TotalPrice = cart.ComputeTotalValue();
+                return RedirectToAction("OrderForm", new { PromotionStatus, TotalPrice }); //********************************
+            }
+        }
+
     }
 
     public class ProductController : Controller
@@ -333,6 +366,30 @@ namespace ItStore.Controllers
         }
         public IActionResult Promotion() => View(Data.Promotions);
         public IActionResult PromotionForm() => View();
+
+        public IActionResult PromotionDelete(int Id)
+        {
+            Promotion promotion = Data.Promotions.Where(q => q.Id == Id).FirstOrDefault();
+            Data.Promotions.Remove(promotion);
+            Data.SaveChanges();
+            return RedirectToAction("Promotion");
+        }
+
+        [HttpPost]
+        public IActionResult PromotionUpdate(Promotion promotion, int Id)
+        {
+            Promotion update = Data.Promotions.Where(q => q.Id == Id).FirstOrDefault();
+            update.Percentage = promotion.Percentage;
+            update.Description = promotion.Description;
+            update.Name = promotion.Name;
+            update.Quantity = promotion.Quantity;
+            update.PromotionCode = promotion.PromotionCode;
+            Data.SaveChanges();
+            return RedirectToAction("Promotion");
+        }
+
+        public IActionResult PromotionUpdate(int Id) => View(Data.Promotions.Where(q => q.Id == Id).FirstOrDefault());
+
     }
 
     public class CommentariesController : Controller

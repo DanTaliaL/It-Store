@@ -31,8 +31,8 @@
                             <td>@q.Description</td>
                             <th>@q.PromotionCode</th>
                             <td>
-                                <a asp-action="" asp-route-id="@q.Id" class="btn btn-primary"> Редактировать </a>
-                                <a asp-action="" asp-route-id="@q.Id" class="btn btn-primary"> Удалить </a>
+                                <a asp-action="PromotionUpdate" asp-route-id="@q.Id" class="btn btn-primary"> Редактировать </a>
+                                <a asp-action="PromotionDelete" asp-route-id="@q.Id" class="btn btn-primary"> Удалить </a>
                             </td>
                         </tr>
                     }

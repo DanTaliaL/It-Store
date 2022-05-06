@@ -1,9 +1,23 @@
 ﻿@model Order
-<div class="intro intro__inner container ">
+
+<div class="intro intro__inner container  row-cols-md-4">
+
+    <form asp-action="PromotionRemains" method="post">
+        <input type="hidden" name="TotalPrc" value="@ViewBag.TotalPrice"/>
+        <labl>Промокод</labl>
+        <input name="PromotionCode" />
+        <button type="submit">Активировать</button>
+    </form>
+    <p class="text-white">@ViewBag.TotalPrice</p>
+    @if (ViewBag.PromotionStatus != null)
+    {
+        <p class="text-white">@ViewBag.PromotionStatus</p>
+    }
+
     <form asp-action="OrderForm" method="post">
         <div asp-validation-summary="All" class="text-white"></div>
         <input type="hidden" name="Name" value="@User.Identity.Name" />
-        <input type="hidden" name="TimeOrders" value="@DateTime.Now"/>
+        <input type="hidden" name="TimeOrders" value="@DateTime.Now" />
         <p class="text-white">
             <label asp-for="Street">Улица</label>
             <input class="form-control" asp-for="Street" />
@@ -18,7 +32,8 @@
         </p>
 
         <div>
-            <input type="submit" class="btn" value="Completed Order" />
+            <input type="hidden"  name="TotalPrice" value="@ViewBag.TotalPrice"/>
+            <button type="submit" > Завершить </button>
         </div>
     </form>
 </div>

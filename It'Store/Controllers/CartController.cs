@@ -34,7 +34,7 @@ namespace ItStore.Controllers
                 Cart = cart,
                 Promotion = Data.Promotions,
                 ReturnUrl = returnUrl,
-            });;
+            });
         }
         public IActionResult AddToCart(int Id, string returnUrl)
         {

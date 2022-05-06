@@ -1,15 +1,15 @@
-﻿@{ 
+﻿@{
     Layout = "_AdminLayout";
 }
 @model Promotion
 <div class="container text-center">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
-        Добавление
+        Редактирование
     </div>
 
     <div class="card-body">
-        <form class="text-black" asp-validation-summary="All" asp-action="Promotion" method="post">
+        <form class="text-black" asp-validation-summary="All" asp-action="PromotionUpdate" method="post">
             <table id="datatablesSimple">
                 <thead>
                     <tr>
@@ -17,6 +17,7 @@
                         <th>Процент скидки</th>
                         <th>Количество</th>
                         <th>Описание промокода</th>
+                        <th>Промокод</th>
 
                     </tr>
                 </thead>
@@ -36,6 +37,10 @@
 
                         <td>
                             <input class="form-control" asp-for="Description" />
+                        </td>
+
+                        <td>
+                            <input  class="form-control" asp-for="PromotionCode"/>
                         </td>
                     </tr>
                 </tbody>

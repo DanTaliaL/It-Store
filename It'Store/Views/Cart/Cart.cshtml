@@ -42,7 +42,11 @@
         </tfoot>
     </table>
     <div class="text-center">
-        <a class="btn" href="@Model.ReturnUrl">Назад</a>
-        <a class="btn" asp-action="OrderForm" asp-controller="Order">Заказать</a>
+        <form asp-action="OrderForm" asp-controller="Order" method="get">
+            <a class="btn" href="@Model.ReturnUrl">Назад</a>
+            <button class="btn" type="submit" name="TotalPrice" value="@ViewBag.TotalPrice">Заказать</button>
+        </form>
+        @*<a class="btn" href="@Model.ReturnUrl">Назад</a>
+        <a class="btn" asp-action="OrderForm" asp-route-TotalPrice="@ViewBag.TotalPrice" asp-controller="Order">Заказать</a>*@
     </div>
 </div>
