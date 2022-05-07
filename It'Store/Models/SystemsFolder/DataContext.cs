@@ -23,14 +23,25 @@ namespace ItStore.Models
         public DbSet<CartLine> CartLine { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Commentaries> Comments { get; set; }
+        public DbSet<ProductQuantity> ProductsQuantity { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Product>()
+            builder.Entity<ProductQuantity>()
+                .HasOne(q => q.Product)
+                .WithMany(q => q.ProductQuantity)
+                .HasForeignKey(q => q.ProductId);
+
+            builder.Entity<ProductQuantity>()
                 .HasOne(q => q.WareHouse)
-                .WithMany(q => q.Products)
+                .WithMany(q => q.ProductQuantities)
                 .HasForeignKey(q => q.WareHouseId);
+                
+                
+                
+                 
+
 
             builder.Entity<Request>()
                 .HasMany(q => q.Suppliers)

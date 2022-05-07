@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model IEnumerable<ItStore.Models.DataFolder.ProductQuantity>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Таблица товара
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Наименование продукта</th>
+                    <th>Количество</th>
+                    <th>Наименование Склада</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var q in Model)
+                    {
+                        <tr>
+                            <td>@q.Product.Name</td>
+                            <td>@q.Quantity</td>
+                            <td>@q.WareHouse.Name</td>
+                            <td>
+                                <a asp-controller="Product" asp-action="Product" asp-route-ProdId="@q.Id" class="btn btn-primary"> Подробнее о продукте </a>
+                                <a asp-action="ProductQuantityUpdate" asp-route-id="@q.Id" class="btn btn-primary"> Редактировать </a>
+                                <a asp-action="ProductQuantityDelete" asp-route-id="@q.Id" class="btn btn-primary"> Удалить </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <a class="btn btn-primary text-center" asp-controller="ProductQuantity" asp-action="ProductQuantityForm">Добавить информацию о количестве продукта</a>
+    </div>
+</div>

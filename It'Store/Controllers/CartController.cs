@@ -15,20 +15,8 @@ namespace ItStore.Controllers
             cart = cartService;
         }
 
-        public IActionResult Cart(string returnUrl, string PromotionCode)
+        public IActionResult Cart(string returnUrl)
         {
-            Promotion promotion = Data.Promotions.Where(q=>q.PromotionCode == PromotionCode).FirstOrDefault();
-            if (promotion !=null)
-            {
-                int Percent = promotion.Percentage;
-                decimal TotalValue =  Convert.ToDecimal(Percent / 100.0);
-                decimal TotalPrice = cart.ComputeTotalValue() - (cart.ComputeTotalValue() * TotalValue);
-                ViewBag.TotalPrice = TotalPrice;
-            }
-            else
-            {
-                ViewBag.TotalPrice = cart.ComputeTotalValue();
-            }
             return View(new CartIndexViewModel
             {
                 Cart = cart,

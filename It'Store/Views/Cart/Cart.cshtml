@@ -1,12 +1,6 @@
 ﻿@model CartIndexViewModel
 <div class="intro text-white container">
-    <h2>Корзина</h2>
-    <form asp-action="Cart">
-        <labl>Промокод</labl>
-        <input name="PromotionCode" />
-        <button type="submit">Активировать</button>
-    </form>
-    
+    <h2>Корзина</h2>    
     <table class="table text-white">
         <tr>
             <td>Количество</td>
@@ -35,7 +29,7 @@
             <tr>
                 <td colspan="3" class="text-right">Итого</td>
                 <td class="text-right">
-                   @ViewBag.TotalPrice ₽
+                   @Model.Cart.ComputeTotalValue().ToString() ₽
                 </td>
                 <td></td>
             </tr>
@@ -44,9 +38,9 @@
     <div class="text-center">
         <form asp-action="OrderForm" asp-controller="Order" method="get">
             <a class="btn" href="@Model.ReturnUrl">Назад</a>
-            <button class="btn" type="submit" name="TotalPrice" value="@ViewBag.TotalPrice">Заказать</button>
+            <input type="hidden" name="ProductName" value="@foreach (var q in Model.Cart.Lines){@q.Product.Name}"/>
+            <input type="hidden" name="ProductQuantity" value="@foreach (var q in Model.Cart.Lines){@q.Quantity}"/>
+            <button class="btn" type="submit" name="TotalPrice" value="@Model.Cart.ComputeTotalValue()">Заказать</button>
         </form>
-        @*<a class="btn" href="@Model.ReturnUrl">Назад</a>
-        <a class="btn" asp-action="OrderForm" asp-route-TotalPrice="@ViewBag.TotalPrice" asp-controller="Order">Заказать</a>*@
     </div>
 </div>

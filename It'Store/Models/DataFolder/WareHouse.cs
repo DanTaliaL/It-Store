@@ -7,6 +7,7 @@ namespace ItStore.Models.DataFolder
         public string Name { get; set; }
         public string Adress { get; set; }
 
-       public List<Product> Products { get; set; }
+        public List<ProductQuantity> ProductQuantities { get; set; }
+        public List<Product> Product { get; set; }
     }
 }

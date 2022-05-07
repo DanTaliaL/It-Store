@@ -5,6 +5,7 @@
 
 
     <p class="text-white">Сумма заказа составляет @ViewBag.TotalPrice</p>
+
     @if (ViewBag.PromotionStatus != null)
     {
         <p class="text-white">@ViewBag.PromotionStatus</p>
@@ -30,6 +31,8 @@
         <div>
             <input type="hidden" name="TotalPrice" value="@ViewBag.TotalPrice" />
             <input type="hidden" name="PromotionCode" value="@ViewBag.PromotionCode" />
+            <input type="hidden" name="ProdName" value="@ViewBag.ProductName"/>
+            <input type="hidden" name="ProdQuantity" value="@ViewBag.ProductQuantity"/>
             <button class="btn" type="submit"> Завершить </button>
         </div>
     </form>

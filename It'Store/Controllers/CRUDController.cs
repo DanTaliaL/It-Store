@@ -127,8 +127,20 @@ namespace ItStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult OrderForm(Order order, decimal TotalPrice, string? PromotionCode)
+        public IActionResult OrderForm(Order order, decimal TotalPrice, string? PromotionCode, string ProdName, int ProdQuantity)
         {
+
+            Product product = Data.Products.FirstOrDefault(p => p.Name == ProdName);
+            //if (product.>=ProdQuantity)
+            //{
+            //    product. -= ProdQuantity;
+            //    Data.SaveChanges();
+            //}
+            //else
+            //{
+            //    ModelState.AddModelError("", $"Приносим свои извенения,{product.Name} осталось всего {product.}") ;
+            //}
+
             order.Name = User.Identity.Name;
             order.TotalPrice = cart.ComputeTotalValue();
             if (cart.Lines.Count() == 0)
@@ -165,11 +177,13 @@ namespace ItStore.Controllers
             return View(repository.Orders.OrderBy(q => q.Id));
         }
 
-        public IActionResult OrderForm(string? PromotionStatus, decimal? TotalPrice, string? PromotionCode)
+        public IActionResult OrderForm(string? PromotionStatus, decimal? TotalPrice, string? PromotionCode, string ProductName, int ProductQuantity)
         {
             ViewBag.TotalPrice = TotalPrice;
             ViewBag.PromotionStatus = PromotionStatus;
             ViewBag.PromotionCode = PromotionCode;
+            ViewBag.ProductName = ProductName;
+            ViewBag.ProductQuantity = ProductQuantity;
             return View();
 
         }
@@ -238,15 +252,22 @@ namespace ItStore.Controllers
 
         }
 
-        public IActionResult Product()
+        public IActionResult Product(int? Id)
         {
-            IQueryable<Product> products = Data.Products
-                .Include(q => q.Categories)
-                .Include(q => q.WareHouse)
-                .Include(q => q.Options)
-                .Include(q => q.Suppliers)
-                .Include(q => q.Orders);
-            return View(Data.Products.OrderBy(q => q.Id));
+            if (Id != null)
+            {
+                return View(Data.Products.Where(q => q.Id == Id));
+            }
+            else
+            {
+                IQueryable<Product> products = Data.Products
+                  .Include(q => q.Categories)
+                  .Include(q => q.Options)
+                  .Include(q => q.Suppliers)
+                  .Include(q => q.Orders);
+                return View(Data.Products.OrderBy(q => q.Id));
+            }
+
         }
 
         [HttpPost]
@@ -281,7 +302,6 @@ namespace ItStore.Controllers
             update.Price = product.Price;
             update.Model = product.Model;
             update.Categories = product.Categories;
-            update.WareHouseId = product.WareHouseId;
             byte[] ImageData = ConvertToBytes(file);
             update.Image = ImageData;
             Data.SaveChanges();
@@ -338,6 +358,48 @@ namespace ItStore.Controllers
         public IActionResult SupplierForm() => View();
     }
 
+    public class ProductQuantityController : Controller
+    {
+        private DataContext Data { get; set; }
+        public ProductQuantityController(DataContext DC) => Data = DC;
+
+        [HttpPost]
+        public IActionResult ProductQuantity(ProductQuantity productQuantity)
+        {
+            Data.ProductsQuantity.Add(productQuantity);
+            Data.SaveChanges();
+            return RedirectToAction();
+        }
+        public IActionResult ProductQuantity()
+        {
+            IQueryable<ProductQuantity> products = Data.ProductsQuantity
+                .Include(q => q.WareHouse)
+                .Include(q => q.Product);
+            return View(products.OrderBy(q => q.Id));
+        }
+
+        public IActionResult ProductQuantityDelete(int Id)
+        {
+            ProductQuantity productQuantity = Data.ProductsQuantity.FirstOrDefault(q => q.Id == Id);
+            Data.ProductsQuantity.Remove(productQuantity);
+            Data.SaveChanges();
+            return RedirectToAction("ProductQuantity");
+        }
+
+        public IActionResult ProductQuantityForm() => View();
+
+        [HttpPost]
+        public IActionResult ProductQuantityUpdate(ProductQuantity productQuantity, int Id)
+        {
+            ProductQuantity update = Data.ProductsQuantity.FirstOrDefault(q => q.Id == Id);
+            update.Quantity = productQuantity.Quantity;
+            update.ProductId = productQuantity.ProductId;
+            Data.SaveChanges();
+            return RedirectToAction("ProductQuantity");
+        }
+        public IActionResult ProductQuantityUpdate(int Id) => View(Data.ProductsQuantity.FirstOrDefault(q => q.Id == Id));
+    }
+
     public class WareHouseController : Controller
     {
         private DataContext Data { get; set; }
@@ -354,8 +416,9 @@ namespace ItStore.Controllers
         public IActionResult WareHouse()
         {
             IQueryable<WareHouse> warehouses = Data.WareHouse
-                .Include(q => q.Products);
-            return View(Data.WareHouse.OrderBy(q => q.Id));
+                .Include(q => q.ProductQuantities);
+                
+            return View(warehouses.OrderBy(q => q.Id));
         }
 
         public IActionResult WareHouseForm() => View();

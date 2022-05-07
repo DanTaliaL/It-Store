@@ -370,7 +370,7 @@ namespace ItStore.Migrations
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Categories = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    WareHouseId = table.Column<int>(type: "int", nullable: false)
+                    WareHouseId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -379,8 +379,7 @@ namespace ItStore.Migrations
                         name: "FK_Products_WareHouse_WareHouseId",
                         column: x => x.WareHouseId,
                         principalTable: "WareHouse",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -496,6 +495,33 @@ namespace ItStore.Migrations
                         name: "FK_OrderProduct_Products_ProductsId",
                         column: x => x.ProductsId,
                         principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductsQuantity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    WareHouseId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductsQuantity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductsQuantity_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductsQuantity_WareHouse_WareHouseId",
+                        column: x => x.WareHouseId,
+                        principalTable: "WareHouse",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -662,6 +688,16 @@ namespace ItStore.Migrations
                 column: "WareHouseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductsQuantity_ProductId",
+                table: "ProductsQuantity",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductsQuantity_WareHouseId",
+                table: "ProductsQuantity",
+                column: "WareHouseId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RequestHistory_RequestsId",
                 table: "RequestHistory",
                 column: "RequestsId");
@@ -720,6 +756,9 @@ namespace ItStore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Pictures");
+
+            migrationBuilder.DropTable(
+                name: "ProductsQuantity");
 
             migrationBuilder.DropTable(
                 name: "RequestHistory");

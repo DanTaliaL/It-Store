@@ -24,8 +24,8 @@ namespace ItStore.Models.DataFolder
 
         public void SaveOrder(Order order)
         {
-            Data.AttachRange(order.Lines.Select(q=>q.Product));
-            if (order.Id==0)
+            Data.AttachRange(order.Lines.Select(q => q.Product));          
+            if (order.Id == 0)
             {
                 Data.Orders.Add(order);
             }

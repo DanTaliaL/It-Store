@@ -25,6 +25,7 @@ builder.Services.AddSession();
 builder.Services.AddTransient<IOrderRepository, EFOrderRepository>();
 builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
 builder.Services.AddScoped<ChartViewModel>();
+builder.Services.AddScoped<Product>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();

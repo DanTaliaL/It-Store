@@ -398,7 +398,7 @@ namespace ItStore.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("WareHouseId")
+                    b.Property<int?>("WareHouseId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -406,6 +406,32 @@ namespace ItStore.Migrations
                     b.HasIndex("WareHouseId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("ItStore.Models.DataFolder.ProductQuantity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WareHouseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("WareHouseId");
+
+                    b.ToTable("ProductsQuantity");
                 });
 
             modelBuilder.Entity("ItStore.Models.DataFolder.Promotion", b =>
@@ -803,11 +829,26 @@ namespace ItStore.Migrations
 
             modelBuilder.Entity("ItStore.Models.DataFolder.Product", b =>
                 {
+                    b.HasOne("ItStore.Models.DataFolder.WareHouse", null)
+                        .WithMany("Product")
+                        .HasForeignKey("WareHouseId");
+                });
+
+            modelBuilder.Entity("ItStore.Models.DataFolder.ProductQuantity", b =>
+                {
+                    b.HasOne("ItStore.Models.DataFolder.Product", "Product")
+                        .WithMany("ProductQuantity")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ItStore.Models.DataFolder.WareHouse", "WareHouse")
-                        .WithMany("Products")
+                        .WithMany("ProductQuantities")
                         .HasForeignKey("WareHouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Product");
 
                     b.Navigation("WareHouse");
                 });
@@ -960,12 +1001,16 @@ namespace ItStore.Migrations
 
                     b.Navigation("Options");
 
+                    b.Navigation("ProductQuantity");
+
                     b.Navigation("Suppliers");
                 });
 
             modelBuilder.Entity("ItStore.Models.DataFolder.WareHouse", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Product");
+
+                    b.Navigation("ProductQuantities");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,31 +2,31 @@
     Layout = "_AdminLayout";
 }
 
-@model ItStore.Models.DataFolder.WareHouse
+@model ItStore.Models.DataFolder.ProductQuantity
 
 
 <div class="container text-center">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
-        Добавление склада
+        Добавление
     </div>
 
     <div class="card-body">
-        <form class="text-black" asp-validation-summary="All" asp-action="WareHouse" method="post">
+        <form class="text-black" asp-validation-summary="All" asp-action="ProductQuantity" method="post">
             <table id="datatablesSimple">
                 <thead>
                     <tr>
-                        <th>Наименование</th>
-                        <th>Адресс</th>
-
+                        <th>Количество</th>
+                        <th>Наименование продукта</th>
+                        <th>Наименование склада</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>
-                            <input class="form-control" asp-for="Name" />
-                        </td>
-                        <td>
-                            <input class="form-control" asp-for="Adress" />
+                            <input class="form-control" asp-for="Quantity" />
+                            <input class="form-control" asp-for="ProductId"/>
+                            <input class="form-control" asp-for="WareHouseId"/>
                         </td>
                     </tr>
                 </tbody>
