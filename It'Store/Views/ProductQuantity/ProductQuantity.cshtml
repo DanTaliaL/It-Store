@@ -13,8 +13,13 @@
             <thead>
                 <tr>
                     <th>Наименование продукта</th>
+                    <th>Модель</th>
+                    <th>Категория</th>
+                    <th>Цена</th>
                     <th>Количество</th>
                     <th>Наименование Склада</th>
+                    <th>Управление продуктом</th>
+                    <th>Управление данными склада о продукте</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,10 +28,17 @@
                     {
                         <tr>
                             <td>@q.Product.Name</td>
+                            <td>@q.Product.Model</td>
+                            <td>@q.Product.Categories</td>
+                            <td>@q.Product.Price</td>
                             <td>@q.Quantity</td>
                             <td>@q.WareHouse.Name</td>
                             <td>
-                                <a asp-controller="Product" asp-action="Product" asp-route-ProdId="@q.Id" class="btn btn-primary"> Подробнее о продукте </a>
+                                <a asp-controller="Options" asp-action="Options" asp-route-ProdId="@q.Product.Id" class="btn btn-primary"> Технические характеристики </a>
+                                <a asp-controller="Product" asp-action="ProductUpdate" asp-route-id="@q.Product.Id" class="btn btn-primary"> Редактировать </a>
+                                <a asp-controller="Product" asp-action="ProductDelete" asp-route-id="@q.Product.Id" class="btn btn-primary"> Удалить </a>
+                            </td>
+                            <td>
                                 <a asp-action="ProductQuantityUpdate" asp-route-id="@q.Id" class="btn btn-primary"> Редактировать </a>
                                 <a asp-action="ProductQuantityDelete" asp-route-id="@q.Id" class="btn btn-primary"> Удалить </a>
                             </td>
@@ -35,6 +47,6 @@
                 }
             </tbody>
         </table>
-        <a class="btn btn-primary text-center" asp-controller="ProductQuantity" asp-action="ProductQuantityForm">Добавить информацию о количестве продукта</a>
+        <a class="btn btn-primary text-center" asp-controller="WareHouse" asp-action="WareHouse">Назад</a>
     </div>
 </div>

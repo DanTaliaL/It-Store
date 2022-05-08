@@ -1,48 +1,50 @@
 ﻿@{
     Layout = "_AdminLayout";
 }
-@model IEnumerable<ItStore.Models.DataFolder.WareHouse>
+@model IEnumerable<ItStore.Models.DataFolder.ProductQuantity>
 
 
 <a class="btn btn-primary text-center" asp-controller="WareHouse" asp-action="WareHouseForm">Добавить склад</a>
 <div class="card mb-4">
-    @foreach (var q in Model)
-    {
-
+      
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            <span>Наименование склада: @q.Name</span> <span>Адресс: @q.Adress</span>
+            <p>Информация товара на складе</p>
         </div>
         <div class="card-body">
-            <table id="datatablesSimple">
+            <table class="table" id="datatablesSimple">
                 <thead>
                     <tr>
-                        <th>Наименование</th>
-                        <th>Количество</th>
-                        <th>Продукты</th>
+                        <th>Наименование склада</th>
+                        <th>Адресс склада</th>
+                        <th>Наименование продукта</th>
+                        <th>Модель продукта</th>
+                        <th>Количество продукта</th>
+                        <th>Упрвление продукта</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var prodqiantity in q.ProductQuantities)
+                    @foreach (var productQuantity in Model.OrderBy(q => q.WareHouseId))
                     {
-                        @foreach (var Product in q.Product)
-                        {
 
-                            <tr>
-                                <td>@Product.Name</td>
-                                <td>@prodqiantity.Quantity</td>
-                                <td>
-                                    <a asp-controller="Product" asp-action="Product" asp-route-ProdId="@Product.Id" class="btn btn-primary"> Подробнее о продукте </a>
-                                    <a asp-action="ProductQuantityUpdate" asp-route-id="@prodqiantity.Id" class="btn btn-primary"> Редактировать кол-во на складе </a>
-                                    <a asp-action="" asp-route-id="@q.Id" class="btn btn-primary"> Удалить запись о количестве yyy </a>
-                                </td>
-                            </tr>
-                        }
+                        <tr>
+                            <td><b>@productQuantity.WareHouse.Name</b></td>
+                            <td>@productQuantity.WareHouse.Adress</td>
+                            <td>@productQuantity.Product.Name</td>
+                            <td>@productQuantity.Product.Model</td>
+                            <td>@productQuantity.Quantity</td>
+                            <td>
+                                <a asp-controller="ProductQuantity" asp-action="ProductQuantity" asp-route-ProdId="@productQuantity.Product.Id" class="btn btn-primary"> Подробнее о продукте </a>
+                                <a asp-action="ProductQuantityUpdate" asp-route-id="@productQuantity.Id" class="btn btn-primary"> Редактировать кол-во</a>
+                                <a asp-action="" asp-route-id="@productQuantity.WareHouse.Id" class="btn btn-primary"> Удалить запись </a>
+                            </td>
+                        </tr>
+
                     }
                 </tbody>
-            </table>
+                </table>
             <a class="btn btn-primary text-center" asp-controller="ProductQuantity" asp-action="ProductQuantityForm">Добавить информацию о количестве продукта</a>
         </div>
-    }
+
 
 </div>

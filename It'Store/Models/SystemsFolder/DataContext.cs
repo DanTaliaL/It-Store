@@ -37,9 +37,7 @@ namespace ItStore.Models
                 .HasOne(q => q.WareHouse)
                 .WithMany(q => q.ProductQuantities)
                 .HasForeignKey(q => q.WareHouseId);
-                
-                
-                
+              
                  
 
 

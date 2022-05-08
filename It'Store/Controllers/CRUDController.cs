@@ -130,7 +130,7 @@ namespace ItStore.Controllers
         public IActionResult OrderForm(Order order, decimal TotalPrice, string? PromotionCode, string ProdName, int ProdQuantity)
         {
 
-            Product product = Data.Products.FirstOrDefault(p => p.Name == ProdName);
+            //ProductQuantity product = Data.ProductsQuantity.FirstOrDefault(p => p.Name == ProdName);
             //if (product.>=ProdQuantity)
             //{
             //    product. -= ProdQuantity;
@@ -264,7 +264,8 @@ namespace ItStore.Controllers
                   .Include(q => q.Categories)
                   .Include(q => q.Options)
                   .Include(q => q.Suppliers)
-                  .Include(q => q.Orders);
+                  .Include(q => q.Orders)
+                  .Include(q => q.ProductQuantity);
                 return View(Data.Products.OrderBy(q => q.Id));
             }
 
@@ -370,12 +371,23 @@ namespace ItStore.Controllers
             Data.SaveChanges();
             return RedirectToAction();
         }
-        public IActionResult ProductQuantity()
+        public IActionResult ProductQuantity(int? ProdId)
         {
-            IQueryable<ProductQuantity> products = Data.ProductsQuantity
-                .Include(q => q.WareHouse)
-                .Include(q => q.Product);
-            return View(products.OrderBy(q => q.Id));
+            if (ProdId != null)
+            {
+                IQueryable<ProductQuantity> products = Data.ProductsQuantity.Where(products => products.ProductId == ProdId)
+                    .Include(q => q.Product)
+                    .Include(q=>q.WareHouse);
+                return View(products);
+            }
+            else
+            {
+                IQueryable<ProductQuantity> products = Data.ProductsQuantity
+                  .Include(q => q.WareHouse)
+                  .Include(q => q.Product);
+                return View(products.OrderBy(q => q.Id));
+            }
+
         }
 
         public IActionResult ProductQuantityDelete(int Id)
@@ -415,10 +427,11 @@ namespace ItStore.Controllers
 
         public IActionResult WareHouse()
         {
-            IQueryable<WareHouse> warehouses = Data.WareHouse
-                .Include(q => q.ProductQuantities);
-                
-            return View(warehouses.OrderBy(q => q.Id));
+            IQueryable<ProductQuantity> products = Data.ProductsQuantity
+                .Include(q => q.WareHouse)
+                .Include(q => q.Product);
+
+            return View(products.OrderBy(q => q.Id));
         }
 
         public IActionResult WareHouseForm() => View();

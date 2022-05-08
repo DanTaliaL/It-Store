@@ -79,6 +79,7 @@ namespace ItStore.Controllers
             ViewBag.Name = ProdName;
             var Result = new ProductCartViewModel
             {
+                
                 Products = Data.Products.Where(q => q.Id == ProdId),
                 Pictures = Data.Pictures.Where(q => q.Name == ProdName),
                 Options = Data.Options.Where(q => q.ProductId == ProdId),

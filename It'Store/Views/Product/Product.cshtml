@@ -15,7 +15,7 @@
                         <th>Наименование</th>
                         <th>Цена</th>
                         <th>Модель</th>
-                        <th>Количество</th>
+                        <th>Категория</th>
                         <th>Управление</th>
                     </tr>
                 </thead>
@@ -27,7 +27,7 @@
                                 <td>@q.Name</td>
                                 <td>@q.Price</td>
                                 <td>@q.Model</td>
-                                <td> </td>
+                                <td>@q.Categories</td>
                                 <td>
                                     <a asp-controller="Options" asp-action="Options" asp-route-ProdId="@q.Id" class="btn btn-primary"> Технические характеристики </a>
                                     <a asp-action="ProductUpdate" asp-route-id="@q.Id" class="btn btn-primary"> Редактировать </a>
