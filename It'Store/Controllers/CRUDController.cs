@@ -127,20 +127,8 @@ namespace ItStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult OrderForm(Order order, decimal TotalPrice, string? PromotionCode, string ProdName, int ProdQuantity)
-        {
-
-            //ProductQuantity product = Data.ProductsQuantity.FirstOrDefault(p => p.Name == ProdName);
-            //if (product.>=ProdQuantity)
-            //{
-            //    product. -= ProdQuantity;
-            //    Data.SaveChanges();
-            //}
-            //else
-            //{
-            //    ModelState.AddModelError("", $"Приносим свои извенения,{product.Name} осталось всего {product.}") ;
-            //}
-
+        public IActionResult OrderForm(Order order, decimal TotalPrice, string? PromotionCode)
+        {                      
             order.Name = User.Identity.Name;
             order.TotalPrice = cart.ComputeTotalValue();
             if (cart.Lines.Count() == 0)
@@ -149,12 +137,26 @@ namespace ItStore.Controllers
             }
             if (ModelState.IsValid)
             {
+                foreach (var q in cart.Lines)
+                {
+                    ProductQuantity product = Data.ProductsQuantity.FirstOrDefault(p => p.Product.Name == q.Product.Name);
+                    if (product.Quantity >= q.Quantity)
+                    {
+                        product.Quantity -= q.Quantity;                       
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", $"Приносим свои извенения,{q.Product.Name} осталось всего {product.Quantity}");
+                        return View(order);
+                    }
+                }
                 order.Lines = cart.Lines.ToArray();
                 if (TotalPrice != null)
                 {
                     order.TotalPrice = TotalPrice;
                     order.Promotions = PromotionCode;
                 }
+                Data.SaveChanges();
                 repository.SaveOrder(order);
                 return RedirectToAction(nameof(Completed));
             }
@@ -177,13 +179,11 @@ namespace ItStore.Controllers
             return View(repository.Orders.OrderBy(q => q.Id));
         }
 
-        public IActionResult OrderForm(string? PromotionStatus, decimal? TotalPrice, string? PromotionCode, string ProductName, int ProductQuantity)
+        public IActionResult OrderForm(string? PromotionStatus, decimal? TotalPrice, string? PromotionCode)
         {
             ViewBag.TotalPrice = TotalPrice;
             ViewBag.PromotionStatus = PromotionStatus;
             ViewBag.PromotionCode = PromotionCode;
-            ViewBag.ProductName = ProductName;
-            ViewBag.ProductQuantity = ProductQuantity;
             return View();
 
         }
@@ -227,7 +227,7 @@ namespace ItStore.Controllers
     {
         private DataContext Data { get; set; }
         public ProductController(DataContext DC) => Data = DC;
-        public int PageSize = 4;
+        //public int PageSize = 4;
 
         //for Image
         private byte[] ConvertToBytes(IFormFile file)
@@ -377,7 +377,7 @@ namespace ItStore.Controllers
             {
                 IQueryable<ProductQuantity> products = Data.ProductsQuantity.Where(products => products.ProductId == ProdId)
                     .Include(q => q.Product)
-                    .Include(q=>q.WareHouse);
+                    .Include(q => q.WareHouse);
                 return View(products);
             }
             else
@@ -409,7 +409,12 @@ namespace ItStore.Controllers
             Data.SaveChanges();
             return RedirectToAction("ProductQuantity");
         }
-        public IActionResult ProductQuantityUpdate(int Id) => View(Data.ProductsQuantity.FirstOrDefault(q => q.Id == Id));
+        public IActionResult ProductQuantityUpdate(int Id)
+        {
+            ViewBag.Id = Id;
+          return View(Data.ProductsQuantity.FirstOrDefault(q => q.Id == Id));
+        }
+        
     }
 
     public class WareHouseController : Controller

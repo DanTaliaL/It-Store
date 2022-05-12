@@ -35,7 +35,7 @@
                             <td>@productQuantity.Quantity</td>
                             <td>
                                 <a asp-controller="ProductQuantity" asp-action="ProductQuantity" asp-route-ProdId="@productQuantity.Product.Id" class="btn btn-primary"> Подробнее о продукте </a>
-                                <a asp-action="ProductQuantityUpdate" asp-route-id="@productQuantity.Id" class="btn btn-primary"> Редактировать кол-во</a>
+                                <a asp-controller="ProductQuantity" asp-action="ProductQuantityUpdate" asp-route-id="@productQuantity.Id" class="btn btn-primary"> Редактировать кол-во</a>
                                 <a asp-action="" asp-route-id="@productQuantity.WareHouse.Id" class="btn btn-primary"> Удалить запись </a>
                             </td>
                         </tr>
