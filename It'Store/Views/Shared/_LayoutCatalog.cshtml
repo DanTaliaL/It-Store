@@ -84,14 +84,14 @@
             <div class="container">
                 <div class="row m-1 p-1 text-white ">
                     <div class="col-2">
-                        <div id="categories" class="intro">
+                        <div id="categories" class="intro col">
                             @await Component.InvokeAsync("NavigationMenu")
                         </div>
-                        <div id="productmodel" class="intro">
+                        <div id="productmodel" class="intro col">
                             @await Component.InvokeAsync("NavigationModelMenu")
                         </div>
                     </div>
-                    <div class="col-9">
+                    <div class="col">
                         @RenderBody()
                     </div>
                 </div>

@@ -27,9 +27,9 @@ a:hover {
 
 .banner {
     padding-top: 5%;
-    padding-bottom:2%;
+    padding-bottom: 2%;
     width: 100%;
-    height:75%;
+    height: 75%;
     min-height: 10rem;
 }
 
@@ -112,6 +112,7 @@ a:hover {
     z-index: 100;
     background-color: #121212;
 }
+
     .header a {
         font-family: Montserrat;
         font-style: normal;
@@ -119,20 +120,21 @@ a:hover {
         font-size: 15px;
     }
 
-    .button{
-        border:none;
-        background:none;
-        opacity:70%;
-    }
-    .button:hover{
-        opacity:1;
+.button {
+    border: none;
+    background: none;
+    opacity: 70%;
+}
+
+    .button:hover {
+        opacity: 1;
     }
 
 
 .modal__button {
     display: flex;
     color: black;
-    background:none;
+    background: none;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -150,13 +152,16 @@ a:hover {
     opacity: 0.70;
     transition: opacity .1s linear;
 }
-.modal__button{
-    opacity:1;
+
+.modal__button {
+    opacity: 1;
 }
-.button__none{
-    border:none;
-    background:none;
+
+.button__none {
+    border: none;
+    background: none;
 }
+
 .b-example-divider {
     height: 3rem;
     background-color: rgba(0, 0, 0, .1);
@@ -210,6 +215,7 @@ a:hover {
 /*intro
     ================
 */
+
 .intro {
     height: auto;
     padding-top: 20px;
@@ -228,10 +234,10 @@ a:hover {
     position: absolute;
     margin-left: 1001px;
     margin-top: 458px;
-    opacity:55%;
+    opacity: 55%;
     background: #6100ff;
     box-shadow: 0px 0px 250px 250px #380080;
-    z-index:-1;
+    z-index: -1;
 }
 
 
@@ -291,12 +297,64 @@ a:hover {
 /*catalog style
     ================
 */
+.dropdown {
+    display: contents;
+}
+.dropdown-item{
+
+}
+.dropdown-item:hover{
+    background-color:rebeccapurple;
+}
+.info h4 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    margin-left: 5%;
+}
 
 .product {
     margin-bottom: 30px;
-    background-color: #121212;
     box-shadow: 8px 3px 13px rgba(0, 0, 0, 0.26);
     border-radius: 15px;
+    background-color: #121212;
+    opacity:0.85;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+    .product button {
+        text-align: left;
+        opacity:90%;
+    }
+    .product button:hover{
+        opacity:1;
+    }
+
+.intro__image__right {
+    position: absolute;
+    z-index:-1;
+    opacity: 60%;
+    right: 45%;
+    margin-top: -10%;
+}
+
+.intro__image__left {
+    position: absolute;
+    opacity: 55%;
+    right: 0%;
+    margin-top: 11%;
+}
+
+.intro__mostpopular {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 33px;
+    line-height: 153.9%;
+
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #FFFFFF;
 }
 
 .elipse__right__catalog {
@@ -305,8 +363,8 @@ a:hover {
     margin-top: 458px;
     background: #6100ff;
     box-shadow: 0px 0px 250px 250px #380080;
-    opacity: 20%;
-    z-index:-1;
+    opacity: 30%;
+    z-index: -1;
 }
 
 .elipse__left__catalog {
@@ -315,8 +373,8 @@ a:hover {
     margin-top: 135px;
     background: #6100FF;
     box-shadow: 0px 0px 250px 100px #5b00a3;
-    opacity: 20%;
-    z-index:-1;
+    opacity: 40%;
+    z-index: -1;
 }
 
 .image__catalog {
@@ -325,23 +383,37 @@ a:hover {
     object-fit: cover;
     border-radius: 7px;
     margin-bottom: 10px;
+    text-align: -webkit-center;
+    white-space: pre-line;
 }
 
 .info h3 {
-    font-size: 21px;
-    margin-bottom: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    position: absolute;
+    width: 286.41px;
+    height: 47.67px;
+    margin-left:5%;
 }
 
 .catalog__price {
+    margin-left:5%;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+    color:white
 }
 
 .price {
-    font-weight: 300;
-    font-size: 18px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
 }
 
 .btn__catalog {
@@ -351,8 +423,8 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #0a325c;
-    color: white;
+    background-color: #121212;
+    color: none;
     border-radius: 10px;
     z-index: 2;
 }
@@ -399,11 +471,41 @@ btn__pagin, .btn__pagin:hover {
     text-align: -webkit-center;
 }
 
+/*About us*********************************************/
 
+.aboutus__intro {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 33px;
+    line-height: 153.9%;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #FFFFFF;
+}
+
+.aboutus p {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 170%;
+    color: #AEAEAE;
+}
+
+.product__link__catalog {
+    border: none;
+    background: none;
+    width: 100%;
+    height:70%;
+    /*white-space: pre-wrap;*/
+}
 
 .product__link {
     border: none;
     background: none;
+    width:100%;
+    /*min-inline-size: -webkit-fill-available;*/
+    white-space: pre-wrap;
 }
 
 .product__cart {
@@ -478,9 +580,9 @@ btn__pagin, .btn__pagin:hover {
     margin-left: 60px;
 }
 
-.comment__border{
-    border:1px;
-    border-color:white;
+.comment__border {
+    border: 1px;
+    border-color: white;
 }
 
 .comments .comment img {
@@ -496,9 +598,8 @@ btn__pagin, .btn__pagin:hover {
     }
 
 .scrol {
-    overflow-y:scroll;
-    height:15rem;
-    
+    overflow-y: scroll;
+    height: 15rem;
 }
 
 .section {
@@ -509,26 +610,27 @@ btn__pagin, .btn__pagin:hover {
     scrollbar-color: #d4aa70 #e4e4e4;
     scrollbar-width: thin;
 }
-.section p{
-    margin-top: 1rem;
-}
+
+    .section p {
+        margin-top: 1rem;
+    }
 
 
-.section::-webkit-scrollbar {
-    width: 20px;
-}
+    .section::-webkit-scrollbar {
+        width: 20px;
+    }
 
-.section::-webkit-scrollbar-track {
-    background-color: #e4e4e4;
-    border-radius: 100px;
-}
+    .section::-webkit-scrollbar-track {
+        background-color: #e4e4e4;
+        border-radius: 100px;
+    }
 
-.section::-webkit-scrollbar-thumb {
-    border-radius: 100px;
-    border: 5px solid transparent;
-    background-clip: content-box;
-    background-color: #8070d4;
-}
+    .section::-webkit-scrollbar-thumb {
+        border-radius: 100px;
+        border: 5px solid transparent;
+        background-clip: content-box;
+        background-color: #8070d4;
+    }
 
 /*Footer*/
 

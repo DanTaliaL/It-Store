@@ -2,26 +2,29 @@
 
     <div class="col-md-3">
         <div class="product">
-            <div class="image__catalog">
-                @Html.Raw("<img style='width:209px; height:210px;' src=\"data:image/jpeg;base64,"
-                                        + Convert.ToBase64String(Model.Image) + "\" />")
-            </div>
             <div class="info">
                 <form asp-controller="Catalog" asp-action="ProductCart" id="@Model.Id" method="get">
                     <input type="hidden" name="ProdId" value="@Model.Id" />
-                    <input type="hidden" name="ProdName" value="@Model.Name"/>
-                    <button class="product__link text-white" type="submit" asp-controller="Catalog" asp-action="ProductCart"><h3>@Model.Name</h3></button>
+                    <input type="hidden" name="ProdName" value="@Model.Name" />
+                    <button class="product__link__catalog text-white" type="submit" asp-controller="Catalog" asp-action="ProductCart">
+
+                        <div class="image__catalog">
+                            @Html.Raw("<img style='width:209px; height:210px;' src=\"data:image/jpeg;base64,"
+                                                    + Convert.ToBase64String(Model.Image) + "\" />")
+                        </div>
+
+                        <h4>@Model.Name @Model.Model</h4>
+                    </button>
                 </form>
-               
+
                 <div class="catalog__price">
                     <span class="price">@Model.Price</span>
                     <form id="@Model.Id" asp-action="AddToCart" asp-controller="Cart" method="post">
                         <input type="hidden" asp-for="Id" />
                         <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-                        <button type="submit" class="btn__catalog"><img src="~/Images/Icons/Basket.png"></button>
+                        <button type="submit" class="btn__catalog"><img src="~/Images/Icons/cart-plus.png"></button>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>

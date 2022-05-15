@@ -1,13 +1,22 @@
 ﻿@model IQueryable<string>
-<p> </p>
 
-@foreach (var q in Model)
-{
-    <a class="btn"
-       asp-action="Catalog"
-       asp-controller="Catalog"
-       asp-route-productmodel="@q"
-       asp-route-productPage="1">
-        @q
+<div class="dropdown ">
+    <a class="btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+       Модель
     </a>
-}
+
+    <ul style="background-color:#121212" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        @foreach (var q in Model)
+        {
+            <li>
+                <a class="dropdown-item text-white"
+                   asp-action="Catalog"
+                   asp-controller="Catalog"
+                   asp-route-productmodel="@q"
+                   asp-route-productPage="1">
+                    @q
+                </a>
+            </li>
+        }
+    </ul>
+</div>

@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+@model ProductsListViewModel
 <div class="elipse__right"></div>
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators banner__position">
@@ -9,7 +9,7 @@
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
-    <div class="carousel-inner">     
+    <div class="carousel-inner">
         <div class="carousel-item active">
 
 
@@ -228,8 +228,43 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
+<div class="container">
+    <img class="intro__image__right" src="~/Images/Ellipse .png" />
+    <img class="intro__image__left" src="~/Images/Ellipse .png"/>
+    <p class="intro__mostpopular mt-3">Популярные модели</p>
+    <div class="row mt-5">
+
+        @foreach (var q in Model.Products)
+        {
+            @Html.Partial("ProductIndexSummary", q)
+        }
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <p class="aboutus__intro text-center mt-5">О нашей компании</p>
+        <div class="col">
+            <img src="~/Images/MainPages/About.png"/>
+        </div>
+        <div class="col aboutus ">
+            <p class="col mt-3 ">
+                Компания основана в 2020 году и является официальным партнером таких известных технологических компаний как:
+                ASUS, Intel, Microsoft, MSI, HP, Apple, Aser и многих других.
+                Также мы реализовали не один совместный проект с такими разработчиками игр, 
+                как: Wargaming, UBISOFT, Electronic Arts, Bethesda, Mail. Games.
+            </p>
+            <p class="col mt-3">
+                Мы осуществляем доставку персональных компьютеров, ноутбуков, и телефонов по всей России и миру.
+                Наша компания работает как с частными лицами, так и с юридическими лицами.
+            </p>
+        </div>
+    </div>
+    
+
+</div>
