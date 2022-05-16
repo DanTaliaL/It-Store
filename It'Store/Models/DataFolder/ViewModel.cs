@@ -57,6 +57,7 @@
     {
         public Cart Cart { get; set; }
         public IEnumerable<Promotion> Promotion { get; set; }
+        public IEnumerable<ProductQuantity> ProductQuantity { get; set; }
         public string ReturnUrl { get; set; }
     }
 }

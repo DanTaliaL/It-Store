@@ -18,6 +18,7 @@ namespace ItStore.Controllers
         {
             ViewBag.SearchingString = searchstring;
             ViewBag.SelectedCategory = category;
+            ViewBag.ProductModel = productmodel;
             var result = new ProductsListViewModel
             {
                 Products = Data.Products

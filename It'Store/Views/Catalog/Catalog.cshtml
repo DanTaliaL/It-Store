@@ -6,21 +6,25 @@
 
 <div class="container intro text-white">
 
-        <div class="mb-4">
-            @if (ViewBag.SelectedCategory != null)
-            {
+    <div class="mb-4">
+        @if (ViewBag.SelectedCategory != null)
+        {
             <h4 class="text-center">@ViewBag.SelectedCategory</h4>
-            }
-            else if (ViewBag.SearchingString != null)
-            {
+        }
+        else if (ViewBag.SearchingString != null)
+        {
             <h4 class="text-center">@ViewBag.SearchingString</h4>
-            }
-            else
-            {
+        }
+        else if (ViewBag.ProductModel !=null)
+        {
+            <h4 class="text-center">@ViewBag.ProductModel</h4>
+        }
+        else
+        {
             <h4 class="text-center">Главная</h4>
-            }
-        </div>
-   
+        }
+    </div>
+
     <div class="elipse__right__catalog"></div>
     <div class="elipse__left__catalog"></div>
     <div class="row">

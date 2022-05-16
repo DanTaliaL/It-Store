@@ -1,46 +1,78 @@
 ﻿@model CartIndexViewModel
-<div class="intro text-white container">
-    <h2>Корзина</h2>    
-    <table class="table text-white">
+<div class="intro text-white container cart">
+    <h2 class="text-center">Корзина</h2>
+    <img class="cart__image__right" src="~/Images/Ellipse .png" />
+    <img class="cart__image__left" src="~/Images/EllipseDark.png" />
+    <table class="table text-white mt-5">
         <tr>
-            <td>Количество</td>
-            <td>Продукт</td>
-            <td class="text-right">Цена</td>
-            <td class="text-right">Всего</td>
-            <td class="text-right">Навигация</td>
+            <td class="text-left">Продукт</td>
+            <td class="text-left">Наличие</td>
+            <td class="text-center">Количество</td>
+            <td colspan="2" class="text-left">Цена</td>
         </tr>
         @foreach (var q in Model.Cart.Lines)
         {
             <tr>
-                <th class="text-left">@q.Quantity</th>
-                <th class="text-left">@q.Product.Name</th>
-                <th class="text-right"> @q.Product.Price.ToString("c")</th>
-                <th class="text-right"> @((q.Quantity*q.Product.Price).ToString("c")) </th>
-                <th>
+                <th class="text-left">
+                    <div class="text-left">
+                        <span>
+                            @Html.Raw("<img style='width:109px; height:110px;' src=\"data:image/jpeg;base64,"
+                                               + Convert.ToBase64String(q.Product.Image) + "\" />")
+                        </span>
+
+                        <span class="m-2"> @q.Product.Name </span>
+                    </div>
+                </th>
+                <th class="text-left">
+                    @{
+                        foreach (var quantity in Model.ProductQuantity.Where(w => w.ProductId == q.Product.Id))
+                        {
+                            if (quantity.Quantity >= q.Quantity && quantity.Quantity != null)
+                            {
+                                <p>В наличии</p>
+                            }
+                            else
+                            {
+                                <p>Не в наличии</p>
+                            }
+                        }
+                    }
+                </th>
+                <th class="text-center">@q.Quantity</th>
+                <th class="text-left"> @((q.Quantity*q.Product.Price)) ₽</th>
+                <th class="text-left">
                     <form asp-action="RemoveFromCart" method="post">
                         <input type="hidden" name="Id" value="@q.Product.Id" />
                         <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
-                        <button type="submit" class="btn">Удалить</button>
+                        <button type="submit" class="btn__link "><img src="~/Images/Icons/Bin.png" /></button>
                     </form>
                 </th>
             </tr>
         }
-        <tfoot>
-            <tr>
-                <td colspan="3" class="text-right">Итого</td>
-                <td class="text-right">
-                   @Model.Cart.ComputeTotalValue().ToString() ₽
-                </td>
-                <td></td>
-            </tr>
-        </tfoot>
+
     </table>
-    <div class="text-center">
-        <form asp-action="OrderForm" asp-controller="Order" method="get">
-            <a class="btn" href="@Model.ReturnUrl">Назад</a>
-            <input type="hidden" name="ProductName" value="@foreach (var q in Model.Cart.Lines){@q.Product.Name}"/>
-            <input type="hidden" name="ProductQuantity" value="@foreach (var q in Model.Cart.Lines){@q.Quantity}"/>
-            <button class="btn" type="submit" name="TotalPrice" value="@Model.Cart.ComputeTotalValue()">Заказать</button>
-        </form>
+
+    <div class="row">
+        <span class="cart__text">Итого: @ViewBag.TotalPrice ₽</span>
+        <div class="col-md-5">
+            @foreach (var q in Model.Promotion)
+            {
+                <p class="mt-2">Промокод : @q.PromotionCode найден.</p>
+                <p>Скидка будет составлять: @q.Percentage %</p>
+            }
+            <form asp-action="Cart" asp-controller="Cart" class="row mt-2">
+                <span class="col"><input class="form-control" name="PromotionCode" placeholder="Введите промокод..." /></span>
+                <span class="col" style="float:right;"><button class="cart__btn" type="submit">Проверить промокод</button></span>
+            </form>
+        </div>
+
+        <div class="col">
+            <form asp-action="OrderForm" asp-controller="Order" method="get">
+                <input type="hidden" name="ProductName" value="@foreach (var q in Model.Cart.Lines){@q.Product.Name}" />
+                <input type="hidden" name="ProductQuantity" value="@foreach (var q in Model.Cart.Lines){@q.Quantity}" />
+                <span style="float:right;"><a class="cart__btn text-end" href="@Model.ReturnUrl">Назад</a></span>
+                <span style="float:right;" class="mx-3"><button class="cart__btn text-end" type="submit" name="TotalPrice" value="@Model.Cart.ComputeTotalValue()">Перейти к оформлению</button></span>
+            </form>
+        </div>
     </div>
 </div>

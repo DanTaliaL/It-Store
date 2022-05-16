@@ -15,14 +15,27 @@ namespace ItStore.Controllers
             cart = cartService;
         }
 
-        public IActionResult Cart(string returnUrl)
+        public IActionResult Cart(string returnUrl, int Id , string PromotionCode)
         {
+            Promotion promotion = Data.Promotions.Where(q => q.PromotionCode == PromotionCode).FirstOrDefault();
+            if (promotion != null)
+            {
+                int Percent = promotion.Percentage;
+                decimal TotalValue = Convert.ToDecimal(Percent / 100.0);
+                decimal TotalPrice = cart.ComputeTotalValue() - (cart.ComputeTotalValue() * TotalValue);
+                ViewBag.TotalPrice =  TotalPrice.ToString();
+            }
+            else
+            {
+                ViewBag.TotalPrice = cart.ComputeTotalValue();
+            }
             return View(new CartIndexViewModel
             {
+                ProductQuantity = Data.ProductsQuantity,
                 Cart = cart,
-                Promotion = Data.Promotions,
+                Promotion = Data.Promotions.Where(q=>q.PromotionCode==PromotionCode),
                 ReturnUrl = returnUrl,
-            });
+            }); ;
         }
         public IActionResult AddToCart(int Id, string returnUrl)
         {
@@ -32,7 +45,7 @@ namespace ItStore.Controllers
             {
                 cart.AddItem(product, 1);
             }
-            return RedirectToAction("Cart", new { returnUrl }); //исправить
+            return RedirectToAction("Cart", new { returnUrl, Id }); //исправить
         }
         public RedirectToActionResult RemoveFromCart(int Id, string returnUrl)
         {
