@@ -246,7 +246,7 @@ a:hover {
     ================
 */
 .btn {
-    background: none;
+    background: #121212;
     color: white;
     border: 1px solid #FFFFFF;
     box-sizing: border-box;
@@ -805,5 +805,105 @@ body {
 /*Order*******************/
 
 .order__image {
+    margin-top: -26%;
     transform: scale(-1, 1);
+    opacity:0.7;
+}
+
+.form__position {
+    margin-right: auto;
+}
+
+.form__text {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 33px;
+    line-height: 153.9%;
+    /* identical to box height, or 51px */
+
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #FFFFFF;
+}
+
+.order__image__left {
+    position: absolute;
+    z-index:-1;
+    opacity: 0.4;
+    margin-top: -3%;
+    right: 28%;
+    width: 86%;
+    height: 80%;
+}
+
+.order__image__right {
+    position: absolute;
+    z-index:-1;
+    opacity: 0.7;
+    right: 0%;
+    margin-top: -15%;
+    width: 80%;
+    height: 80%;
+}
+
+.btn__position {
+    place-content: space-around;
+}
+
+.order__input{
+
+}
+    .order__input input {
+        opacity: 0.7;
+        -webkit-text-stroke: medium;
+    }
+
+    /*Login**********************/
+.login__image__left {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.4;
+    margin-top: -13%;
+    right: 3%;
+    width: 72%;
+    height: 102%;
+}
+
+.login__image__right {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.7;
+    right: 50%;
+    margin-top: -10%;
+    width: 107%;
+    height: 80%;
+}
+
+.login__main__image {
+    position: absolute;
+    opacity: 0.8;
+    right: 19%;
+    margin-top: -4%;
+}
+
+/*Registration******************/
+
+.reg__image__right {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.7;
+    right: 50%;
+    margin-top: -10%;
+    width: 107%;
+    height: 80%;
+}
+
+.reg__image__left {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.4;
+    margin-top: -13%;
+    right: 3%;
+    width: 72%;
+    height: 102%;
 }

@@ -1,5 +1,7 @@
 ﻿@model ItStore.Models.SystemsFolder.LoginModel
 <div class="intro container">
+    <img class="login__image__left" src="~/Images/Ellipse .png" />
+    <img class="login__image__right" src="~/Images/EllipseDark.png"/>
     <div class=" row">
         <form asp-action="login" method="post" class="col">
             <div asp-validation-summary="All"></div>
@@ -16,8 +18,7 @@
 
         </form>
         <div class="col">
-            <div class="elipse__right"></div>
-            <img src="~/Images/MainPages/Login/Login.png" />
+            <img class="login__main__image" src="~/Images/MainPages/Login/Login.png" />
         </div>
     </div>
 

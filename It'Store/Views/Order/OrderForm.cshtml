@@ -1,10 +1,12 @@
 ﻿@model Order
 
 
-<div class="row">
+<div class="row order__input">
 
-    <h3 class="text-center text-white">Оформление заказа на сумму @ViewBag.TotalPrice ₽</h3>
-    <div class="col-4">
+    <h3 class="text-center text-white pb-4 form__text">Оформление заказа на сумму @ViewBag.TotalPrice ₽</h3>
+    <img class="order__image__left" src="~/Images/Ellipse .png"/>
+    <img class="order__image__right" src="~/Images/EllipseDark.png"/>
+    <div class="col-4 form__position">
 
         @if (ViewBag.PromotionStatus != null)
         {
@@ -41,19 +43,18 @@
                 <input class="form-control" asp-for="DeliveryMethod" />
             </p>
 
-            <div>
+            <div class="row btn__position">
                 <input type="hidden" name="TotalPrice" value="@ViewBag.TotalPrice" />
                 <input type="hidden" name="PromotionCode" value="@ViewBag.PromotionCode" />
                 <input type="hidden" name="ProdName" value="@ViewBag.ProductName" />
                 <input type="hidden" name="ProdQuantity" value="@ViewBag.ProductQuantity" />
-                <button class="btn" type="submit"> Завершить </button>
+                <button class="btn col-4 " asp-controller="Cart" asp-action="Cart">Назад</button>
+                <button class="btn col-4" type="submit"> Завершить </button>
             </div>
         </form>
-
-
     </div>
 
-    <div class="col-auto">
+    <div class="col-auto form-check ">
         <img class="order__image" src="~/Images/MainPages/OrderForm.png" />
     </div>
 
