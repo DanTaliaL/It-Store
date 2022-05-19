@@ -81,7 +81,6 @@ namespace ItStore.Models
                 .WithMany(q => q.Comments)
                 .HasForeignKey(q => q.ProductID);
 
-
         }
         public static async Task CreateAdminAccount(IServiceProvider sericeProvider,
                 IConfiguration configuration)

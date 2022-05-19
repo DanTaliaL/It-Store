@@ -227,7 +227,6 @@ namespace ItStore.Controllers
     {
         private DataContext Data { get; set; }
         public ProductController(DataContext DC) => Data = DC;
-        //public int PageSize = 4;
 
         //for Image
         private byte[] ConvertToBytes(IFormFile file)

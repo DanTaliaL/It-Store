@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ItStore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220508141526__1")]
+    [Migration("20220519150204__1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -131,6 +131,17 @@ namespace ItStore.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductModel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductPrice")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -400,12 +411,7 @@ namespace ItStore.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int?>("WareHouseId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("WareHouseId");
 
                     b.ToTable("Products");
                 });
@@ -829,13 +835,6 @@ namespace ItStore.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ItStore.Models.DataFolder.Product", b =>
-                {
-                    b.HasOne("ItStore.Models.DataFolder.WareHouse", null)
-                        .WithMany("Product")
-                        .HasForeignKey("WareHouseId");
-                });
-
             modelBuilder.Entity("ItStore.Models.DataFolder.ProductQuantity", b =>
                 {
                     b.HasOne("ItStore.Models.DataFolder.Product", "Product")
@@ -1010,8 +1009,6 @@ namespace ItStore.Migrations
 
             modelBuilder.Entity("ItStore.Models.DataFolder.WareHouse", b =>
                 {
-                    b.Navigation("Product");
-
                     b.Navigation("ProductQuantities");
                 });
 #pragma warning restore 612, 618

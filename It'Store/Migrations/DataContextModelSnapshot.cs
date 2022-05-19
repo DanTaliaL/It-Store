@@ -131,6 +131,17 @@ namespace ItStore.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ProductModel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductPrice")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -398,12 +409,7 @@ namespace ItStore.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int?>("WareHouseId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("WareHouseId");
 
                     b.ToTable("Products");
                 });
@@ -827,13 +833,6 @@ namespace ItStore.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ItStore.Models.DataFolder.Product", b =>
-                {
-                    b.HasOne("ItStore.Models.DataFolder.WareHouse", null)
-                        .WithMany("Product")
-                        .HasForeignKey("WareHouseId");
-                });
-
             modelBuilder.Entity("ItStore.Models.DataFolder.ProductQuantity", b =>
                 {
                     b.HasOne("ItStore.Models.DataFolder.Product", "Product")
@@ -1008,8 +1007,6 @@ namespace ItStore.Migrations
 
             modelBuilder.Entity("ItStore.Models.DataFolder.WareHouse", b =>
                 {
-                    b.Navigation("Product");
-
                     b.Navigation("ProductQuantities");
                 });
 #pragma warning restore 612, 618

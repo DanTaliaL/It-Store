@@ -26,15 +26,12 @@
 
                         @foreach (var cartline in Model.CartLine)
                         {
-                            @foreach (var product in order.Lines.Where(q => q.CartLineId == cartline.CartLineId))
-                            {
+                            <tr>
+                                <td>@cartline.ProductName @cartline.ProductModel</td>
+                                <td>@cartline.Quantity</td>
+                                <td>@(cartline.ProductPrice * cartline.Quantity)</td>
+                            </tr>
 
-                                <tr>
-                                    <td>@product.Product.Name</td>
-                                    <td>@cartline.Quantity</td>
-                                    <td>@(product.Product.Price * cartline.Quantity)</td>
-                                </tr>
-                            }
                         }
 
                     </tbody>
@@ -48,7 +45,7 @@
                                     <td>Активирован промокод @order.Promotions применена скидка на @promotion.Percentage процента</td>
 
                                 }
-                            }                       
+                            }
                         </tr>
                         <tr>
                             <td colspan="3">
