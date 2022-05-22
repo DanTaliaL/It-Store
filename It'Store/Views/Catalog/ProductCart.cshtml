@@ -1,91 +1,113 @@
 ﻿@model ItStore.Models.DataFolder.ProductCartViewModel
-<div class="row">
-    <div class="col-md-8">
-        <div id="carouselExampleFade" class="carousel slide product__min__cart" data-bs-ride="carousel">
-            <div class="col-auto">
-                <div class="carousel-inner carousel-item_slow position">
-                    <div class="carousel-item active">
-                        @foreach (var q in Model.Products)
+    <img class="productcart__image__left" src="~/Images/Ellipse .png" />
+    <img class="productcart__image__right" src="~/Images/EllipseDark.png" />
+    <div class="row">
+        <div class="col-md-8">
+            <div id="carouselExampleFade" class="carousel slide product__min__cart__picture" data-bs-ride="carousel">
+                <div class="col-auto">
+                    <div class="carousel-inner carousel-item_slow position">
+                        <div class="carousel-item active">
+                            @foreach (var q in Model.Products)
+                            {
+                                @Html.Raw("<img class='d-block' style='width:209px; height:210px;' src=\"data:image/jpeg;base64,"
+                                                          + Convert.ToBase64String(q.Image) + "\" />")
+                            }
+                        </div>
+                        @foreach (var q in Model.Pictures)
                         {
-                            @Html.Raw("<img class='d-block' style='width:209px; height:210px;' src=\"data:image/jpeg;base64,"
-                                                      + Convert.ToBase64String(q.Image) + "\" />")
+                            @Html.Partial("ProductPicture", q)
                         }
                     </div>
-                    @foreach (var q in Model.Pictures)
+                    <div>
+                        <button class="carousel-control-prev carousel__button__position" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Назад</span>
+                        </button>
+                        <button class="carousel-control-next carousel__button__position" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Вперед</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container product__min__cart">
+
+
+                <div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading text-white text-center my-3">
+                            <h4>Отзывы</h4>
+                        </div>
+                        <form asp-controller="Commentaries" asp-action="Commentaries" method="post">
+                            <div class="panel-body comments">
+                                <input type="hidden" asp-for="ProductID" />
+                                <input type="hidden" asp-for="UserName" />
+                                <input type="hidden" name="ProdId" value="@ViewBag.Id" />
+                                <input type="hidden" name="ProdName" value="@ViewBag.Name" />
+
+                                <div class="row">
+
+                                    <div class="form-check col-md-2 like__position">
+                                        <input class="form-check-input" type="radio" id="flexRadioDefault2" name="Grade" value="true" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            <img class="like" src="~/Images/Icons/Like.png" />
+                                        </label>
+                                    </div>
+                                    <div class="form-check col">
+                                        <input class="form-check-input" type="radio" name="Grade" value="false" id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            <img class="dislike" src="~/Images/Icons/like.png" />
+                                        </label>
+                                    </div>
+                                </div>
+
+
+
+
+                                <textarea style=" background-color: #171616; outline: none;" class="form-control text-white panel__text" placeholder="Оставьте Ваш комментарий" asp-for="Comment" rows="5"></textarea>
+                                <br>
+                                <button type="submit" class="btn pull-right">Отправить</button>
+                                <div class="clearfix"></div>
+                                <hr>
+                                <ul class="media-list">
+                                </ul>
+                            </div>
+                        </form>
+                        <div class="section">
+                            @foreach (var q in Model.Commentaries)
+                            {
+                                @Html.Partial("ProductCommentaries", q)
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col product__min__cart ">
+            <div class="opacity-75">
+                <div>
+                    @foreach (var q in Model.Products)
                     {
-                        @Html.Partial("ProductPicture", q)
+                        @Html.Partial("ProductInformation", q)
                     }
                 </div>
+                <h4 class="text-white text-center my-3">
+                    <b>
+                        Подробные характеристики
+                    </b>
+                </h4>
                 <div>
-                    <button class="carousel-control-prev carousel__button__position" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Назад</span>
-                    </button>
-                    <button class="carousel-control-next carousel__button__position" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Вперед</span>
-                    </button>
+                    @foreach (var q in Model.Options)
+                    {
+                        @Html.Partial("ProductOption", q)
+                    }
                 </div>
             </div>
         </div>
 
-        <div class="container product__min__cart">
-
-
-            <div>
-                <div class="panel panel-info">
-                    <div class="panel-heading text-white text-center mt-3">
-                        <h4>Отзывы</h4>
-                    </div>
-                    <form asp-controller="Commentaries" asp-action="Commentaries" method="post">
-                        <div class="panel-body comments">
-                            <input type="hidden" asp-for="ProductID" />
-                            <input type="hidden" asp-for="UserName" />
-                            <input type="hidden" name="ProdId" value="@ViewBag.Id" />
-                            <input type="hidden" name="ProdName" value="@ViewBag.Name" />
-                            <div class="form-check form-switch">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Ввод флажка переключателя по умолчанию</label>
-                                <input class="form-check-input" asp-for="@Model.Grade" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                            </div>
-                            <textarea style="background-color: #171616" class="form-control text-white" placeholder="Оставьте Ваш комментарий" asp-for="Comment" rows="5"></textarea>
-                            <br>
-                            <button type="submit" class="btn btn-info pull-right">Отправить</button>
-                            <div class="clearfix"></div>
-                            <hr>
-                            <ul class="media-list">
-                            </ul>
-                        </div>
-                    </form>
-                    <div class=" section">
-                        @foreach (var q in Model.Commentaries)
-                        {
-                            @Html.Partial("ProductCommentaries", q)
-                        }
-                    </div>
-                </div>
-            </div>
-
-        </div>
     </div>
-
-    <div class="col product__min__cart">
-        <div>
-            @foreach (var q in Model.Products)
-            {
-                @Html.Partial("ProductInformation", q)
-            }
-        </div>
-        <h4 class="text-white text-center my-3">
-            <b>
-                Подробные характеристики
-            </b>
-        </h4>
-        @foreach (var q in Model.Options)
-        {
-            @Html.Partial("ProductOption", q)
-        }
-    </div>
-
-</div>
 
 

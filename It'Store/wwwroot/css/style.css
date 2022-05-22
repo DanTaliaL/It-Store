@@ -474,8 +474,28 @@ btn__pagin, .btn__pagin:hover {
     text-align: -webkit-center;
 }
 
-/*About us*********************************************/
 
+/**ProductCart***************/
+.productcart__image__right {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.4;
+    right: 50%;
+    margin-top: 9%;
+    width: 157%;
+    height: 82%;
+}
+
+.productcart__image__left {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.4;
+    margin-top: -13%;
+    right: 3%;
+    width: 72%;
+    height: 102%;
+}
+/*About us*********************************************/
 .aboutus__intro {
     font-family: 'Raleway';
     font-style: normal;
@@ -529,6 +549,15 @@ btn__pagin, .btn__pagin:hover {
     box-shadow: 8px 3px 13px rgb(0 0 0 / 26%);
 }
 
+.product__min__cart__picture {
+    background-color: #161515;
+    border-radius: 10px;
+    margin-top: 13px;
+    border-radius: 10px;
+    height: 250px;
+    box-shadow: 8px 3px 13px rgb(0 0 0 / 26%);
+}
+
 .text__cart {
     font-family: 'Montserrat';
     font-style: normal;
@@ -547,12 +576,12 @@ btn__pagin, .btn__pagin:hover {
         color: white;
     }
 
-    .product__cart h3 {
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 500;
-        color: white; /* #AEAEAE*/
-    }
+.product__cart h3 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    color: white; /* #AEAEAE*/
+}
 
 .product__cart p {
     font-family: 'Montserrat';
@@ -564,7 +593,7 @@ btn__pagin, .btn__pagin:hover {
 }
 
 .btn__link__cart {
-    background-color:inherit;
+    background-color: inherit;
     border: 1px;
     color: none;
 }
@@ -621,14 +650,59 @@ btn__pagin, .btn__pagin:hover {
     margin-left: 60px;
 }
 
-.comment__border {
-    border: 1px;
-    border-color: white;
+.intro__comment {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #AEAEAE;
 }
 
-.comments .comment img {
-    margin-right: 20px;
+.comment__border {
+    outline: outset;
+    border-radius: 10px;
+    padding: 5px;
 }
+
+
+
+
+.comment__body {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #AEAEAE;
+}
+
+.panel__text {
+    border-radius: 10px;
+    background-color: #171616;
+    outline: none;
+    opacity: 0.8;
+}
+
+.like {
+    margin: 5px;
+    height: 30px;
+    width: 30px;
+    opacity: 0.5;
+}
+
+.like__position {
+    width: min-content;
+}
+
+.dislike {
+    margin: 5px;
+    height: 30px;
+    width: 30px;
+    opacity: 0.5;
+    transform:rotate(180deg);
+}
+
 
 .comments .comment {
     padding: 6px;
@@ -845,7 +919,7 @@ body {
 .order__image {
     margin-top: -26%;
     transform: scale(-1, 1);
-    opacity:0.7;
+    opacity: 0.7;
 }
 
 .form__position {
@@ -866,7 +940,7 @@ body {
 
 .order__image__left {
     position: absolute;
-    z-index:-1;
+    z-index: -1;
     opacity: 0.4;
     margin-top: -3%;
     right: 28%;
@@ -876,7 +950,7 @@ body {
 
 .order__image__right {
     position: absolute;
-    z-index:-1;
+    z-index: -1;
     opacity: 0.7;
     right: 0%;
     margin-top: -15%;
@@ -888,15 +962,15 @@ body {
     place-content: space-around;
 }
 
-.order__input{
-
+.order__input {
 }
+
     .order__input input {
         opacity: 0.7;
         -webkit-text-stroke: medium;
     }
 
-    /*Login**********************/
+/*Login**********************/
 .login__image__left {
     position: absolute;
     z-index: -1;
@@ -945,3 +1019,8 @@ body {
     width: 72%;
     height: 102%;
 }
+
+
+/*chekbox****************/
+
+

@@ -1,19 +1,29 @@
 ﻿@model Commentaries
-    <ul class="media-list comment__border">
-        <li class="media">
-            <div class="comment">
-                <div class="media-body">
-                    <strong class="text-success">@Model.UserName</strong>
-                    <span class="text-muted">
-                        <small class="text-muted">@Model.Created.</small>
-                    </span>
-                    <p>
-                        @Model.Comment
-                    </p>
-                </div>
-                <div class="clearfix"></div>
+<div class="media-list">
+    <div class="media">
+        <div class="comment">
+            <div class="media-body comment__border">
+                <span>
+                    @if (Model.Grade)
+                    {
+                        <img class="like" src="~/Images/Icons/Like.png" />
+                    }
+                    else
+                    {
+                        <img class="dislike" src="~/Images/Icons/like.png"/>
+                    }
+                </span>
+                <strong class="intro__comment"><b>@Model.UserName</b></strong>
+                <span class="text-muted">
+                    <small style="float:right;" class="text-muted"> @Model.Created.ToShortDateString() </small>
+                </span>
+                <p class="comment__body">
+                    @Model.Comment
+                </p>
             </div>
-            <ul class="media-list">
-            </ul>
-        </li>
-    </ul>
+            <div class="clearfix"></div>
+        </div>
+        <ul class="media-list">
+        </ul>
+    </div>
+</div>

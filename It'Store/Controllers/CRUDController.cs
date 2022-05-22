@@ -487,8 +487,9 @@ namespace ItStore.Controllers
         public CommentariesController(DataContext DC) => Data = DC;
 
         [HttpPost]
-        public IActionResult Commentaries(Commentaries commentaries, int ProdId, string ProdName)
+        public IActionResult Commentaries(Commentaries commentaries, int ProdId, string ProdName, bool Grade)
         {
+            commentaries.Grade = Grade;
             commentaries.Created = DateTime.Now;
             Data.Comments.Add(commentaries);
             Data.SaveChanges();
