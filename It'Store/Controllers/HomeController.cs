@@ -18,7 +18,7 @@ namespace ItStore.Controllers
             Data = DC;
         }
         public int PageSize = 8;
-        public IActionResult Index(string category, string productmodel, int productPage = 1)
+        public IActionResult Index(string? category, string? productmodel, int productPage = 1)
         {     
             ViewBag.SelectedCategory = category;
             var result = new ProductsListViewModel

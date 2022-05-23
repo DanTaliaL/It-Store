@@ -15,13 +15,15 @@ namespace ItStore.Controllers
         private SignInManager<AppUser> signInManager;
         private RoleManager<IdentityRole> roleManager;
         private DataContext Data;
+        private Cart cart;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, DataContext Data)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, DataContext Data, Cart cart)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
             this.Data = Data;
+            this.cart = cart;
         }
 
         [AllowAnonymous]
@@ -117,11 +119,16 @@ namespace ItStore.Controllers
         }
         public IActionResult Profile()
         {
-            var result = new HistoryViewModel
+
+
+            var result = new ProfileViewModel
             {
                 CartLine = Data.CartLine.Include(q=>q.Product),
                 Order =Data.Orders.Include(q=>q.Lines).Where(q=>q.Name==User.Identity.Name),
-                Promotion = Data.Promotions
+                Promotion = Data.Promotions.Where(q=>q.Description=="AllUser"),
+                AppUser = Data.Users.Where(q=>q.UserName==User.Identity.Name),
+                ProductQuantity = Data.ProductsQuantity,
+                Cart = cart
             };
             return View(result);
         }

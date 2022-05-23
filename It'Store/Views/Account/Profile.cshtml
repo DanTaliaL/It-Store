@@ -1,12 +1,265 @@
-﻿@model HistoryViewModel
-<div class="intro">
+﻿@model ProfileViewModel
+
+
+
+    <div class="profile mb-5 row">
+
+        <div class="col">
+            <h2 class="text-start">Персональные данные</h2>
+        </div>
+       
+
+        <div class="text-end col">
+            <form asp-action="Logout method="post" >
+                <p>
+                    <button class="btn__link " asp-area="" asp-controller="Account" asp-action="Logout"><img class="btn__exit" src="~/Images/Icons/exit.png" /></button>
+                </p>
+            </form>
+        </div>
+
+    </div>
+
+<div class=" row profile">
+
+    <div class="col mx-1 text-white">
+        <table class="table">
+            <tr>
+                <th>
+                    <b>Контакты</b>
+                </th>
+                <th>
+                    <button class="btn__link" href="#">Редактровать</button>
+                </th>
+            </tr>
+            @foreach (var User in Model.AppUser)
+            {
+                <tr>
+                    <td>
+                        <b>ФИО:</b>
+                    </td>
+                    <td>
+                        @if (User.FatherName == null && User.LastName == null && User.FatherName == null)
+                        {
+                            <p>-</p>
+                        }
+                        else
+                        {
+                            <p> @User.FirstName @User.LastName @User.FatherName </p>
+                        }
+
+                    </td>
+                </tr>
+                <tr class="tr__style">
+                    <td>
+                        <b>Телефон:</b>
+                    </td>
+                    <td>
+                        @if (User.PhoneNumber == null)
+                        {
+                            <p>-</p>
+                        }
+                        else
+                        {
+                            <p> @User.PhoneNumber</p>
+                        }
+
+                    </td>
+                </tr>
+                <tr class="tr__style">
+                    <td>
+                        <b>E-mail:</b>
+                    </td>
+                    <td>
+                        @if (User.Email == null)
+                        {
+                            <p>-</p>
+                        }
+                        else
+                        {
+                            <p>  @User.Email </p>
+                        }
+
+                    </td>
+                </tr>
+            }
+            @foreach (var PromotionCode in Model.Promotion)
+            {
+                <tr class="tr__style">
+                    <td>
+                        <b>Уникальный купон:</b>
+                    </td>
+                    <td>
+                        @if (PromotionCode.PromotionCode == null)
+                        {
+                            <p>-</p>
+                        }
+                        else
+                        {
+                            <p> @PromotionCode.PromotionCode </p>
+                        }
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+
+
+
+    <div class="col mx-1 text-white">
+        <table class="table">
+            <tr>
+                <th>
+                    <b>Адресс доставки</b>
+                </th>
+                <th>
+                    <button class="btn__link" href="#">Редактровать</button>
+                </th>
+            </tr>
+            @foreach (var User in Model.AppUser)
+            {
+                <tr>
+                    <td>
+                        <b>Город:</b>
+                    </td>
+                    <td>
+                        @if (User.City == null)
+                        {
+                            <p>-</p>
+                        }
+                        else
+                        {
+                            <p> @User.City </p>
+                        }
+
+                    </td>
+                </tr>
+                <tr class="tr__style">
+                    <td>
+                        <b>Улица:</b>
+                    </td>
+                    <td>
+                        @if (User.Street == null)
+                        {
+                            <p>-</p>
+                        }
+                        else
+                        {
+                            <p> @User.Street</p>
+                        }
+                    </td>
+                </tr>
+                <tr class="tr__style">
+                    <td>
+                        <b>Дом:</b>
+                    </td>
+                    <td>
+                        @if (User.House == null)
+                        {
+                            <p>-</p>
+                        }
+                        else
+                        {
+                            <p>  @User.House </p>
+                        }
+
+                    </td>
+                </tr>
+
+                <tr class="tr__style">
+                    <td>
+                        <b>Номер квартиры:</b>
+                    </td>
+                    <td>
+                        @if (@User.Flat == null)
+                        {
+                            <p> - </p>
+                        }
+                        else
+                        {
+                            <p> @User.Flat </p>
+                        }
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+
+
+
+<div class="intro text-white container cart">
+    <h2 class="text-center">Мои заказы</h2>
+    <img class="cart__image__right" src="~/Images/Ellipse .png" />
+    <img class="cart__image__left" src="~/Images/EllipseDark.png" />
+    <table class="table text-white mt-5">
+        <tr>
+            <td class="text-left">Продукт</td>
+            <td class="text-left">Наличие</td>
+            <td class="text-center">Количество</td>
+            <td colspan="2" class="text-left">Цена</td>
+        </tr>
+        @foreach (var q in Model.Cart.Lines)
+        {
+            <tr>
+                <th class="text-left">
+                    <div class="text-left">
+                        <span>
+                            @Html.Raw("<img style='width:109px; height:110px;' src=\"data:image/jpeg;base64,"
+                                               + Convert.ToBase64String(q.Product.Image) + "\" />")
+                        </span>
+
+                        <span class="m-2"> @q.Product.Name </span>
+                    </div>
+                </th>
+                <th class="text-left">
+                    @{
+                        foreach (var quantity in Model.ProductQuantity.Where(w => w.ProductId == q.Product.Id))
+                        {
+                            if (quantity.Quantity >= q.Quantity && quantity.Quantity != null)
+                            {
+                                <p>В наличии</p>
+                            }
+                            else
+                            {
+                                <p>Не в наличии</p>
+                            }
+                        }
+                    }
+                </th>
+                <th class="text-center">@q.Quantity</th>
+                <th class="text-left"> @((q.Quantity*q.Product.Price)) ₽</th>
+                <th class="text-left">
+                    <form asp-action="RemoveFromCart" method="post">
+                        <input type="hidden" name="Id" value="@q.Product.Id" />
+                        <button type="submit" class="btn__link "><img src="~/Images/Icons/Bin.png" /></button>
+                    </form>
+                </th>
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="row">
+
+    <span class="cart__text col">Итого:  @Model.Cart.ComputeTotalValue() ₽</span>
+    <span class="col text__end"> <a class="cart__btn" asp-controller="Cart" asp-action="Cart">Перейти в корзину</a> </span>
+</div>
+
+
+
+
+<div>
     <div class="container">
         <form asp-action="Logout method="post">
             <p>
-                <button class="btn" asp-area="" asp-controller="Account" asp-action="Logout">Выйти</button>
+                <button class="btn__link" asp-area="" asp-controller="Account" asp-action="Logout">Выйти</button>
             </p>
         </form>
-        <h1>Hi @User.Identity.Name</h1>
     </div>
 </div>
 

@@ -1021,6 +1021,85 @@ body {
 }
 
 
-/*chekbox****************/
+/*profile****************/
+.profile .table{
+    color:white;
+    border-color:#434343;
+}
 
+.border__style {
+    float: left
+}
+
+.tr__style {
+    border-style: hidden;
+}
+
+.profile th {
+    width: 113px;
+    height: 27px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    /* identical to box height */
+
+
+    color: #FFFFFF;
+}
+
+.profile td {
+    width: 54px;
+    height: 23px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 23px;
+    color: #FFFFFF;
+}
+
+.profile .btn__link {
+    color: white;
+    float: right;
+    opacity: 80%;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    max-width: 220px;
+}
+
+.profile .btn__link :hover{
+    opacity:100%;
+}
+
+.profile p {
+    float: right;
+    margin-bottom: 0
+}
+
+.profile h2 {
+    width: auto;
+    height: 51px;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 33px;
+    line-height: 153.9%;
+    /* identical to box height, or 51px */
+
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #FFFFFF;
+}
+
+
+.text__end {
+    max-inline-size: fit-content;
+}
+
+.btn__exit{
+    width:30px;
+    height:30px;
+}
 
