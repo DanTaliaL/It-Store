@@ -119,8 +119,6 @@ namespace ItStore.Controllers
         }
         public IActionResult Profile()
         {
-
-
             var result = new ProfileViewModel
             {
                 CartLine = Data.CartLine.Include(q=>q.Product),
@@ -132,6 +130,45 @@ namespace ItStore.Controllers
             };
             return View(result);
         }
+
+        public IActionResult ProfileUpdate(string ProfileName) => View(userManager.Users.Where(q => q.UserName == ProfileName).FirstOrDefault());
+
+        [HttpPost]
+        public IActionResult ProfileUpdate(AppUser user, string ProfileName, string ProfileRole)
+        {
+            AppUser update = userManager.Users.Where(q=>q.UserName == ProfileName).FirstOrDefault();
+           
+
+  
+            update.City = user.City;
+ 
+            update.Email = user.Email;
+   
+            update.FatherName = user.FatherName;
+            update.FirstName = user.FirstName;
+            update.LastName = user.LastName;
+            update.PhoneNumber = user.PhoneNumber;
+            update.Flat = user.Flat;
+            update.House =user.House;
+
+ 
+            update.NormalizedEmail= user.Email.Normalize();
+
+
+            update.Street= user.Street;
+   
+            Data.SaveChanges();
+            if (ProfileRole == "Admin")
+            {
+                return RedirectToAction("AdminProfile");
+            }
+            else
+            {
+                return RedirectToAction("Profile");
+            }
+           
+        }
+
         public IActionResult AdminProfile()
         {
             var result = new HistoryViewModel
@@ -142,5 +179,7 @@ namespace ItStore.Controllers
             };
             return View(result);
         }
+
+
     }
 }
