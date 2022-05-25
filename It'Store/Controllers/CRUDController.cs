@@ -5,6 +5,7 @@ using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Identity;
 
 namespace ItStore.Controllers
 {
@@ -117,18 +118,21 @@ namespace ItStore.Controllers
     public class OrderController : Controller
     {
         private DataContext Data { get; set; }
+        private UserManager<AppUser> userManager { get; set; }
         private IOrderRepository repository { get; set; }
         private Cart cart { get; set; }
-        public OrderController(IOrderRepository repository, Cart cart, DataContext DC)
+        public OrderController(IOrderRepository repository, Cart cart, DataContext DC, UserManager<AppUser> userManager)
         {
             this.repository = repository;
             this.cart = cart;
+            this.userManager = userManager;
             Data = DC;
         }
 
         [HttpPost]
         public IActionResult OrderForm(Order order, decimal TotalPrice, string? PromotionCode)
-        {                      
+        {
+            var History = new History();
             order.Name = User.Identity.Name;
             order.TotalPrice = cart.ComputeTotalValue();
             if (cart.Lines.Count() == 0)
@@ -140,9 +144,31 @@ namespace ItStore.Controllers
                 foreach (var q in cart.Lines)
                 {
                     ProductQuantity product = Data.ProductsQuantity.FirstOrDefault(p => p.Product.Name == q.Product.Name);
+                    Promotion promotion = Data.Promotions.FirstOrDefault(q=>q.PromotionCode == PromotionCode);
                     if (product.Quantity >= q.Quantity)
                     {
-                        product.Quantity -= q.Quantity;                       
+                        product.Quantity -= q.Quantity;
+
+                        History.ProductName =$"{q.Product.Name}  {q.Product.Model}";
+                        History.ProductPrice = q.Product.Price.ToString();
+                        History.ProductQuantity = Convert.ToString(q.Quantity);
+                        History.DateTime = order.TimeOrders;
+                        History.Buyer = User.Identity.Name;
+                        History.TotalPrice = order.TotalPrice.ToString();
+                        if (PromotionCode!=null)
+                        {
+                            History.NamePromotion = promotion.Name;
+                            History.PromotionDescription = promotion.Description;
+                            History.PercentAge = promotion.Percentage.ToString();
+                        }
+                        else
+                        {
+                            History.NamePromotion = "-";
+                            History.PromotionDescription = "-";
+                            History.PercentAge = "-";
+                        }
+                                               
+                        Data.Histories.Add(History);
                     }
                     else
                     {
@@ -156,8 +182,10 @@ namespace ItStore.Controllers
                     order.TotalPrice = TotalPrice;
                     order.Promotions = PromotionCode;
                 }
+
                 Data.SaveChanges();
                 repository.SaveOrder(order);
+
                 return RedirectToAction(nameof(Completed));
             }
             else
@@ -184,7 +212,15 @@ namespace ItStore.Controllers
             ViewBag.TotalPrice = TotalPrice;
             ViewBag.PromotionStatus = PromotionStatus;
             ViewBag.PromotionCode = PromotionCode;
-            return View();
+            var user = userManager.Users.Where(q => q.UserName == User.Identity.Name);
+            var order = new Order
+            {
+                City = user.Select(q => q.City).FirstOrDefault(),
+                Street = user.Select(q => q.Street).FirstOrDefault(),
+                House = user.Select(q => q.House).FirstOrDefault(),
+                Flat = user.Select(q => q.Flat).FirstOrDefault(),
+            };
+            return View(order);
 
         }
 
@@ -411,9 +447,9 @@ namespace ItStore.Controllers
         public IActionResult ProductQuantityUpdate(int Id)
         {
             ViewBag.Id = Id;
-          return View(Data.ProductsQuantity.FirstOrDefault(q => q.Id == Id));
+            return View(Data.ProductsQuantity.FirstOrDefault(q => q.Id == Id));
         }
-        
+
     }
 
     public class WareHouseController : Controller

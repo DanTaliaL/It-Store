@@ -1,17 +1,17 @@
 ﻿@{
     Layout = "_AdminLayout";
 }
-@model HistoryViewModel
+@model ProfileViewModel
 
 <div class="row-cols-md-2">
     <h3>История покупок</h3>
-    @foreach (var order in Model.Order)
+    @foreach (var history in Model.Histories)
     {
 
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                Дата покупки @order.TimeOrders
+                Дата покупки @history.DateTime
             </div>
             <div class="card-body">
                 <table class="table">
@@ -24,33 +24,31 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var cartline in Model.CartLine)
-                        {
+
                             <tr>
-                                <td>@cartline.ProductName @cartline.ProductModel</td>
-                                <td>@cartline.Quantity</td>
-                                <td>@(cartline.ProductPrice * cartline.Quantity)</td>
+                                <td>@history.ProductName</td>
+                                <td>@history.ProductQuantity</td>
+                                <td>@(int.Parse(history.ProductPrice) * int.Parse(history.ProductQuantity))</td>
                             </tr>
 
-                        }
+        
 
                     </tbody>
                     <tfoot>
                         <tr>
-                            @if (order.Promotions != null)
+                            @if (history.NamePromotion != "-")
                             {
-                                @foreach (var promotion in Model.Promotion)
-                                {
+                               
 
-                                    <td>Активирован промокод @order.Promotions применена скидка на @promotion.Percentage процента</td>
+                                    <td>Активирован промокод @history.NamePromotion применена скидка на @history.PercentAge процента</td>
 
-                                }
+                               
                             }
                         </tr>
                         <tr>
                             <td colspan="3">
                                 <span><b>Итого</b></span>
-                                <span style="float:right;">@order.TotalPrice</span>
+                                <span style="float:right;">@history.TotalPrice</span>
                             </td>
                         </tr>
 

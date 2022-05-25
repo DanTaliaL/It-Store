@@ -7,9 +7,6 @@ namespace ItStore.Models.DataFolder
         public int CartLineId { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
-        public string ProductName { get; set; }
-        public string ProductModel { get; set; }
-        public int ProductPrice { get; set; }
     }
     public class Cart
     {
@@ -22,9 +19,6 @@ namespace ItStore.Models.DataFolder
                 LineCollection.Add(new CartLine
                 {
                     Product = product,
-                    ProductName = product.Name,
-                    ProductModel = product.Model,
-                    ProductPrice= product.Price,
                     Quantity = quantity
                 });
             }

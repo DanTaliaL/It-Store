@@ -30,14 +30,27 @@
             <div asp-validation-summary="All" class="text-white"></div>
             <input type="hidden" name="Name" value="@User.Identity.Name" />
             <input type="hidden" name="TimeOrders" value="@DateTime.Now" />
-            <p class="text-white">
-                <label asp-for="Street">Улица</label>
-                <input class="form-control" asp-for="Street" />
-            </p>
+
             <p class="text-white">
                 <label asp-for="City">Город</label>
                 <input class="form-control" asp-for="City" />
             </p>
+
+            <p class="text-white">
+                <label asp-for="Street">Улица</label>
+                <input class="form-control" asp-for="Street" />
+            </p>
+
+            <p class="text-white">
+                <label asp-for="House">Номер дома</label>
+                <input class="form-control" asp-for="House" />
+            </p>
+
+            <p class="text-white">
+                <label asp-for="Flat">Номер квартиры</label>
+                <input class="form-control" asp-for="Flat" />
+            </p>
+
             <p class="text-white">
                 <label asp-for="DeliveryMethod">Метод доставки</label>
                 <input class="form-control" asp-for="DeliveryMethod" />

@@ -64,8 +64,7 @@
 
     public class ProfileViewModel
     {
-        public IEnumerable<CartLine> CartLine { get; set; }
-        public IEnumerable<Order> Order { get; set; }
+        public IEnumerable<History> Histories { get; set; }
         public IEnumerable<Promotion> Promotion { get; set; }
 
         public IEnumerable<AppUser> AppUser { get; set; }
@@ -73,4 +72,5 @@
         public Cart Cart { get; set; }
         public IEnumerable<ProductQuantity> ProductQuantity { get; set; }
     }
+
 }

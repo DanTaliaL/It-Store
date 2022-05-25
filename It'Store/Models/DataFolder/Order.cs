@@ -18,6 +18,11 @@ namespace ItStore.Models.DataFolder
         public string Street { get; set; }
         [Required(ErrorMessage = "Название города не может быть пустым")]
         public string City { get; set; }
+        [Required(ErrorMessage = "Номер дома не может быть пустым")]
+        public string House { get; set; }
+
+        public string Flat { get; set; }
+
         public decimal TotalPrice { get; set; }
         public string? Promotions { get; set; } 
 

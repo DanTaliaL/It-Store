@@ -121,9 +121,8 @@ namespace ItStore.Controllers
         {
             var result = new ProfileViewModel
             {
-                CartLine = Data.CartLine.Include(q=>q.Product),
-                Order =Data.Orders.Include(q=>q.Lines).Where(q=>q.Name==User.Identity.Name),
-                Promotion = Data.Promotions.Where(q=>q.Description=="AllUser"),
+                Histories = Data.Histories.Where(q=>q.Buyer==User.Identity.Name),
+                Promotion = Data.Promotions.Where(q=>q.Percentage==5),
                 AppUser = Data.Users.Where(q=>q.UserName==User.Identity.Name),
                 ProductQuantity = Data.ProductsQuantity,
                 Cart = cart
@@ -171,11 +170,13 @@ namespace ItStore.Controllers
 
         public IActionResult AdminProfile()
         {
-            var result = new HistoryViewModel
+            var result = new ProfileViewModel
             {
-                CartLine = Data.CartLine.Include(q => q.Product),
-                Order = Data.Orders.Include(q => q.Lines).Where(q => q.Name == User.Identity.Name),
-                Promotion = Data.Promotions
+                Histories = Data.Histories.Where(q => q.Buyer == User.Identity.Name),
+                Promotion = Data.Promotions.Where(q => q.Percentage == 5),
+                AppUser = Data.Users.Where(q => q.UserName == User.Identity.Name),
+                ProductQuantity = Data.ProductsQuantity,
+                Cart = cart
             };
             return View(result);
         }

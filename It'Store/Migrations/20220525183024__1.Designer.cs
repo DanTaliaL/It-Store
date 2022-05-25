@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ItStore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220523144513__1")]
+    [Migration("20220525183024__1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,36 +23,6 @@ namespace ItStore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("HistoryOrder", b =>
-                {
-                    b.Property<int>("HistoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrdersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("HistoryId", "OrdersId");
-
-                    b.HasIndex("OrdersId");
-
-                    b.ToTable("OrderHistory", (string)null);
-                });
-
-            modelBuilder.Entity("HistoryRequest", b =>
-                {
-                    b.Property<int>("HistoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RequestsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("HistoryId", "RequestsId");
-
-                    b.HasIndex("RequestsId");
-
-                    b.ToTable("RequestHistory", (string)null);
-                });
 
             modelBuilder.Entity("ItStore.Models.AppUser", b =>
                 {
@@ -154,17 +124,6 @@ namespace ItStore.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductModel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductPrice")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -217,17 +176,49 @@ namespace ItStore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
+                    b.Property<string>("Buyer")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Rating")
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NamePromotion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
+                    b.Property<string>("PercentAge")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductPrice")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductQuantity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PromotionDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RequestId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TotalPrice")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("RequestId");
 
                     b.ToTable("Histories");
                 });
@@ -359,6 +350,14 @@ namespace ItStore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DeliveryMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Flat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("House")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -789,36 +788,6 @@ namespace ItStore.Migrations
                     b.ToTable("RequestSuplier", (string)null);
                 });
 
-            modelBuilder.Entity("HistoryOrder", b =>
-                {
-                    b.HasOne("ItStore.Models.DataFolder.History", null)
-                        .WithMany()
-                        .HasForeignKey("HistoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ItStore.Models.DataFolder.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("HistoryRequest", b =>
-                {
-                    b.HasOne("ItStore.Models.DataFolder.History", null)
-                        .WithMany()
-                        .HasForeignKey("HistoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ItStore.Models.DataFolder.Request", null)
-                        .WithMany()
-                        .HasForeignKey("RequestsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ItStore.Models.DataFolder.CartLine", b =>
                 {
                     b.HasOne("ItStore.Models.DataFolder.Order", null)
@@ -843,6 +812,17 @@ namespace ItStore.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ItStore.Models.DataFolder.History", b =>
+                {
+                    b.HasOne("ItStore.Models.DataFolder.Order", null)
+                        .WithMany("History")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("ItStore.Models.DataFolder.Request", null)
+                        .WithMany("History")
+                        .HasForeignKey("RequestId");
                 });
 
             modelBuilder.Entity("ItStore.Models.DataFolder.Options", b =>
@@ -1014,6 +994,8 @@ namespace ItStore.Migrations
 
             modelBuilder.Entity("ItStore.Models.DataFolder.Order", b =>
                 {
+                    b.Navigation("History");
+
                     b.Navigation("Lines");
                 });
 
@@ -1026,6 +1008,11 @@ namespace ItStore.Migrations
                     b.Navigation("ProductQuantity");
 
                     b.Navigation("Suppliers");
+                });
+
+            modelBuilder.Entity("ItStore.Models.DataFolder.Request", b =>
+                {
+                    b.Navigation("History");
                 });
 
             modelBuilder.Entity("ItStore.Models.DataFolder.WareHouse", b =>

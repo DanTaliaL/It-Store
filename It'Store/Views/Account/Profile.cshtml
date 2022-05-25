@@ -112,7 +112,10 @@
                         <b>Адресс доставки</b>
                     </th>
                     <th>
-                        <button class="btn__link" href="#">Редактровать</button>
+                        <form asp-action="ProfileUpdate" asp-controller="Account" method="get">
+                            <input type="hidden" name="ProfileName" value="@User.Identity.Name" />
+                            <button class="btn__link" type="submit">Редактровать</button>
+                        </form>
                     </th>
                 </tr>
                 @foreach (var User in Model.AppUser)
@@ -265,38 +268,35 @@
                 <th>Цена</th>
             </tr>
         </thead>
-        @foreach (var order in Model.Order)
+        @foreach (var history in Model.Histories)
         {
             <tbody>
 
-                @foreach (var cartline in Model.CartLine)
-                {
+
                     <tr>
-                        <td>@order.TimeOrders.ToShortDateString()</td>
-                        <td>@cartline.ProductName @cartline.ProductModel</td>
-                        <td>@cartline.Quantity</td>
-                        <td>@(cartline.ProductPrice * cartline.Quantity)</td>
+                        <td>@history.DateTime</td>
+                        <td>@history.ProductName</td>
+                        <td>@history.ProductQuantity</td>
+                        <td>@history.ProductPrice</td>
                     </tr>
 
-                }
+            
 
             </tbody>
             <tfoot>
                 <tr>
-                    @if (order.Promotions != null)
+                    @if (history.NamePromotion != "-")
                     {
-                        @foreach (var promotion in Model.Promotion)
-                        {
+                       
+                            <td>Активирован промокод @history.NamePromotion применена скидка на @history.PercentAge процента</td>
 
-                            <td>Активирован промокод @order.Promotions применена скидка на @promotion.Percentage процента</td>
-
-                        }
+                        
                     }
                 </tr>
                 <tr>
                     <td colspan="4">
                         <span><b>Итого</b></span>
-                        <span style="float:right;">@order.TotalPrice</span>
+                        <span style="float:right;">@history.TotalPrice</span>
                     </td>
                 </tr>
 
