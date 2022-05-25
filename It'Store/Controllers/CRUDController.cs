@@ -154,7 +154,7 @@ namespace ItStore.Controllers
                         History.ProductQuantity = Convert.ToString(q.Quantity);
                         History.DateTime = order.TimeOrders;
                         History.Buyer = User.Identity.Name;
-                        History.TotalPrice = order.TotalPrice.ToString();
+                        History.TotalPrice = TotalPrice.ToString();
                         if (PromotionCode!=null)
                         {
                             History.NamePromotion = promotion.Name;

@@ -235,8 +235,9 @@
                     <th class="text-center">@q.Quantity</th>
                     <th class="text-left"> @((q.Quantity*q.Product.Price)) ₽</th>
                     <th class="text-left">
-                        <form asp-action="RemoveFromCart" method="post">
+                        <form asp-controller="Cart" asp-action="RemoveFromCart" method="post">
                             <input type="hidden" name="Id" value="@q.Product.Id" />
+                            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                             <button type="submit" class="btn__link "><img src="~/Images/Icons/Bin.png" /></button>
                         </form>
                     </th>
@@ -288,7 +289,7 @@
                     @if (history.NamePromotion != "-")
                     {
                        
-                            <td>Активирован промокод @history.NamePromotion применена скидка на @history.PercentAge процента</td>
+                            <td>Активирован промокод @history.NamePromotion применена скидка на @history.PercentAge %</td>
 
                         
                     }
