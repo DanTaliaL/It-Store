@@ -2,11 +2,18 @@
 
 <img class="profile__image__right" src="~/Images/Ellipse .png" />
 <img class="profile__image__left" src="~/Images/EllipseDark.png" />
-<form asp-action="Logout method="post">
-    <p class="text-end text__decoration">
+<div class="row">
+    @if (User.IsInRole("Admin"))
+    {
+        <form class="col text-end" asp-controller="Account" asp-action="AdminProfile">
+            <button title="Администрирование" class="btn__link " type="submit"><img class="btn__exit" src="~/Images/Icons/admin.png" /></button>
+        </form>
+    }
+    <form class="col-md-1 text-start opacity-75 " asp-action="Logout method="post">
         <button title="Выход" class="btn__link " asp-area="" asp-controller="Account" asp-action="Logout"><img class="btn__exit" src="~/Images/Icons/exit.png" /></button>
-    </p>
-</form>
+    </form>
+
+</div>
 <div class=" product__min__cart__profile">
 
 
@@ -258,50 +265,33 @@
 
 
 <div class="product__min__cart__profile text-white">
-    <h2 class="text-center">История заказов</h2>
+    <h2 class="text-center">История покупок</h2>
 
     <table class="cart table">
         <thead>
             <tr>
                 <th>Дата</th>
+                <th>Время</th>
                 <th>Наименование</th>
                 <th>Количество</th>
                 <th>Цена</th>
+                <th>Скидочный промокод</th>
+                <th>Процент скидки</th>
             </tr>
         </thead>
-        @foreach (var history in Model.Histories)
+        @foreach (var history in Model.Histories.OrderByDescending(q => q.DateTime))
         {
             <tbody>
-
-
-                    <tr>
-                        <td>@history.DateTime</td>
-                        <td>@history.ProductName</td>
-                        <td>@history.ProductQuantity</td>
-                        <td>@history.ProductPrice</td>
-                    </tr>
-
-            
-
+                <tr>
+                    <td>@history.DateTime.ToShortDateString()</td>
+                    <td>@history.DateTime.ToShortTimeString()</td>
+                    <td>@history.ProductName</td>
+                    <td>@history.ProductQuantity</td>
+                    <td>@history.ProductPrice</td>
+                    <td>@history.NamePromotion</td>
+                    <td>@history.PercentAge</td>
+                </tr>
             </tbody>
-            <tfoot>
-                <tr>
-                    @if (history.NamePromotion != "-")
-                    {
-                       
-                            <td>Активирован промокод @history.NamePromotion применена скидка на @history.PercentAge %</td>
-
-                        
-                    }
-                </tr>
-                <tr>
-                    <td colspan="4">
-                        <span><b>Итого</b></span>
-                        <span style="float:right;">@history.TotalPrice</span>
-                    </td>
-                </tr>
-
-            </tfoot>
         }
     </table>
 </div>

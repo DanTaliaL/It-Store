@@ -61,6 +61,9 @@ namespace ItStore.Models
                 .WithMany(q => q.Manufacturers)
                 .UsingEntity(q => q.ToTable("ManufacturerSuppliers"));
 
+           
+
+
             //builder.Entity<History>()
             //    .HasMany(q => q.Orders)
             //    .WithMany(q => q.History)

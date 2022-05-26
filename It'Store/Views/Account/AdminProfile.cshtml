@@ -3,58 +3,47 @@
 }
 @model ProfileViewModel
 
-<div class="row-cols-md-2">
-    <h3>История покупок</h3>
-    @foreach (var history in Model.Histories)
-    {
+<div class=" text-center">
+    <h3>История продаж</h3>
 
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                Дата покупки @history.DateTime
-            </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Наименование</th>
-                            <th>Количество</th>
-                            <th>Цена</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-
-                            <tr>
-                                <td>@history.ProductName</td>
-                                <td>@history.ProductQuantity</td>
-                                <td>@(int.Parse(history.ProductPrice) * int.Parse(history.ProductQuantity))</td>
-                            </tr>
-
-        
-
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            @if (history.NamePromotion != "-")
-                            {
-                               
-
-                                    <td>Активирован промокод @history.NamePromotion применена скидка на @history.PercentAge %</td>
-
-                               
-                            }
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <span><b>Итого</b></span>
-                                <span style="float:right;">@history.TotalPrice</span>
-                            </td>
-                        </tr>
-
-                    </tfoot>
-                </table>
-            </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Общая история продаж
         </div>
-    }
+        <div class="card-body">
+            <table class="table" id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Время</th>
+                        <th>Логин покупателя</th>
+                        <th>Наименование продукта</th>
+                        <th>Количество</th>
+                        <th>Цена</th>
+                        <th>Промокод</th>
+                        <th>Процент</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var history in Model.Histories)
+                    {
+
+                        <tr>
+                            <td>@history.DateTime.ToShortDateString()</td>
+                            <td>@history.DateTime.ToShortTimeString()</td>
+                            <td>@history.Buyer</td>
+                            <td>@history.ProductName</td>
+                            <td>@history.ProductQuantity</td>
+                            <td>@(int.Parse(history.ProductPrice) * int.Parse(history.ProductQuantity))</td>
+                            <td>@history.NamePromotion</td>
+                            <td>@history.PercentAge</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>

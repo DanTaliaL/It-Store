@@ -132,7 +132,7 @@ namespace ItStore.Controllers
         [HttpPost]
         public IActionResult OrderForm(Order order, decimal TotalPrice, string? PromotionCode)
         {
-            var History = new History();
+            
             order.Name = User.Identity.Name;
             order.TotalPrice = cart.ComputeTotalValue();
             if (cart.Lines.Count() == 0)
@@ -144,37 +144,19 @@ namespace ItStore.Controllers
                 foreach (var q in cart.Lines)
                 {
                     ProductQuantity product = Data.ProductsQuantity.FirstOrDefault(p => p.Product.Name == q.Product.Name);
-                    Promotion promotion = Data.Promotions.FirstOrDefault(q=>q.PromotionCode == PromotionCode);
                     if (product.Quantity >= q.Quantity)
                     {
                         product.Quantity -= q.Quantity;
-
-                        History.ProductName =$"{q.Product.Name}  {q.Product.Model}";
-                        History.ProductPrice = q.Product.Price.ToString();
-                        History.ProductQuantity = Convert.ToString(q.Quantity);
-                        History.DateTime = order.TimeOrders;
-                        History.Buyer = User.Identity.Name;
-                        History.TotalPrice = TotalPrice.ToString();
-                        if (PromotionCode!=null)
-                        {
-                            History.NamePromotion = promotion.Name;
-                            History.PromotionDescription = promotion.Description;
-                            History.PercentAge = promotion.Percentage.ToString();
-                        }
-                        else
-                        {
-                            History.NamePromotion = "-";
-                            History.PromotionDescription = "-";
-                            History.PercentAge = "-";
-                        }
-                                               
-                        Data.Histories.Add(History);
+                       
                     }
                     else
                     {
                         ModelState.AddModelError("", $"Приносим свои извенения,{q.Product.Name} осталось всего {product.Quantity}");
                         return View(order);
                     }
+
+                   
+
                 }
                 order.Lines = cart.Lines.ToArray();
                 if (TotalPrice != null)
@@ -183,7 +165,40 @@ namespace ItStore.Controllers
                     order.Promotions = PromotionCode;
                 }
 
-                Data.SaveChanges();
+
+                
+                foreach (var q in cart.Lines)
+                {
+                    var History = new History();
+                    ProductQuantity product = Data.ProductsQuantity.FirstOrDefault(p => p.Product.Name == q.Product.Name);
+                    Promotion promotion = Data.Promotions.FirstOrDefault(q => q.PromotionCode == PromotionCode);
+
+                    History.ProductName = $"{q.Product.Name}  {q.Product.Model}";                  
+                    History.ProductQuantity = Convert.ToString(q.Quantity);
+                    History.DateTime = order.TimeOrders;
+                    History.Buyer = User.Identity.Name;
+                   
+                    if (PromotionCode != null)
+                    {
+                        History.PromotionCode = PromotionCode;
+                        History.NamePromotion = promotion.Name;
+                        History.PromotionDescription = promotion.Description;
+                        History.PercentAge = promotion.Percentage.ToString();
+                        History.ProductPrice = (Convert.ToDouble(q.Product.Price)-(Convert.ToDouble(promotion.Percentage/100.0)* Convert.ToDouble(q.Product.Price))).ToString();
+                    }
+                    else
+                    {
+                        History.PromotionCode = "-";
+                        History.ProductPrice = q.Product.Price.ToString();
+                        History.NamePromotion = "-";
+                        History.PromotionDescription = "-";
+                        History.PercentAge = "-";
+                    }
+
+                    Data.Histories.Add(History);
+                    Data.SaveChanges();
+
+                }           
                 repository.SaveOrder(order);
 
                 return RedirectToAction(nameof(Completed));

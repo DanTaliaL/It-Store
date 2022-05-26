@@ -184,9 +184,6 @@ namespace ItStore.Migrations
                     b.Property<string>("NamePromotion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<string>("PercentAge")
                         .HasColumnType("nvarchar(max)");
 
@@ -202,21 +199,13 @@ namespace ItStore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PromotionCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PromotionDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RequestId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TotalPrice")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("RequestId");
 
                     b.ToTable("Histories");
                 });
@@ -812,17 +801,6 @@ namespace ItStore.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ItStore.Models.DataFolder.History", b =>
-                {
-                    b.HasOne("ItStore.Models.DataFolder.Order", null)
-                        .WithMany("History")
-                        .HasForeignKey("OrderId");
-
-                    b.HasOne("ItStore.Models.DataFolder.Request", null)
-                        .WithMany("History")
-                        .HasForeignKey("RequestId");
-                });
-
             modelBuilder.Entity("ItStore.Models.DataFolder.Options", b =>
                 {
                     b.HasOne("ItStore.Models.DataFolder.Product", "Product")
@@ -992,8 +970,6 @@ namespace ItStore.Migrations
 
             modelBuilder.Entity("ItStore.Models.DataFolder.Order", b =>
                 {
-                    b.Navigation("History");
-
                     b.Navigation("Lines");
                 });
 
@@ -1006,11 +982,6 @@ namespace ItStore.Migrations
                     b.Navigation("ProductQuantity");
 
                     b.Navigation("Suppliers");
-                });
-
-            modelBuilder.Entity("ItStore.Models.DataFolder.Request", b =>
-                {
-                    b.Navigation("History");
                 });
 
             modelBuilder.Entity("ItStore.Models.DataFolder.WareHouse", b =>

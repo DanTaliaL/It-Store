@@ -30,7 +30,7 @@ namespace ItStore.Controllers
         public IActionResult Login(string? ReturnUrl)
         {
             ViewBag.ReturnUrl = ReturnUrl;
-            return RedirectToAction(ReturnUrl??"Index","Home");
+            return RedirectToAction(ReturnUrl ?? "Index", "Home");
         }
 
         [HttpPost]
@@ -40,8 +40,8 @@ namespace ItStore.Controllers
         {
             if (model.Login == null || model.Password == null)
             {
-                ModelState.AddModelError(nameof(CreateUserModel.Password),"");
-            }       
+                ModelState.AddModelError(nameof(CreateUserModel.Password), "");
+            }
             bool AdminStatus = false;
             if (ModelState.IsValid)
             {
@@ -121,9 +121,9 @@ namespace ItStore.Controllers
         {
             var result = new ProfileViewModel
             {
-                Histories = Data.Histories.Where(q=>q.Buyer==User.Identity.Name),
-                Promotion = Data.Promotions.Where(q=>q.Percentage==5),
-                AppUser = Data.Users.Where(q=>q.UserName==User.Identity.Name),
+                Histories = Data.Histories.Where(q => q.Buyer == User.Identity.Name),
+                Promotion = Data.Promotions.Where(q => q.Percentage == 5),
+                AppUser = Data.Users.Where(q => q.UserName == User.Identity.Name),
                 ProductQuantity = Data.ProductsQuantity,
                 Cart = cart
             };
@@ -135,52 +135,46 @@ namespace ItStore.Controllers
         [HttpPost]
         public IActionResult ProfileUpdate(AppUser user, string ProfileName, string ProfileRole)
         {
-            AppUser update = userManager.Users.Where(q=>q.UserName == ProfileName).FirstOrDefault();
-           
+            AppUser update = userManager.Users.Where(q => q.UserName == ProfileName).FirstOrDefault();
 
-  
+
+
             update.City = user.City;
- 
+
             update.Email = user.Email;
-   
+
             update.FatherName = user.FatherName;
             update.FirstName = user.FirstName;
             update.LastName = user.LastName;
             update.PhoneNumber = user.PhoneNumber;
             update.Flat = user.Flat;
-            update.House =user.House;
-
- 
-            update.NormalizedEmail= user.Email.Normalize();
+            update.House = user.House;
 
 
-            update.Street= user.Street;
-   
+            update.NormalizedEmail = user.Email.Normalize();
+
+
+            update.Street = user.Street;
+
             Data.SaveChanges();
-            if (ProfileRole == "Admin")
-            {
-                return RedirectToAction("AdminProfile");
-            }
-            else
-            {
-                return RedirectToAction("Profile");
-            }
-           
+
+            return RedirectToAction("Profile");
+
+
         }
 
         public IActionResult AdminProfile()
         {
             var result = new ProfileViewModel
             {
-                Histories = Data.Histories.Where(q => q.Buyer == User.Identity.Name),
-                Promotion = Data.Promotions.Where(q => q.Percentage == 5),
-                AppUser = Data.Users.Where(q => q.UserName == User.Identity.Name),
+                Histories = Data.Histories,
+                Promotion = Data.Promotions,
+                AppUser = Data.Users,
                 ProductQuantity = Data.ProductsQuantity,
                 Cart = cart
             };
             return View(result);
         }
-
 
     }
 }

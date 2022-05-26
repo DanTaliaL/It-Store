@@ -36,8 +36,6 @@ namespace ItStore.Models.DataFolder
         public List<Request>? Requests { get; set; }
         [BindNever]
         public List<Promotion>? Promotion { get; set; }
-        [BindNever]
-        public List<History>? History { get; set; }
 
     }
 }

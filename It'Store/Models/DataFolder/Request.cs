@@ -12,6 +12,5 @@ namespace ItStore.Models.DataFolder
 
         public List<Supplier> Suppliers { get; set; }
         public List<Order> Orders { get; set; }
-        public List<History> History { get; set; }
     }
 }

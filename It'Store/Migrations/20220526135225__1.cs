@@ -56,6 +56,27 @@ namespace ItStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Histories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductPrice = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductQuantity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Buyer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NamePromotion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PromotionCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PromotionDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PercentAge = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Histories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Manufacturer",
                 columns: table => new
                 {
@@ -440,39 +461,6 @@ namespace ItStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Histories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductPrice = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductQuantity = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Buyer = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TotalPrice = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NamePromotion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PromotionDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PercentAge = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OrderId = table.Column<int>(type: "int", nullable: true),
-                    RequestId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Histories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Histories_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Histories_Requests_RequestId",
-                        column: x => x.RequestId,
-                        principalTable: "Requests",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OrderRequest",
                 columns: table => new
                 {
@@ -624,16 +612,6 @@ namespace ItStore.Migrations
                 name: "IX_Comments_ProductID",
                 table: "Comments",
                 column: "ProductID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Histories_OrderId",
-                table: "Histories",
-                column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Histories_RequestId",
-                table: "Histories",
-                column: "RequestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ManufacturerSuppliers_SuppliersId",
