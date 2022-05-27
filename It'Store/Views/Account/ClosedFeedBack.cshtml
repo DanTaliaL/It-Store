@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model IEnumerable<FeedBack>
+
+
+<div class=" text-center">
+    <h3>Закрытые обращения</h3>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+        </div>
+        <div class="card-body">
+            <table class="table" id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Дата обращения</th>
+                        <th>Дата закрытия</th>
+                        <th>Логин</th>
+                        <th>Тип обращения</th>
+                        <th>Основная почта</th>
+                        <th>Вспомогательная почта</th>
+                        <th>ФИО пользователя</th>
+                        <th>Обращение</th>
+                        <th>Администратор</th>
+                        <th>Комментарий администратора</th>
+                        <th>Управление</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var openfeedback in Model.Where(q => q.FeedbakStatus == false))
+                    {
+
+                        <tr>
+                            <td>@openfeedback.Created.ToShortDateString()</td>
+                            <td>@openfeedback.Closed.ToShortDateString()</td>
+                            <td>@openfeedback.Login</td>
+                            <td>@openfeedback.TypeMessage</td>
+                            <td>@openfeedback.MainEmail</td>
+                            <td>@openfeedback.AuxiliaryEmail</td>
+                            <td>@openfeedback.Name</td>
+                            <td>@openfeedback.Text</td>
+                            <td>@openfeedback.Admin</td>
+                            <td>@openfeedback.AdminCommentaries</td>
+                            <td>
+                                <form asp-action="EditFeedBack" method="post">
+                                    <input type="hidden" name="id" value="@openfeedback.id" />
+                                    <input type="hidden" name="Status" value="true"/>
+                                    <button class="btn btn-primary" type="submit"> Открыть обращение </button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

@@ -171,10 +171,70 @@ namespace ItStore.Controllers
                 Promotion = Data.Promotions,
                 AppUser = Data.Users,
                 ProductQuantity = Data.ProductsQuantity,
-                Cart = cart
+                Cart = cart,
+                FeedBacks = Data.FeedBacks
+
             };
             return View(result);
         }
 
+
+        public IActionResult OpenFeedBack()
+        {
+            return View(Data.FeedBacks.OrderBy(q=>q.id));
+        }
+
+        public IActionResult ClosedFeedBack()
+        {
+
+            return View(Data.FeedBacks.OrderBy(q => q.id));
+        }
+
+
+
+        public IActionResult EditFeedBack(int id) => View(Data.FeedBacks.FirstOrDefault(q => q.id == id));
+
+        [HttpPost]
+        public IActionResult EditFeedBack(FeedBack feedBack, int id, bool Status , string Comment)
+        {
+            if (Status)
+            {
+                FeedBack update = Data.FeedBacks.FirstOrDefault(q => q.id == id);
+
+                if (update.AdminCommentaries==null)
+                {
+                    update.AdminCommentaries = $"{DateTime.Now}\n  {Comment}";
+                }
+                else
+                {
+                    update.AdminCommentaries = $"{update.AdminCommentaries}  \n {DateTime.Now} \n  {Comment}";
+                }             
+                update.FeedbakStatus = true;
+                update.Admin = User.Identity.Name;
+                update.Closed = DateTime.Now;
+
+                Data.SaveChanges();
+                return RedirectToAction("OpenFeedBack");
+            }
+            else
+            {
+                FeedBack update = Data.FeedBacks.FirstOrDefault(q => q.id == id);
+
+                if (update.AdminCommentaries == null)
+                {
+                    update.AdminCommentaries = $"{DateTime.Now}\n  {Comment}";
+                }
+                else
+                {
+                    update.AdminCommentaries = $"{update.AdminCommentaries}  \n {DateTime.Now}\n  {Comment}";
+                }
+                update.FeedbakStatus = false;
+                update.Admin = User.Identity.Name;
+                update.Closed = DateTime.Now;
+
+                Data.SaveChanges();
+                return RedirectToAction("ClosedFeedBack");
+            }
+        }
     }
 }

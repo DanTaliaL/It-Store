@@ -166,6 +166,56 @@ namespace ItStore.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("ItStore.Models.DataFolder.FeedBack", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<string>("Admin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AdminCommentaries")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AuxiliaryEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Closed")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("FeedbakStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MainEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("FeedBacks");
+                });
+
             modelBuilder.Entity("ItStore.Models.DataFolder.History", b =>
                 {
                     b.Property<int>("Id")

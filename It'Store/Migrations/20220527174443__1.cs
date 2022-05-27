@@ -56,6 +56,29 @@ namespace ItStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FeedBacks",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MainEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AuxiliaryEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TypeMessage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Closed = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Admin = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AdminCommentaries = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FeedbakStatus = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FeedBacks", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Histories",
                 columns: table => new
                 {
@@ -681,6 +704,9 @@ namespace ItStore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "FeedBacks");
 
             migrationBuilder.DropTable(
                 name: "Histories");

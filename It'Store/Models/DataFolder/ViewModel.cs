@@ -71,6 +71,7 @@
 
         public Cart Cart { get; set; }
         public IEnumerable<ProductQuantity> ProductQuantity { get; set; }
+        public IEnumerable <FeedBack> FeedBacks { get; set; }
     }
 
 }

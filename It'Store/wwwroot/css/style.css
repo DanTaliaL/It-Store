@@ -120,6 +120,21 @@ a:hover {
         font-size: 15px;
     }
 
+.text__decoration {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.form-control-plaintext {
+    padding:0;
+}
+
+.modal-body p {
+    -webkit-text-stroke: thin;
+}
+
 .button {
     border: none;
     background: none;
@@ -700,7 +715,7 @@ btn__pagin, .btn__pagin:hover {
     height: 30px;
     width: 30px;
     opacity: 0.5;
-    transform:rotate(180deg);
+    transform: rotate(180deg);
 }
 
 
@@ -1022,9 +1037,9 @@ body {
 
 
 /*profile****************/
-.profile .table{
-    color:white;
-    border-color:#434343;
+.profile .table {
+    color: white;
+    border-color: #434343;
 }
 
 .border__style {
@@ -1070,9 +1085,9 @@ body {
     max-width: 220px;
 }
 
-.profile .btn__link :hover{
-    opacity:100%;
-}
+    .profile .btn__link :hover {
+        opacity: 100%;
+    }
 
 .profile p {
     float: right;
@@ -1098,9 +1113,9 @@ body {
     max-inline-size: fit-content;
 }
 
-.btn__exit{
-    width:30px;
-    height:30px;
+.btn__exit {
+    width: 30px;
+    height: 30px;
 }
 
 .product__min__cart__profile {
@@ -1109,11 +1124,12 @@ body {
     margin-top: 13px;
     border-radius: 10px;
     box-shadow: 8px 3px 13px rgb(0 0 0 / 26%);
-    opacity:0.8;
+    opacity: 0.8;
 }
-.product__min__cart__profile :hover{
-    opacity:1;
-}
+
+    .product__min__cart__profile :hover {
+        opacity: 1;
+    }
 
 .profile__image__right {
     position: absolute;

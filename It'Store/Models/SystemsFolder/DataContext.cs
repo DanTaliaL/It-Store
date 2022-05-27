@@ -24,6 +24,7 @@ namespace ItStore.Models
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Commentaries> Comments { get; set; }
         public DbSet<ProductQuantity> ProductsQuantity { get; set; }
+        public DbSet<FeedBack> FeedBacks { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

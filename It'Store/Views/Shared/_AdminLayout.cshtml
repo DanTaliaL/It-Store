@@ -42,7 +42,7 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Основной функционал</div> 
+                        <div class="sb-sidenav-menu-heading">Основной функционал</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Мэнеджмент
@@ -59,7 +59,6 @@
                                 <div class="collapse" id="pagesProduct" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" asp-controller="Product" asp-action="Product">Товар</a>
-                                        @*<a class="nav-link" asp-controller="ProductQuantity" asp-action="ProductQuantity">Количество</a>*@
                                         <a class="nav-link" asp-controller="Promotion" asp-action="Promotion">Промокоды</a>
                                         <a class="nav-link" asp-controller="WareHouse" asp-action="WareHouse">Склад</a>
                                         <a class="nav-link" asp-controller="Picture" asp-action="Picture">Изображения</a>
@@ -102,9 +101,14 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Распределение товара по цене
                         </a>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" asp-controller="Account" asp-action="OpenFeedBack">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Динамика продаж
+                            Активные обращения
+                        </a>
+
+                        <a class="nav-link" asp-controller="Account" asp-action="ClosedFeedBack">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Закрытые обращения
                         </a>
                     </div>
                 </div>
