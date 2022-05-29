@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ItStore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220527174443__1")]
+    [Migration("20220529153308__1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -205,9 +205,15 @@ namespace ItStore.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TypeFeedback")
+                        .HasColumnType("bit");
 
                     b.Property<string>("TypeMessage")
                         .IsRequired()

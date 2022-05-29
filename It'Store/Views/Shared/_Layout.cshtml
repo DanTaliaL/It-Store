@@ -29,9 +29,9 @@
                             </a>
                         </li>
                         <li>
-                            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white nav__link">
+                            <button type="button" class="btn__link text__decoration nav-link text-white nav__link" data-bs-toggle="modal" data-bs-target="#Garantee">
                                 Гарантия и возврат
-                            </a>
+                            </button>
                         </li>
                         <li>
                             <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white nav__link">
@@ -59,14 +59,7 @@
                     <a class="nav__link" asp-area="" asp-controller="Cart" asp-action="Cart"><img src="~/Images/Icons/Basket.png" /></a>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        @*if (User.IsInRole("Admin"))
-                            {
-                                <a type="" class="nav__link nav__link_icon" asp-area="" asp-controller="Account" asp-action="AdminProfile"><img src="~/Images/Icons/User.png" /></a>
-                            }
-                            else
-                            {*@
                         <a type="" class="nav__link nav__link_icon" asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/Images/Icons/User.png" /></a>
-                        //}
 
                     }
                     else
@@ -137,24 +130,24 @@
                         <div class="row">
                             <p class="text-black col-3">Я хочу </p>
                             <p class="col-6">
-                                
-                                    <select name="TypeMesseage" class="form-control-plaintext">
-                                        <option class="text-black"  value="Оставить жалобу">Оставить жалобу</option>
-                                        <option class="text-black"  value="Задать вопрос">Задать вопрос</option>
-                                        <option class="text-black"  value="Поблагодарить">Поблагодарить</option>
-                                        <option class="text-black"  value="Сделать предложение">Сделать предложение</option>
-                                        <option class="text-black"  value="Сообщить об ошибке сайта">Сообщить об ошибке сайта</option>
-                                    </select>
-                                
+
+                                <select name="TypeMesseage" class="form-control-plaintext">
+                                    <option class="text-black" value="Оставить жалобу">Оставить жалобу</option>
+                                    <option class="text-black" value="Задать вопрос">Задать вопрос</option>
+                                    <option class="text-black" value="Поблагодарить">Поблагодарить</option>
+                                    <option class="text-black" value="Сделать предложение">Сделать предложение</option>
+                                    <option class="text-black" value="Сообщить об ошибке сайта">Сообщить об ошибке сайта</option>
+                                </select>
+
                             </p>
                         </div>
                         <p class="text-black">
                             Ваше обращение
-                            <textarea class="text-black form-control w-100" name="Text" placeholder="Ваше мнение важно для нас..."> </textarea>
+                            <textarea class="text-black form-control w-100" name="Text"> </textarea>
                         </p>
                         <p class="text-black">
                             <label>Допольнительный E-Mail</label>
-                            <input class="form-control" name="Email" placeholder="Ответим в течении 2 часов..."/>
+                            <input class="form-control" name="Email" />
                         </p>
 
                     </div>
@@ -166,6 +159,60 @@
         </div>
     </div>
 
+
+    @*//Modal Garantee*@
+    <div class="modal fade" id="Garantee" tabindex="-1" aria-labelledby="Garantee" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-black" id="Garantee">Гарантия и возврат</h5>
+                    <button type="button" class="button__none" data-bs-dismiss="modal" aria-label="Close">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z" />
+                            <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z" />
+                        </svg>
+                    </button>
+                </div>
+                <form asp-controller="Home" asp-action="FeedBack" method="post">
+                    <div class="modal-body">
+
+                        <div asp-validation-summary="All"></div>
+                        <div class="row">
+                            <p class="text-black col-3">Поблема с </p>
+                            <p class="col-6">
+
+                                <select name="TypeMesseage" class="form-control-plaintext">
+                                    <option class="text-black" value="Не надлежащее качество">Качеством</option>
+                                    <option class="text-black" value="Брак">Поломкой</option>
+                                    <option class="text-black" value="Пришел не тот продукт">Маркой (пришел не тот проудкт)</option>
+                                </select>
+
+                            </p>
+                        </div>
+
+                        <p class="text-black">
+                            Укажите Марку и модель продукта
+                            <input class="text-black form-control" name="ProductName" />
+                        </p>
+
+                        <p class="text-black">
+                            Опишие проблему
+                            <textarea class="text-black form-control w-100" name="Text"> </textarea>
+                        </p>
+
+                        <p class="text-black">
+                            <label>Допольнительный E-Mail</label>
+                            <input class="form-control" name="Email" />
+                        </p>
+
+                    </div>
+                    <div class="modal-footer text-black">
+                        <button name="TypeFeedback" value="true" type="submit" class="modal__button">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
 

@@ -40,48 +40,84 @@ namespace ItStore.Controllers
         public IActionResult Privacy() => View();
 
         [HttpPost]
-        public IActionResult Feedback(string EMail, string Text, string TypeMesseage)
+        public IActionResult Feedback(string EMail, string Text, string TypeMesseage, bool TypeFeedback, string? ProductName)
         {
-            AppUser appUser = UserManager.Users.FirstOrDefault(q => q.UserName == User.Identity.Name);
-            FeedBack feedBack = new FeedBack
+            if (TypeFeedback)
             {
-                TypeMessage = TypeMesseage,
-                Text = Text,
-                Login = User.Identity.Name,
-                Created = DateTime.Now,
-                Closed = DateTime.Now,
-                FeedbakStatus = true,
 
-            };
-            if (feedBack.MainEmail == null)
-            {
-                feedBack.MainEmail = "Не зарегестрирован";
-                feedBack.Login = "Гость";
+                if (User.Identity.IsAuthenticated)
+                {
+                    AppUser appUser = UserManager.Users.FirstOrDefault(q => q.UserName == User.Identity.Name);
+                    FeedBack feedBack = new FeedBack
+                    {
+                        TypeMessage = TypeMesseage,
+                        ProductName = ProductName,
+                        TypeFeedback = TypeFeedback,
+                        Text = Text,
+                        Login = User.Identity.Name,
+                        Created = DateTime.Now,
+                        Closed = DateTime.Now,
+                        FeedbakStatus = true,
+                        MainEmail = appUser.Email,
+
+                    };
+
+                    if (EMail != null)
+                    {
+                        feedBack.AuxiliaryEmail = EMail;
+                    }
+
+                    Data.Add(feedBack);
+                    Data.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Login","Account");
+                }              
             }
             else
             {
-                feedBack.MainEmail = appUser.Email;
-            }
-
-            if (EMail != null)
-            {
-                feedBack.AuxiliaryEmail = EMail;
-            }
-
-
-            if (appUser != null)
-            {
-                if (appUser.FatherName != null)
+                AppUser appUser = UserManager.Users.FirstOrDefault(q => q.UserName == User.Identity.Name);
+                FeedBack feedBack = new FeedBack
                 {
-                    feedBack.Name = $"{appUser.LastName} {appUser.FirstName} {appUser.FatherName}";
+                    TypeMessage = TypeMesseage,
+                    Text = Text,
+                    Login = User.Identity.Name,
+                    Created = DateTime.Now,
+                    Closed = DateTime.Now,
+                    FeedbakStatus = true,
+
+                };
+                if (feedBack.MainEmail == null)
+                {
+                    feedBack.MainEmail = "Не зарегестрирован";
+                    feedBack.Login = "Гость";
+                }
+                else
+                {
+                    feedBack.MainEmail = appUser.Email;
                 }
 
+                if (EMail != null)
+                {
+                    feedBack.AuxiliaryEmail = EMail;
+                }
+
+
+                if (appUser != null)
+                {
+                    if (appUser.FatherName != null)
+                    {
+                        feedBack.Name = $"{appUser.LastName} {appUser.FirstName} {appUser.FatherName}";
+                    }
+
+                }
+
+                Data.Add(feedBack);
+                Data.SaveChanges();
+                return RedirectToAction("Index");
             }
-
-
-            Data.Add(feedBack);
-            Data.SaveChanges();
-            return RedirectToAction("Index");
         }
 
     }

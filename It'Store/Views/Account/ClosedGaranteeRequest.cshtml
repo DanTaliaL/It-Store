@@ -1,0 +1,63 @@
+﻿@{ 
+    Layout = "_AdminLayout";
+}
+@model IEnumerable<FeedBack>
+
+
+<div class=" text-center">
+    <h3>Закрытые обращения</h3>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+        </div>
+        <div class="card-body">
+            <table class="table" id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Дата обращения</th>
+                        <th>Дата закрытия</th>
+                        <th>Логин</th>
+                        <th>Тип обращения</th>
+                        <th>Продукт</th>
+                        <th>Основная почта</th>
+                        <th>Вспомогательная почта</th>
+                        <th>ФИО пользователя</th>
+                        <th>Обращение</th>
+                        <th>Администратор</th>
+                        <th>Комментарий администратора</th>
+                        <th>Управление</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var closedgarantee in Model.Where(q => q.FeedbakStatus == false))
+                    {
+
+                        <tr>
+                            <td>@closedgarantee.Created.ToShortDateString()</td>
+                            <td>@closedgarantee.Closed.ToShortDateString()</td>
+                            <td>@closedgarantee.Login</td>
+                            <td>@closedgarantee.TypeMessage</td>
+                            <td>@closedgarantee.ProductName</td>
+                            <td>@closedgarantee.MainEmail</td>
+                            <td>@closedgarantee.AuxiliaryEmail</td>
+                            <td>@closedgarantee.Name</td>
+                            <td>@closedgarantee.Text</td>
+                            <td>@closedgarantee.Admin</td>
+                            <td>@closedgarantee.AdminCommentaries</td>
+                            <td>
+                                <form asp-action="EditGaranteeRequest" method="post">
+                                    <input type="hidden" name="id" value="@closedgarantee.id" />
+                                    <input type="hidden" name="Status" value="true" />
+                                    <button class="btn btn-primary" type="submit"> Открыть обращение </button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

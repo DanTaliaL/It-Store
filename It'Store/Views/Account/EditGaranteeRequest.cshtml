@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model FeedBack
+
+
+<div class=" text-center">
+    <h3>Обработка заявки возврата</h3>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+        </div>
+        <div class="card-body">
+            <form asp-action="EditGaranteeRequest" method="post">
+                <table class="table" id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th class="w-25">Общая информация</th>
+                            <th class="w-25">Обращение</th>
+                            <th class="w-50">Комментарий администратора</th>
+                            <th>Управление</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                <b>Продукт: @Model.ProductName</b>
+                                Дата обращения: @Model.Created.ToShortDateString()<br />
+                                Логин: @Model.Login<br />
+                                Тип обращения: @Model.TypeMessage<br />
+                                Основная почта: @Model.MainEmail<br />
+                                Вспомогательная почта: @Model.AuxiliaryEmail<br />
+                                ФИО пользователя: @Model.Name<br />
+                            </td>
+                            <td>@Model.Text</td>
+                            <td>
+                                <textarea class="form-control w-100" name="Comment"> </textarea>
+                            </td>
+                            <td>
+                                <input type="hidden" name="id" value="@Model.id" />
+                                <button class="btn btn-primary mb-2" name="Status" value="true" type="submit"> Сохранить</button>
+                                <button class="btn btn-primary mb-2" type="submit"> Сохранить  и зыкрыть заявку</button>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -181,13 +181,13 @@ namespace ItStore.Controllers
 
         public IActionResult OpenFeedBack()
         {
-            return View(Data.FeedBacks.OrderBy(q=>q.id));
+            return View(Data.FeedBacks.OrderBy(q=>q.id).Where(q=>q.TypeFeedback==false));
         }
 
         public IActionResult ClosedFeedBack()
         {
 
-            return View(Data.FeedBacks.OrderBy(q => q.id));
+            return View(Data.FeedBacks.OrderBy(q => q.id).Where(q => q.TypeFeedback == false));
         }
 
 
@@ -236,5 +236,72 @@ namespace ItStore.Controllers
                 return RedirectToAction("ClosedFeedBack");
             }
         }
+
+
+
+
+        public IActionResult OpenGaranteeRequest()
+        {
+            return View(Data.FeedBacks.OrderBy(q => q.id).Where(q => q.TypeFeedback == true));
+        }
+
+        public IActionResult ClosedGaranteeRequest()
+        {
+
+            return View(Data.FeedBacks.OrderBy(q => q.id).Where(q => q.TypeFeedback == true));
+        }
+
+
+
+        public IActionResult EditGaranteeRequest(int id) => View(Data.FeedBacks.FirstOrDefault(q => q.id == id));
+
+        [HttpPost]
+        public IActionResult EditGaranteeRequest(FeedBack feedBack, int id, bool Status, string Comment)
+        {
+            if (Status)
+            {
+                FeedBack update = Data.FeedBacks.FirstOrDefault(q => q.id == id);
+
+                if (update.AdminCommentaries == null)
+                {
+                    update.AdminCommentaries = $"{DateTime.Now}\n  {Comment}";
+                }
+                else
+                {
+                    update.AdminCommentaries = $"{update.AdminCommentaries}  \n {DateTime.Now} \n  {Comment}";
+                }
+                update.FeedbakStatus = true;
+                update.Admin = User.Identity.Name;
+                update.Closed = DateTime.Now;
+
+                Data.SaveChanges();
+                return RedirectToAction("OpenGaranteeRequest");
+            }
+            else
+            {
+                FeedBack update = Data.FeedBacks.FirstOrDefault(q => q.id == id);
+
+                if (update.AdminCommentaries == null)
+                {
+                    update.AdminCommentaries = $"{DateTime.Now}\n  {Comment}";
+                }
+                else
+                {
+                    update.AdminCommentaries = $"{update.AdminCommentaries}  \n {DateTime.Now}\n  {Comment}";
+                }
+                update.FeedbakStatus = false;
+                update.Admin = User.Identity.Name;
+                update.Closed = DateTime.Now;
+
+                Data.SaveChanges();
+                return RedirectToAction("ClosedGaranteeRequest");
+            }
+        }
+
+
+
+
+
+
     }
 }

@@ -68,6 +68,8 @@ namespace ItStore.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TypeFeedback = table.Column<bool>(type: "bit", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Closed = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Admin = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AdminCommentaries = table.Column<string>(type: "nvarchar(max)", nullable: true),

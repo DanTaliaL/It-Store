@@ -30,7 +30,8 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">@User.Identity.Name</a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile">Настройки профиля</a></li>
+                    <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile">Профиль покупателя</a></li>
+                    <li><a class="dropdown-item" asp-controller="Account" asp-action="AdminProfile">Общая история продаж</a></li>
                     <li><a class="dropdown-item" asp-controller="Account" asp-action="Logout">Выйти</a></li>
                 </ul>
             </li>
@@ -74,33 +75,16 @@
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" asp-controller="AdminRole" asp-action="PageRole">Аккаунты</a>
                                     </nav>
-                                </div>
-
-
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesSupplier" aria-expanded="false" aria-controls="pagesSupplier">
-                                    Управление поставщиков
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesSupplier" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link">Добавить поставщика</a> @*none*@
-                                        <a class="nav-link">Добавить заказ</a>
-                                        <a class="nav-link"> Удалить </a> @*none*@
-                                    </nav>
-                                </div>
+                                </div>                         
                             </nav>
                         </div>
-
-
-
-
-
 
                         <div class="sb-sidenav-menu-heading">Аналитика</div>
                         <a class="nav-link" asp-controller="Chart" asp-action="Chart">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Распределение товара по цене
                         </a>
+                        <div class="sb-sidenav-menu-heading">Обращения</div>
                         <a class="nav-link" asp-controller="Account" asp-action="OpenFeedBack">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Активные обращения
@@ -110,6 +94,18 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Закрытые обращения
                         </a>
+
+                        <div class="sb-sidenav-menu-heading">Запросы возврата</div>
+                        <a class="nav-link" asp-controller="Account" asp-action="OpenGaranteeRequest">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Активные запросы
+                        </a>
+
+                        <a class="nav-link" asp-controller="Account" asp-action="ClosedGaranteeRequest">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Закрытые запросы
+                        </a>
+
                     </div>
                 </div>
             </nav>

@@ -203,9 +203,15 @@ namespace ItStore.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TypeFeedback")
+                        .HasColumnType("bit");
 
                     b.Property<string>("TypeMessage")
                         .IsRequired()

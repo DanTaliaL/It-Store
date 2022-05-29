@@ -11,7 +11,10 @@
         public string Text { get; set; }
         public DateTime Created { get; set; }
 
+        public bool TypeFeedback { get; set; }
+        public string? ProductName { get; set; }
 
+       
 
         public DateTime Closed { get; set; }
         public string? Admin { get; set; }
