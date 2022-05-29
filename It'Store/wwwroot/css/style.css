@@ -773,6 +773,16 @@ btn__pagin, .btn__pagin:hover {
     background-color: #212529;
 }
 
+.footer__logo{
+    position:absolute;
+}
+
+.footer__image {
+    height: 50%;
+    width: 50%;
+}
+
+
 .footer__position {
     background: rgba(0, 0, 0, .1);
     margin-top: 10px;
@@ -1149,4 +1159,14 @@ body {
     right: 3%;
     width: 114%;
     height: 102%;
+}
+
+.map iframe {
+    width: -webkit-fill-available;
+}
+
+.btn__footer {
+    background-color: #101010;
+    border: 1px;
+    color: none;
 }
