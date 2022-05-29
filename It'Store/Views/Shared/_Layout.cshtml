@@ -34,9 +34,12 @@
                             </button>
                         </li>
                         <li>
-                            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white nav__link">
-                                Успей купить
-                            </a>
+                            <form asp-controller="Catalog" asp-action="Catalog" >
+                                <button type="submit"  name="HotProduct" value="true" class="btn__link text__decoration nav-link text-white nav__link" >
+                                    Успей купить
+                                </button>
+                            </form>
+                            
                         </li>
                         <li>
                             <button type="button" class="btn__link text__decoration nav-link text-white nav__link" data-bs-toggle="modal" data-bs-target="#FeedBack">

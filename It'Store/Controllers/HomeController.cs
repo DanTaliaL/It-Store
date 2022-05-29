@@ -31,6 +31,7 @@ namespace ItStore.Controllers
                 .Where(q => category == null || q.Categories == category)
                 .OrderBy(p => p.Id)
                 .Skip((productPage - 1) * PageSize)
+                .OrderByDescending(q=>q.Price)
                 .Take(PageSize),
                 CurrentCategory = category,
                 ProductModel = productmodel
