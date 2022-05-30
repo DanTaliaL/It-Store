@@ -7,7 +7,12 @@ namespace ItStore.Models.DataFolder
         public int Id { get; set; }
         public string Name { get; set; }
         public int Percentage { get; set; }
-        public int Quantity { get; set; }
+
+        public bool PublicStatus { get; set; }
+
+        public DateTime CreateDate { get; set; }
+        public DateTime ClosedDate { get; set; }
+
         public string Description { get; set; }
         public string PromotionCode { get; set; }
 

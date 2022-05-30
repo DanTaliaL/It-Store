@@ -11,13 +11,10 @@ namespace ItStore.Models
     public class DataContext : IdentityDbContext<AppUser>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-        public DbSet<Request> Requests { get; set; }
         public DbSet<WareHouse> WareHouse { get; set; }
-        public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Options> Options { get; set; }
-        public DbSet<Manufacturer> Manufacturer { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<History> Histories { get; set; }
         public DbSet<CartLine> CartLine { get; set; }
@@ -39,41 +36,12 @@ namespace ItStore.Models
                 .WithMany(q => q.ProductQuantities)
                 .HasForeignKey(q => q.WareHouseId);
               
-                 
-
-
-            builder.Entity<Request>()
-                .HasMany(q => q.Suppliers)
-                .WithMany(q => q.Requests)
-                .UsingEntity(q => q.ToTable("RequestSuplier"));
-
+               
             builder.Entity<Options>()
                 .HasOne(q => q.Product)
                 .WithMany(q => q.Options)
                 .HasForeignKey(q => q.ProductId);
-
-            builder.Entity<Supplier>()
-                .HasOne(q => q.Product)
-                .WithMany(q => q.Suppliers)
-                .HasForeignKey(q => q.ProductId);
-
-            builder.Entity<Manufacturer>()
-                .HasMany(q => q.Suppliers)
-                .WithMany(q => q.Manufacturers)
-                .UsingEntity(q => q.ToTable("ManufacturerSuppliers"));
-
-           
-
-
-            //builder.Entity<History>()
-            //    .HasMany(q => q.Orders)
-            //    .WithMany(q => q.History)
-            //    .UsingEntity(q => q.ToTable("OrderHistory"));
-
-            //builder.Entity<History>()
-            //    .HasMany(q => q.Requests)
-            //    .WithMany(q => q.History)
-            //    .UsingEntity(q => q.ToTable("RequestHistory"));
+         
 
             builder.Entity<Promotion>()
                 .HasMany(q => q.Orders)

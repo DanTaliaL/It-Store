@@ -30,10 +30,7 @@ namespace ItStore.Models.DataFolder
         public DateTime TimeOrders { get; set; }
         public string DeliveryMethod { get; set; }
 
-        [BindNever]
-        public List<Product>? Products { get; set; }
-        [BindNever]
-        public List<Request>? Requests { get; set; }
+
         [BindNever]
         public List<Promotion>? Promotion { get; set; }
 

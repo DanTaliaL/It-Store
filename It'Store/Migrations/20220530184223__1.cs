@@ -102,20 +102,6 @@ namespace ItStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Manufacturer",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Manufacturer", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -175,29 +161,15 @@ namespace ItStore.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Percentage = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    PublicStatus = table.Column<bool>(type: "bit", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ClosedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PromotionCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Promotions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Requests",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductPrice = table.Column<int>(type: "int", nullable: false),
-                    PurshaceMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Requests", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -414,54 +386,6 @@ namespace ItStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderProduct",
-                columns: table => new
-                {
-                    OrdersId = table.Column<int>(type: "int", nullable: false),
-                    ProductsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderProduct", x => new { x.OrdersId, x.ProductsId });
-                    table.ForeignKey(
-                        name: "FK_OrderProduct_Orders_OrdersId",
-                        column: x => x.OrdersId,
-                        principalTable: "Orders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderProduct_Products_ProductsId",
-                        column: x => x.ProductsId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Suppliers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Organization = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Adress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Suppliers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Suppliers_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OrdersPromotions",
                 columns: table => new
                 {
@@ -481,30 +405,6 @@ namespace ItStore.Migrations
                         name: "FK_OrdersPromotions_Promotions_PromotionId",
                         column: x => x.PromotionId,
                         principalTable: "Promotions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OrderRequest",
-                columns: table => new
-                {
-                    OrdersId = table.Column<int>(type: "int", nullable: false),
-                    RequestsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderRequest", x => new { x.OrdersId, x.RequestsId });
-                    table.ForeignKey(
-                        name: "FK_OrderRequest_Orders_OrdersId",
-                        column: x => x.OrdersId,
-                        principalTable: "Orders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderRequest_Requests_RequestsId",
-                        column: x => x.RequestsId,
-                        principalTable: "Requests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -532,54 +432,6 @@ namespace ItStore.Migrations
                         name: "FK_ProductsQuantity_WareHouse_WareHouseId",
                         column: x => x.WareHouseId,
                         principalTable: "WareHouse",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ManufacturerSuppliers",
-                columns: table => new
-                {
-                    ManufacturersId = table.Column<int>(type: "int", nullable: false),
-                    SuppliersId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ManufacturerSuppliers", x => new { x.ManufacturersId, x.SuppliersId });
-                    table.ForeignKey(
-                        name: "FK_ManufacturerSuppliers_Manufacturer_ManufacturersId",
-                        column: x => x.ManufacturersId,
-                        principalTable: "Manufacturer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ManufacturerSuppliers_Suppliers_SuppliersId",
-                        column: x => x.SuppliersId,
-                        principalTable: "Suppliers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RequestSuplier",
-                columns: table => new
-                {
-                    RequestsId = table.Column<int>(type: "int", nullable: false),
-                    SuppliersId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RequestSuplier", x => new { x.RequestsId, x.SuppliersId });
-                    table.ForeignKey(
-                        name: "FK_RequestSuplier_Requests_RequestsId",
-                        column: x => x.RequestsId,
-                        principalTable: "Requests",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RequestSuplier_Suppliers_SuppliersId",
-                        column: x => x.SuppliersId,
-                        principalTable: "Suppliers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -639,24 +491,9 @@ namespace ItStore.Migrations
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ManufacturerSuppliers_SuppliersId",
-                table: "ManufacturerSuppliers",
-                column: "SuppliersId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Options_ProductId",
                 table: "Options",
                 column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderProduct_ProductsId",
-                table: "OrderProduct",
-                column: "ProductsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderRequest_RequestsId",
-                table: "OrderRequest",
-                column: "RequestsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrdersPromotions_PromotionId",
@@ -672,16 +509,6 @@ namespace ItStore.Migrations
                 name: "IX_ProductsQuantity_WareHouseId",
                 table: "ProductsQuantity",
                 column: "WareHouseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RequestSuplier_SuppliersId",
-                table: "RequestSuplier",
-                column: "SuppliersId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Suppliers_ProductId",
-                table: "Suppliers",
-                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -714,16 +541,7 @@ namespace ItStore.Migrations
                 name: "Histories");
 
             migrationBuilder.DropTable(
-                name: "ManufacturerSuppliers");
-
-            migrationBuilder.DropTable(
                 name: "Options");
-
-            migrationBuilder.DropTable(
-                name: "OrderProduct");
-
-            migrationBuilder.DropTable(
-                name: "OrderRequest");
 
             migrationBuilder.DropTable(
                 name: "OrdersPromotions");
@@ -735,16 +553,10 @@ namespace ItStore.Migrations
                 name: "ProductsQuantity");
 
             migrationBuilder.DropTable(
-                name: "RequestSuplier");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Manufacturer");
 
             migrationBuilder.DropTable(
                 name: "Orders");
@@ -753,16 +565,10 @@ namespace ItStore.Migrations
                 name: "Promotions");
 
             migrationBuilder.DropTable(
-                name: "WareHouse");
-
-            migrationBuilder.DropTable(
-                name: "Requests");
-
-            migrationBuilder.DropTable(
-                name: "Suppliers");
-
-            migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "WareHouse");
         }
     }
 }

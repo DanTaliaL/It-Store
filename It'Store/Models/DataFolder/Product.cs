@@ -14,14 +14,11 @@ namespace ItStore.Models.DataFolder
         public string Model { get; set; }
         public string Categories { get; set; }
         public byte[] Image { get; set; }
-
-        public List<Order> Orders { get; set; }
         
         public List<ProductQuantity> ProductQuantity { get; set; }
 
         public List<Options> Options { get; set; } 
 
-        public List<Supplier> Suppliers { get; set; }
         public List<Commentaries> Comments { get; set; }
 
         

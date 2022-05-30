@@ -22,7 +22,7 @@ namespace ItStore.Controllers
 
             if (HotProduct)
             {
-                               
+
                 double MostBigPrice = 1.0;
                 foreach (var q in Data.Products.OrderBy(a => a.Price))
                 {
@@ -59,7 +59,18 @@ namespace ItStore.Controllers
                     Searchstring = searchstring
                 };
 
-                if (category != null)
+                if (HotProduct)
+                {
+                    result.PaginInfo = new PaginInfo
+                    {
+                        CurrentPage = productPage,
+                        ItemsPerPage= PageSize,
+                        TotalItems = result.Products.Count()
+                    };
+
+                }
+
+                else if (category != null)
                 {
                     result.PaginInfo = new PaginInfo
                     {

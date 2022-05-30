@@ -58,7 +58,7 @@
             @foreach (var q in Model.Promotion)
             {
                 <p class="mt-2">Промокод : @q.PromotionCode найден.</p>
-                <p>Скидка будет составлять: @q.Percentage %</p>
+                <p>Действует до @q.ClosedDate.ToShortDateString() скидка составляет: @q.Percentage %</p>
             }
             <form asp-action="Cart" asp-controller="Cart" class="row mt-2">
                 <span class="col"><input class="form-control" name="PromotionCode" placeholder="Введите промокод..." /></span>

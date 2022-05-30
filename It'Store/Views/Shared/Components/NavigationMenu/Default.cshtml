@@ -1,23 +1,5 @@
 ﻿@model IEnumerable<string>
 
-@*<p>Категории</p>
-
-<a class="btn" asp-action="Catalog"
-   asp-controller="Catalog"
-   asp-route-category=""
-   asp-route-productmodel="">
-    Главная
-</a>*@
-@*@foreach (var q in Model)
-    {
-        <a class="btn"
-           asp-action="Catalog"
-           asp-controller="Catalog"
-           asp-route-category="@q"
-           asp-route-productPage="1">
-            @q
-        </a>
-    }*@
 
 <div class="dropdown">
     <a class="btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">

@@ -15,8 +15,9 @@
                     <tr>
                         <th>Наименование промокода</th>
                         <th>Процент скидки</th>
-                        <th>Количество</th>
+                        <th>Окончание акции</th>
                         <th>Описание промокода</th>
+                        <th>Публичный статус</th>
 
                     </tr>
                 </thead>
@@ -31,11 +32,17 @@
                         </td>
 
                         <td>
-                            <input class="form-control" asp-for="Quantity" />
+                            <input class="form-control" type="date" asp-for="ClosedDate" />
                         </td>
 
                         <td>
                             <input class="form-control" asp-for="Description" />
+                        </td>
+                        <td>
+                            <select class="form-control" asp-for="PublicStatus">
+                                <option value="true" >Включен</option>
+                                <option value="false">Выключен</option>
+                            </select>
                         </td>
                     </tr>
                 </tbody>

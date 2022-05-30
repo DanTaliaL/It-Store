@@ -122,7 +122,7 @@ namespace ItStore.Controllers
             var result = new ProfileViewModel
             {
                 Histories = Data.Histories.Where(q => q.Buyer == User.Identity.Name),
-                Promotion = Data.Promotions.Where(q => q.Percentage == 5),
+                Promotion = Data.Promotions.Where(q => q.PublicStatus==true),
                 AppUser = Data.Users.Where(q => q.UserName == User.Identity.Name),
                 ProductQuantity = Data.ProductsQuantity,
                 Cart = cart

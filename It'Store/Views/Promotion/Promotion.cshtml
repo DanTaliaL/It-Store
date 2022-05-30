@@ -14,9 +14,11 @@
                 <tr>
                     <th>Наименование промокода</th>
                     <th>Процент скидки</th>
-                    <th>Количество</th>
+                    <th>Начало акции</th>
+                    <th>Окончание акции</th>
                     <th>Описание промокода</th>
                     <th>Промокод</th>
+                    <th>Публичный статус</th>
                     <th>Управление</th>
                 </tr>
             </thead>
@@ -27,15 +29,26 @@
                         <tr>
                             <td>@q.Name</td>
                             <td>@q.Percentage</td>
-                            <td>@q.Quantity</td>
+                            <td>@q.CreateDate.ToShortDateString()</td>
+                            <td>@q.ClosedDate.ToShortDateString()</td>
                             <td>@q.Description</td>
                             <th>@q.PromotionCode</th>
-                            <td>
-                                <a asp-action="PromotionUpdate" asp-route-id="@q.Id" class="btn btn-primary"> Редактировать </a>
-                                <a asp-action="PromotionDelete" asp-route-id="@q.Id" class="btn btn-primary"> Удалить </a>
-                            </td>
-                        </tr>
-                    }
+                            <th>
+                                @if (q.PublicStatus)
+                                {
+                                    <p>Активирован</p>
+                                }
+                                else
+                                {
+                                    <p>Деактивирован</p>
+                                }
+                            </th>
+                        <td>
+                            <a asp-action="PromotionUpdate" asp-route-id="@q.Id" class="btn btn-primary"> Редактировать </a>
+                            <a asp-action="PromotionDelete" asp-route-id="@q.Id" class="btn btn-primary"> Удалить </a>
+                        </td>
+                    </tr>
+                }
                 }
             </tbody>
         </table>

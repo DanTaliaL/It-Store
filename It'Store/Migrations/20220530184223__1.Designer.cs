@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ItStore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220529153308__1")]
+    [Migration("20220530184223__1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -268,27 +268,6 @@ namespace ItStore.Migrations
                     b.ToTable("Histories");
                 });
 
-            modelBuilder.Entity("ItStore.Models.DataFolder.Manufacturer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Manufacturer");
-                });
-
             modelBuilder.Entity("ItStore.Models.DataFolder.Options", b =>
                 {
                     b.Property<int>("Id")
@@ -515,6 +494,12 @@ namespace ItStore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<DateTime>("ClosedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -530,78 +515,12 @@ namespace ItStore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                    b.Property<bool>("PublicStatus")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.ToTable("Promotions");
-                });
-
-            modelBuilder.Entity("ItStore.Models.DataFolder.Request", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductPrice")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PurshaceMethod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Quantity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Requests");
-                });
-
-            modelBuilder.Entity("ItStore.Models.DataFolder.Supplier", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Organization")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("ItStore.Models.DataFolder.WareHouse", b =>
@@ -623,21 +542,6 @@ namespace ItStore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WareHouse");
-                });
-
-            modelBuilder.Entity("ManufacturerSupplier", b =>
-                {
-                    b.Property<int>("ManufacturersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SuppliersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ManufacturersId", "SuppliersId");
-
-                    b.HasIndex("SuppliersId");
-
-                    b.ToTable("ManufacturerSuppliers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -773,21 +677,6 @@ namespace ItStore.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OrderProduct", b =>
-                {
-                    b.Property<int>("OrdersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrdersId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("OrderProduct");
-                });
-
             modelBuilder.Entity("OrderPromotion", b =>
                 {
                     b.Property<int>("OrdersId")
@@ -801,36 +690,6 @@ namespace ItStore.Migrations
                     b.HasIndex("PromotionId");
 
                     b.ToTable("OrdersPromotions", (string)null);
-                });
-
-            modelBuilder.Entity("OrderRequest", b =>
-                {
-                    b.Property<int>("OrdersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RequestsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrdersId", "RequestsId");
-
-                    b.HasIndex("RequestsId");
-
-                    b.ToTable("OrderRequest");
-                });
-
-            modelBuilder.Entity("RequestSupplier", b =>
-                {
-                    b.Property<int>("RequestsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SuppliersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RequestsId", "SuppliersId");
-
-                    b.HasIndex("SuppliersId");
-
-                    b.ToTable("RequestSuplier", (string)null);
                 });
 
             modelBuilder.Entity("ItStore.Models.DataFolder.CartLine", b =>
@@ -889,32 +748,6 @@ namespace ItStore.Migrations
                     b.Navigation("WareHouse");
                 });
 
-            modelBuilder.Entity("ItStore.Models.DataFolder.Supplier", b =>
-                {
-                    b.HasOne("ItStore.Models.DataFolder.Product", "Product")
-                        .WithMany("Suppliers")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("ManufacturerSupplier", b =>
-                {
-                    b.HasOne("ItStore.Models.DataFolder.Manufacturer", null)
-                        .WithMany()
-                        .HasForeignKey("ManufacturersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ItStore.Models.DataFolder.Supplier", null)
-                        .WithMany()
-                        .HasForeignKey("SuppliersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -966,21 +799,6 @@ namespace ItStore.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OrderProduct", b =>
-                {
-                    b.HasOne("ItStore.Models.DataFolder.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ItStore.Models.DataFolder.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("OrderPromotion", b =>
                 {
                     b.HasOne("ItStore.Models.DataFolder.Order", null)
@@ -992,36 +810,6 @@ namespace ItStore.Migrations
                     b.HasOne("ItStore.Models.DataFolder.Promotion", null)
                         .WithMany()
                         .HasForeignKey("PromotionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("OrderRequest", b =>
-                {
-                    b.HasOne("ItStore.Models.DataFolder.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ItStore.Models.DataFolder.Request", null)
-                        .WithMany()
-                        .HasForeignKey("RequestsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RequestSupplier", b =>
-                {
-                    b.HasOne("ItStore.Models.DataFolder.Request", null)
-                        .WithMany()
-                        .HasForeignKey("RequestsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ItStore.Models.DataFolder.Supplier", null)
-                        .WithMany()
-                        .HasForeignKey("SuppliersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1038,8 +826,6 @@ namespace ItStore.Migrations
                     b.Navigation("Options");
 
                     b.Navigation("ProductQuantity");
-
-                    b.Navigation("Suppliers");
                 });
 
             modelBuilder.Entity("ItStore.Models.DataFolder.WareHouse", b =>

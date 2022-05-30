@@ -10,27 +10,7 @@ using Microsoft.AspNetCore.Identity;
 namespace ItStore.Controllers
 {
 
-    public class ManufacturerController : Controller
-    {
-        private DataContext Data { get; set; }
-        public ManufacturerController(DataContext DC) => Data = DC;
-
-        [HttpPost]
-        public IActionResult Manufacturer(Manufacturer manufacturer)
-        {
-            Data.Manufacturer.Add(manufacturer);
-            Data.SaveChanges();
-            return RedirectToAction();
-        }
-
-        public IActionResult Manufacturer()
-        {
-            IQueryable<Manufacturer> manufacturers = Data.Manufacturer
-                .Include(q => q.Suppliers);
-            return View(manufacturers.OrderBy(q => q.Id));
-        }
-        public IActionResult ManufacturerForm() => View();
-    }
+   
 
     public class OptionsController : Controller
     {
@@ -217,8 +197,6 @@ namespace ItStore.Controllers
 
         public IActionResult Order()
         {
-            IQueryable<Order> orders = repository.Orders
-                .Include(q => q.Products);
             return View(repository.Orders.OrderBy(q => q.Id));
         }
 
@@ -250,10 +228,9 @@ namespace ItStore.Controllers
                 decimal TotalPrice = cart.ComputeTotalValue();
                 return RedirectToAction("OrderForm", new { PromotionStatus, TotalPrice });
             }
-            else if (promotion.Quantity >= 1)
+            else if (promotion.ClosedDate >= DateTime.Now)
             {
-                promotion.Quantity -= 1;
-                string PromotionStatus = $"Промокод на {promotion.Percentage}% успешно применен";
+                string PromotionStatus = $"Промокод {promotion.PromotionCode} на {promotion.Percentage}% успешно применен";
                 Data.SaveChanges();
 
                 int Percent = promotion.Percentage;
@@ -264,7 +241,7 @@ namespace ItStore.Controllers
             }
             else
             {
-                string PromotionStatus = "Количество промокодов ограничено, к сожалению вы не успели";
+                string PromotionStatus = $"Сожалеем но введеный вами промокод до {promotion.ClosedDate.ToShortDateString()}, к сожалению вы не успели";
                 decimal TotalPrice = cart.ComputeTotalValue();
                 return RedirectToAction("OrderForm", new { PromotionStatus, TotalPrice });
 
@@ -313,8 +290,6 @@ namespace ItStore.Controllers
                 IQueryable<Product> products = Data.Products
                   .Include(q => q.Categories)
                   .Include(q => q.Options)
-                  .Include(q => q.Suppliers)
-                  .Include(q => q.Orders)
                   .Include(q => q.ProductQuantity);
                 return View(Data.Products.OrderBy(q => q.Id));
             }
@@ -361,52 +336,6 @@ namespace ItStore.Controllers
 
         public IActionResult ProductUpdate(int Id) => View(Data.Products.FirstOrDefault(q => q.Id == Id));
 
-    }
-
-    public class RequestController : Controller
-    {
-        private DataContext Data { get; set; }
-        public RequestController(DataContext DC) => Data = DC;
-
-        [HttpPost]
-        public new IActionResult Request(Request request)
-        {
-            Data.Requests.Add(request);
-            Data.SaveChanges();
-            return RedirectToAction();
-        }
-        public new IActionResult Request()
-        {
-            IQueryable<Request> query = Data.Requests
-                .Include(q => q.Suppliers);
-            return View(Data.Requests.OrderBy(q => q.Id));
-        }
-        public IActionResult RequestForm() => View();
-    }
-
-    public class SupplierController : Controller
-    {
-        private DataContext Data { get; set; }
-        public SupplierController(DataContext DC) => Data = DC;
-
-        [HttpPost]
-        public IActionResult Supplier(Supplier supplier)
-        {
-            Data.Suppliers.Add(supplier);
-            Data.SaveChanges();
-            return RedirectToAction();
-        }
-
-        public IActionResult Supplier()
-        {
-            IQueryable<Supplier> suppliers = Data.Suppliers
-                .Include(q => q.Requests)
-                .Include(q => q.Product)
-                .Include(q => q.Manufacturers);
-            return View(Data.Suppliers.OrderBy(q => q.Id));
-        }
-
-        public IActionResult SupplierForm() => View();
     }
 
     public class ProductQuantityController : Controller
@@ -500,6 +429,11 @@ namespace ItStore.Controllers
         public IActionResult Promotion(Promotion promotion)
         {
             promotion.PromotionCode = Regex.Replace(Convert.ToBase64String(Guid.NewGuid().ToByteArray()), "[/+=]", "");
+            promotion.CreateDate = DateTime.Now;
+            if (promotion.ClosedDate==null || promotion.ClosedDate <promotion.CreateDate)
+            {
+                promotion.ClosedDate = DateTime.Now;
+            }
             Data.Promotions.Add(promotion);
             Data.SaveChanges();
             return RedirectToAction();
@@ -522,7 +456,8 @@ namespace ItStore.Controllers
             update.Percentage = promotion.Percentage;
             update.Description = promotion.Description;
             update.Name = promotion.Name;
-            update.Quantity = promotion.Quantity;
+            update.PublicStatus = promotion.PublicStatus;
+            update.ClosedDate = promotion.ClosedDate;
             update.PromotionCode = promotion.PromotionCode;
             Data.SaveChanges();
             return RedirectToAction("Promotion");
