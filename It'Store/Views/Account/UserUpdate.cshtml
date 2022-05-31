@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model AppUser
+
+
+<div class=" product__min__cart__profile profile row">
+    <div asp-validation-summary="All"></div>
+    <form asp-action="UserUpdate" method="post">
+        <div class="col">
+            <div class=" mx-1 text-white">
+                <table class="table">
+                    <tr>
+                        <td>
+                            <b>Пароль:</b>
+                        </td>
+                        <td>
+                            <input class="form-control" name="Password" placeholder="Пароль" />
+                        </td>
+
+                    </tr>
+                    <tr class="tr__style">
+                        <td><b>Логин:</b></td>
+                        <td> <input class="form-control" asp-for="UserName" placeholder="Логин" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <input type="hidden" name="ProfileName" value="@User.Identity.Name" />
+        @if (User.IsInRole("Admin"))
+        {
+            <input type="hidden" name="ProfileRole" value="Admin" />
+        }
+        else
+        {
+            <input type="hidden" name="ProfileRole" value="User" />
+        }
+
+
+    <div class="text-center mb-4">
+        <a class="btn" asp-action="Profile">Назад</a>
+        <button class="btn" type="submit">Сохранить</button>
+    </div>
+
+    </form>
+
+
+
+</div>

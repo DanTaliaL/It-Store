@@ -2,7 +2,7 @@
     Layout = "_AdminLayout";
 }
 
-@model ItStore.Models.DataFolder.ProductQuantity
+@model ItStore.Models.DataFolder.ProductQuantityViewModel
 
 
 <div class="container text-center">
@@ -24,13 +24,23 @@
                 <tbody>
                     <tr>
                         <td>
-                            <input class="form-control" asp-for="Quantity" />
+                            <input class="form-control" asp-for="@Model.ProductQuantity.Quantity" />
                         </td>
                         <td> 
-                        <input class="form-control" asp-for="ProductId" />
+                        <select class="form-control" asp-for="@Model.ProductQuantity.ProductId" >
+                            @foreach (var q in Model.Products)
+                            {
+                                <option value="@q.Id" > @q.Name  @q.Model</option>
+                            }
+                        </select>
                         </td>
                         <td>
-                        <input class="form-control" asp-for="WareHouseId" />
+                        <select class="form-control" asp-for="@Model.ProductQuantity.WareHouseId">
+                            @foreach (var q in Model.WareHouse)
+                            {
+                                <option value="@q.Id"> Наименование: @q.Name  Улица: @q.Adress</option>
+                            }
+                        </select>
                         </td>
 
                     </tr>

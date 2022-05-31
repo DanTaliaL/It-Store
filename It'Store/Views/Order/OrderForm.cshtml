@@ -4,8 +4,8 @@
 <div class="row order__input">
 
     <h3 class="text-center text-white pb-4 form__text">Оформление заказа на сумму @ViewBag.TotalPrice ₽</h3>
-    <img class="order__image__left" src="~/Images/Ellipse .png"/>
-    <img class="order__image__right" src="~/Images/EllipseDark.png"/>
+    <img class="order__image__left" src="~/Images/Ellipse .png" />
+    <img class="order__image__right" src="~/Images/EllipseDark.png" />
     <div class="col-4 form__position">
 
         @if (ViewBag.PromotionStatus != null)
@@ -17,8 +17,8 @@
         <form asp-action="PromotionRemains" method="post" class="row">
             <input type="hidden" name="TotalPrc" value="@ViewBag.TotalPrice" />
 
-            <div class="col-8">               
-                <input class="form-control px-2" name="PromotionCode" placeholder="Промокод..."/>
+            <div class="col-8">
+                <input class="form-control px-2" name="PromotionCode" placeholder="Промокод..." />
             </div>
 
             <div class="col">
@@ -62,7 +62,17 @@
                 <input type="hidden" name="ProdName" value="@ViewBag.ProductName" />
                 <input type="hidden" name="ProdQuantity" value="@ViewBag.ProductQuantity" />
                 <button class="btn col-4 " asp-controller="Cart" asp-action="Cart">Назад</button>
-                <button class="btn col-4" type="submit"> Завершить </button>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <button class="btn col-4" type="submit"> Завершить </button>
+                }
+                else
+                {                   
+                    <button type="button"  class="btn col-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Завершить
+                    </button>
+                }
+
             </div>
         </form>
     </div>

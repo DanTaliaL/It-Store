@@ -14,7 +14,7 @@ namespace ItStore.Controllers
         }
         public int PageSize = 8;
 
-        public IActionResult Catalog(string category, string searchstring, string productmodel, bool HotProduct, int productPage = 1)
+        public IActionResult Catalog(string? category, string? searchstring, string? productmodel, bool HotProduct, int productPage = 1)
         {
             ViewBag.SearchingString = searchstring;
             ViewBag.SelectedCategory = category;

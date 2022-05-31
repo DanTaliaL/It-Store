@@ -15,7 +15,28 @@ namespace ItStore.Controllers
             return View(Data.Pictures);
         }
 
-        public IActionResult Create() => View();
+        public IActionResult Create()
+        {
+            var result = new PictureViewModel
+            {
+                Products = Data.Products.Select(q=>new Product
+                {
+                    Name = q.Name,
+                    Model = q.Model,
+                    Image= q.Image,
+                }),
+            };
+            return View(result);
+        }
+
+        
+        public IActionResult PictureDelete(int id)
+        {
+            Picture picture = Data.Pictures.FirstOrDefault(q=>q.Id == id);
+            Data.Pictures.Remove(picture);
+            Data.SaveChanges();
+            return RedirectToAction("Picture");
+        }
 
         //---
         private byte[] ConvertToBytes(IFormFile file)

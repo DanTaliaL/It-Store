@@ -39,41 +39,46 @@
                         <div class="panel-heading text-white text-center my-3">
                             <h4>Отзывы</h4>
                         </div>
-                        <form asp-controller="Commentaries" asp-action="Commentaries" method="post">
-                            <div class="panel-body comments">
-                                <input type="hidden" asp-for="ProductID" />
-                                <input type="hidden" asp-for="UserName" />
-                                <input type="hidden" name="ProdId" value="@ViewBag.Id" />
-                                <input type="hidden" name="ProdName" value="@ViewBag.Name" />
 
-                                <div class="row">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-controller="Commentaries" asp-action="Commentaries" method="post">
+                                <div class="panel-body comments">
+                                    <input type="hidden" asp-for="ProductID" />
+                                    <input type="hidden" asp-for="UserName" />
+                                    <input type="hidden" name="ProdId" value="@ViewBag.Id" />
+                                    <input type="hidden" name="ProdName" value="@ViewBag.Name" />
 
-                                    <div class="form-check col-md-2 like__position">
-                                        <input class="form-check-input" type="radio" id="flexRadioDefault2" name="Grade" value="true" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            <img class="like" src="~/Images/Icons/Like.png" />
-                                        </label>
+                                    <div class="row">
+
+                                        <div class="form-check col-md-2 like__position">
+                                            <input class="form-check-input" type="radio" id="flexRadioDefault2" name="Grade" value="true" checked>
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                <img class="like" src="~/Images/Icons/Like.png" />
+                                            </label>
+                                        </div>
+                                        <div class="form-check col">
+                                            <input class="form-check-input" type="radio" name="Grade" value="false" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                <img class="dislike" src="~/Images/Icons/like.png" />
+                                            </label>
+                                        </div>
                                     </div>
-                                    <div class="form-check col">
-                                        <input class="form-check-input" type="radio" name="Grade" value="false" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            <img class="dislike" src="~/Images/Icons/like.png" />
-                                        </label>
-                                    </div>
+
+
+
+
+                                    <textarea style=" background-color: #171616; outline: none;" class="form-control text-white panel__text" placeholder="Оставьте Ваш комментарий" asp-for="Comment" rows="5"></textarea>
+                                    <br>
+                                    <button type="submit" class="btn pull-right">Отправить</button>
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                    <ul class="media-list">
+                                    </ul>
                                 </div>
+                            </form>
+                        }
 
-
-
-
-                                <textarea style=" background-color: #171616; outline: none;" class="form-control text-white panel__text" placeholder="Оставьте Ваш комментарий" asp-for="Comment" rows="5"></textarea>
-                                <br>
-                                <button type="submit" class="btn pull-right">Отправить</button>
-                                <div class="clearfix"></div>
-                                <hr>
-                                <ul class="media-list">
-                                </ul>
-                            </div>
-                        </form>
                         <div class="section">
                             @foreach (var q in Model.Commentaries)
                             {

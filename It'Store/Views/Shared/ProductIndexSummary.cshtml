@@ -5,7 +5,7 @@
         <div class="info">
             <form asp-controller="Catalog" asp-action="ProductCart" id="@Model.Id" method="get">
                 <input type="hidden" name="ProdId" value="@Model.Id" />
-                <input type="hidden" name="ProdName" value="@Model.Name" />
+                <input type="hidden" name="ProdName" value="@Model.Name @Model.Model" />
                 <button class="product__link text-white" type="submit" asp-controller="Catalog" asp-action="ProductCart">
                     <div class="image__catalog">
                         @Html.Raw("<img style='width:209px; height:210px;' src=\"data:image/jpeg;base64,"

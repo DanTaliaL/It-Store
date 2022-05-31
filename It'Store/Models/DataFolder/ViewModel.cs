@@ -74,4 +74,16 @@
         public IEnumerable <FeedBack> FeedBacks { get; set; }
     }
 
+   public class ProductQuantityViewModel
+    {
+        public IEnumerable <Product> Products { get; set;}
+        public IEnumerable <WareHouse> WareHouse { get; set; }
+        public ProductQuantity ProductQuantity { get; set; }
+    }
+
+    public class PictureViewModel
+    {
+        public IEnumerable <Product> Products { get; set; } 
+        public Picture Picture { get; set; }
+    }
 }

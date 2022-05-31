@@ -1,26 +1,71 @@
-﻿@model ItStore.Models.DataFolder.Picture
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model ItStore.Models.DataFolder.PictureViewModel
+@*<div class="intro">
+        <div class="container">
+            <form asp-controller="Picture" asp-action="Create" method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Добавить изображение</legend>
 
-<div class="intro">
-    <div class="container">
+                    <div class="editor-label">Название</div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Name)
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+
+                    <div class="editor-label">Файл изображения</div>
+                    <div class="editor-field">
+                        <input type="file" name="uploadImage" />
+                    </div>
+                    <p>
+                        <input type="submit" value="Добавить" />
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+    </div>*@
+
+<div class="container text-center">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Добавление изображения
+    </div>
+
+    <div class="card-body">
         <form asp-controller="Picture" asp-action="Create" method="post" enctype="multipart/form-data">
-            <fieldset>
-                <legend>Добавить изображение</legend>
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Наименование продукта</th>
+                        <th>Изображеине</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <select class="form-control" asp-for="@Model.Picture.Name">
+                                @foreach (var q in Model.Products)
+                                {
+                                    <option value="@q.Name @q.Model"> @q.Name @q.Model </option>
+                                }
 
-                <div class="editor-label">Название</div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Name)
-                    @Html.ValidationMessageFor(model => model.Name)
-                </div>
+                            </select>
+                        </td>
 
-                <div class="editor-label">Файл изображения</div>
-                <div class="editor-field">
-                    <input type="file" name="uploadImage" />
-                </div>
-                <p>
-                    <input type="submit" value="Добавить" />
-                </p>
-            </fieldset>
+                        <td>
+                            <fieldset>
+                                <div class="editor-field col">
+                                    <input type="file" name="uploadImage" />
+                                </div>
+                            </fieldset>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-primary col" asp-action="Picture"> Назад </a>
+            <button class="btn btn-primary col" type="submit">Добавить</button>
         </form>
     </div>
 </div>
-

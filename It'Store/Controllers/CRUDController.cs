@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ItStore.Controllers
 {
-
-   
-
+    [Authorize]
     public class OptionsController : Controller
     {
         private DataContext Data { get; set; }
         public OptionsController(DataContext DC) => Data = DC;
+
 
         [HttpPost]
         public IActionResult Options(Options options, int ProdId)
@@ -250,7 +250,7 @@ namespace ItStore.Controllers
         }
 
     }
-
+    [Authorize]
     public class ProductController : Controller
     {
         private DataContext Data { get; set; }
@@ -337,7 +337,7 @@ namespace ItStore.Controllers
         public IActionResult ProductUpdate(int Id) => View(Data.Products.FirstOrDefault(q => q.Id == Id));
 
     }
-
+    [Authorize]
     public class ProductQuantityController : Controller
     {
         private DataContext Data { get; set; }
@@ -377,7 +377,26 @@ namespace ItStore.Controllers
             return RedirectToAction("ProductQuantity");
         }
 
-        public IActionResult ProductQuantityForm() => View();
+        public IActionResult ProductQuantityForm()
+        {
+            var result = new ProductQuantityViewModel
+            {
+                Products = Data.Products.Select(q=>new Product
+                {
+                    Id = q.Id,
+                    Name = q.Name,
+                    Model = q.Model,
+                }),
+                WareHouse = Data.WareHouse.Select(q=>new WareHouse
+                {
+                    Id=q.Id,
+                    Name=q.Name,
+                    Adress=q.Adress,
+                }),
+            
+            };
+            return View(result);
+        }
 
         [HttpPost]
         public IActionResult ProductQuantityUpdate(ProductQuantity productQuantity, int Id)
@@ -395,7 +414,7 @@ namespace ItStore.Controllers
         }
 
     }
-
+    [Authorize]
     public class WareHouseController : Controller
     {
         private DataContext Data { get; set; }
@@ -420,6 +439,7 @@ namespace ItStore.Controllers
 
         public IActionResult WareHouseForm() => View();
     }
+    [Authorize]
     public class PromotionController : Controller
     {
         private DataContext Data { get; set; }
@@ -466,7 +486,7 @@ namespace ItStore.Controllers
         public IActionResult PromotionUpdate(int Id) => View(Data.Promotions.Where(q => q.Id == Id).FirstOrDefault());
 
     }
-
+    [Authorize]
     public class CommentariesController : Controller
     {
         private DataContext Data { get; set; }

@@ -98,6 +98,21 @@ namespace ItStore.Controllers
             return View(model);
         }
 
+        public IActionResult UserUpdate(AppUser appUser, string UserName)
+        {
+            AppUser update = userManager.Users.FirstOrDefault(q=>q.UserName ==UserName);
+            return View(update);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UserUpdate(CreateUserModel model, string UserName, string Password)
+        {
+            AppUser update = userManager.Users.FirstOrDefault(q => q.UserName == UserName);
+
+            
+            return RedirectToAction("Profile");
+        }
+
         [Authorize]
         public IActionResult Index() => View(GetData(nameof(Index)));
         [Authorize(Roles = "Users")]
@@ -132,6 +147,7 @@ namespace ItStore.Controllers
 
         public IActionResult ProfileUpdate(string ProfileName) => View(userManager.Users.Where(q => q.UserName == ProfileName).FirstOrDefault());
 
+        [Authorize]
         [HttpPost]
         public IActionResult ProfileUpdate(AppUser user, string ProfileName, string ProfileRole)
         {
@@ -162,7 +178,7 @@ namespace ItStore.Controllers
 
 
         }
-
+        [Authorize]
         public IActionResult AdminProfile()
         {
             var result = new ProfileViewModel
@@ -178,12 +194,12 @@ namespace ItStore.Controllers
             return View(result);
         }
 
-
+        [Authorize]
         public IActionResult OpenFeedBack()
         {
             return View(Data.FeedBacks.OrderBy(q=>q.id).Where(q=>q.TypeFeedback==false));
         }
-
+        [Authorize]
         public IActionResult ClosedFeedBack()
         {
 
@@ -191,9 +207,10 @@ namespace ItStore.Controllers
         }
 
 
-
+        [Authorize]
         public IActionResult EditFeedBack(int id) => View(Data.FeedBacks.FirstOrDefault(q => q.id == id));
 
+        [Authorize]
         [HttpPost]
         public IActionResult EditFeedBack(FeedBack feedBack, int id, bool Status , string Comment)
         {
@@ -239,12 +256,13 @@ namespace ItStore.Controllers
 
 
 
-
+        [Authorize]
         public IActionResult OpenGaranteeRequest()
         {
             return View(Data.FeedBacks.OrderBy(q => q.id).Where(q => q.TypeFeedback == true));
         }
 
+        [Authorize]
         public IActionResult ClosedGaranteeRequest()
         {
 
@@ -252,9 +270,11 @@ namespace ItStore.Controllers
         }
 
 
-
+        [Authorize]
         public IActionResult EditGaranteeRequest(int id) => View(Data.FeedBacks.FirstOrDefault(q => q.id == id));
 
+
+        [Authorize]
         [HttpPost]
         public IActionResult EditGaranteeRequest(FeedBack feedBack, int id, bool Status, string Comment)
         {
@@ -297,11 +317,5 @@ namespace ItStore.Controllers
                 return RedirectToAction("ClosedGaranteeRequest");
             }
         }
-
-
-
-
-
-
     }
 }
