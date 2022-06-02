@@ -13,11 +13,15 @@
             </p>
             <p>
                 <label asp-for="Password">Пароль</label>
-                <input class="form-control" asp-for="Password" />
+                <input type="password" class="form-control" asp-for="Password" />
+            </p>
+            <p>
+                <label name="Password">Повторите пароль</label>
+                <input type="password" class="form-control" name="RepeatPassword" />
             </p>
             <p>
                 <label asp-for="Email">Электронная почта</label>
-                <input class="form-control" asp-for="Email" />
+                <input type="email" class="form-control" asp-for="Email" />
             </p>
 
             <button class="btn" asp-controller="Home" asp-action="Index">Назад</button>

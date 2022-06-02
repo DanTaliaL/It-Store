@@ -1170,3 +1170,9 @@ body {
     border: 1px;
     color: none;
 }
+
+.btn__footer__admin {
+    background-color: #212529;
+    border: 1px;
+    color: none;
+}

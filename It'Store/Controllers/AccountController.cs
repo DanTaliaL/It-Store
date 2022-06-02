@@ -73,45 +73,54 @@ namespace ItStore.Controllers
         public IActionResult UserCreate() => View();
 
         [HttpPost]
-        public async Task<IActionResult> UserCreate(CreateUserModel model)
+        public async Task<IActionResult> UserCreate(CreateUserModel model, string RepeatPassword)
         {
-            if (ModelState.IsValid)
+            if (model.Password == RepeatPassword)
             {
-                AppUser user = new AppUser
+                if (ModelState.IsValid)
                 {
-                    UserName = model.Login,
-                    Email = model.Email
-                };
-                IdentityResult result = await userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Login");
-                }
-                else
-                {
-                    foreach (IdentityError error in result.Errors)
+
+                    AppUser user = new AppUser
                     {
-                        ModelState.AddModelError("", error.Description);
+                        UserName = model.Login,
+                        Email = model.Email
+                    };
+                    IdentityResult result = await userManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Login");
+                    }
+                    else
+                    {
+                        foreach (IdentityError error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
                     }
                 }
+                return View(model);
             }
-            return View(model);
+            else
+            {
+               ModelState.AddModelError("", "Пароли не совпадают");
+               return View();
+            }
         }
 
-        public IActionResult UserUpdate(AppUser appUser, string UserName)
-        {
-            AppUser update = userManager.Users.FirstOrDefault(q=>q.UserName ==UserName);
-            return View(update);
-        }
+        //public IActionResult UserUpdate(AppUser appUser, string UserName)
+        //{
+        //    AppUser update = userManager.Users.FirstOrDefault(q=>q.UserName ==UserName);
+        //    return View(update);
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> UserUpdate(CreateUserModel model, string UserName, string Password)
-        {
-            AppUser update = userManager.Users.FirstOrDefault(q => q.UserName == UserName);
+        //[HttpPost]
+        //public async Task<IActionResult> UserUpdate(CreateUserModel model, string UserName, string Password)
+        //{
+        //    AppUser update = userManager.Users.FirstOrDefault(q => q.UserName == UserName);
 
             
-            return RedirectToAction("Profile");
-        }
+        //    return RedirectToAction("Profile");
+        //}
 
         [Authorize]
         public IActionResult Index() => View(GetData(nameof(Index)));

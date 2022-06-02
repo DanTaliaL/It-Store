@@ -9,10 +9,10 @@
             <button title="Администрирование" class="btn__link " type="submit"><img class="btn__exit" src="~/Images/Icons/admin.png" /></button>
         </form>
     }
-    <form class="col text-end" asp-controller="Account" asp-action="UserUpdate" method="get">
+    @*<form class="col text-end" asp-controller="Account" asp-action="UserUpdate" method="get">
         <input name="UserName" value="@User.Identity.Name" />
         <button title="Редактирование профиля" class="btn__link " type="submit"> кукарача </button>
-    </form>
+    </form>*@
     <form class="col-md-1 text-start opacity-75 " asp-action="Logout method="post">
         <button title="Выход" class="btn__link " asp-area="" asp-controller="Account" asp-action="Logout"><img class="btn__exit" src="~/Images/Icons/exit.png" /></button>
     </form>
