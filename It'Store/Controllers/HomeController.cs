@@ -90,30 +90,45 @@ namespace ItStore.Controllers
                     FeedbakStatus = true,
 
                 };
-                if (feedBack.MainEmail == null)
+                if (User.Identity.IsAuthenticated)
                 {
-                    feedBack.MainEmail = "Не зарегестрирован";
-                    feedBack.Login = "Гость";
-                }
-                else
-                {
+                   
                     feedBack.MainEmail = appUser.Email;
-                }
-
-                if (EMail != null)
-                {
-                    feedBack.AuxiliaryEmail = EMail;
-                }
-
-
-                if (appUser != null)
-                {
-                    if (appUser.FatherName != null)
+                    if (appUser.LastName ==null || appUser.FirstName == null || appUser.FatherName ==null)
+                    {
+                        feedBack.Name = "-";
+                    }
+                    else
                     {
                         feedBack.Name = $"{appUser.LastName} {appUser.FirstName} {appUser.FatherName}";
                     }
 
+                    if (EMail == null)
+                    {
+                        feedBack.AuxiliaryEmail = "-";
+                    }
+                    else
+                    {
+                        feedBack.AuxiliaryEmail = EMail;
+                    }
+                    
                 }
+
+                else
+                {
+                    feedBack.MainEmail = "Не зарегестрирован";
+                    feedBack.Login = "Гость";
+                    feedBack.Name= "-";
+                    if (EMail == null)
+                    {
+                        feedBack.AuxiliaryEmail = "-";
+                    }
+                    else
+                    {
+                        feedBack.AuxiliaryEmail = EMail;
+                    }
+                }
+                
 
                 Data.Add(feedBack);
                 Data.SaveChanges();

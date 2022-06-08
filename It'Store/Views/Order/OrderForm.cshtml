@@ -3,7 +3,16 @@
 
 <div class="row order__input">
 
-    <h3 class="text-center text-white pb-4 form__text">Оформление заказа на сумму @ViewBag.TotalPrice ₽</h3>
+    @if (@ViewBag.TotalPrice != null)
+    {
+        <h3 class="text-center text-white pb-4 form__text">Оформление заказа на сумму @ViewBag.TotalPrice ₽</h3>
+    }
+    else
+    {
+        <h3 class="text-center text-white pb-4 form__text">К сожалению вас опередили</h3>
+    }
+
+
     <img class="order__image__left" src="~/Images/Ellipse .png" />
     <img class="order__image__right" src="~/Images/EllipseDark.png" />
     <div class="col-4 form__position">
@@ -67,8 +76,8 @@
                     <button class="btn col-4" type="submit"> Завершить </button>
                 }
                 else
-                {                   
-                    <button type="button"  class="btn col-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                {
+                    <button type="button" class="btn col-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Завершить
                     </button>
                 }

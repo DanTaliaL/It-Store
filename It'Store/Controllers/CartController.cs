@@ -45,7 +45,7 @@ namespace ItStore.Controllers
             {
                 cart.AddItem(product, 1);
             }
-            return RedirectToAction("Cart", new { returnUrl, Id }); //исправить
+            return RedirectToAction("Cart", new { returnUrl, Id }); 
         }
         public RedirectToActionResult RemoveFromCart(int Id, string returnUrl)
         {

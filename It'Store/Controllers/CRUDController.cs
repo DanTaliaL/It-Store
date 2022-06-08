@@ -124,14 +124,23 @@ namespace ItStore.Controllers
                 foreach (var q in cart.Lines)
                 {
                     ProductQuantity product = Data.ProductsQuantity.FirstOrDefault(p => p.Product.Name == q.Product.Name);
-                    if (product.Quantity >= q.Quantity)
+
+                    if (product != null)
                     {
-                        product.Quantity -= q.Quantity;
-                       
+                        if (product.Quantity >= q.Quantity)
+                        {
+                            product.Quantity -= q.Quantity;
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", $"Приносим свои извенения {q.Product.Name} {q.Product.Model} осталось всего {product.Quantity}");
+                            return View(order);
+                        }
+                                             
                     }
                     else
                     {
-                        ModelState.AddModelError("", $"Приносим свои извенения,{q.Product.Name} осталось всего {product.Quantity}");
+                        ModelState.AddModelError("", $"Приносим свои извенения {q.Product.Name} {q.Product.Model} на данный момент отсутствует");
                         return View(order);
                     }
 
